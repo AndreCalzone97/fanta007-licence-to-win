@@ -1,0 +1,7 @@
+[build]
+# Build command already set in Railway deploy config: pip install -e .
+
+[deploy]
+# FastAPI app with uvicorn — Railway startCommand config provides the host/port binding
+cmd = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+
