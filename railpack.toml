@@ -1,0 +1,10 @@
+[build]
+# Install backend as editable package from repo root
+# This makes `app` importable and ensures dependencies are installed
+cmd = "pip install -e ./backend"
+
+[deploy]
+# Start uvicorn from repo root with --app-dir pointing to backend/
+# This preserves full repo as runtime context so data/ and app resolve correctly
+cmd = "python -m uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $PORT"
+

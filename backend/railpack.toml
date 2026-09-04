@@ -1,7 +1,10 @@
+# DEPRECATED: Use the root railpack.toml instead.
+# This file is kept only for reference if someone deploys with rootDirectory=/backend.
+# The root railpack.toml handles the full-repo context correctly and should be the default.
+
 [build]
-# Build command already set in Railway deploy config: pip install -e .
+cmd = "pip install -e ."
 
 [deploy]
-# FastAPI app with uvicorn — Railway startCommand config provides the host/port binding
-cmd = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+cmd = "python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
 
