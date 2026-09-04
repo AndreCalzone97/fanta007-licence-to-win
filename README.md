@@ -6,7 +6,7 @@ Non sostituisce una piattaforma di gestione lega: è uno **strumento di supporto
 
 > 🎯 Obiettivo: trasformare tanti numeri sparsi in indicazioni più immediate, senza presentare stime o indicatori come verità assolute.
 
-![Home di Fanta007](docs/images/01-home.webp)
+![Home di Fanta007](docs/images/01-home.png)
 
 ## Fanta007 in 30 secondi
 
@@ -29,7 +29,7 @@ Puoi vedere rapidamente:
 - avanzamento della rosa per reparto;
 - suggerimenti contestuali del Fantagente 007.
 
-![Home e riepilogo della missione](docs/images/01-home.webp)
+![Home e riepilogo della missione](docs/images/01-home.png)
 
 ---
 
@@ -39,7 +39,7 @@ Il Listone raccoglie i **533 giocatori** presenti nel dataset attivo della stagi
 
 Sono disponibili filtri per squadra e ruolo, ricerca testuale e ordinamenti basati su quotazioni e FantaValore di Mercato.
 
-![Listone giocatori](docs/images/02-listone.webp)
+![Listone giocatori](docs/images/02-listone.png)
 
 ### Sigle principali
 
@@ -69,7 +69,7 @@ Il dossier mette insieme:
 - compatibilità con l'obiettivo della rosa;
 - consiglio sintetico del Fantagente.
 
-![Player Dossier](docs/images/08-player-dossier.webp)
+![Player Dossier](docs/images/08-player-dossier.png)
 
 ### Appetibilità ≠ prezzo d'acquisto
 
@@ -93,7 +93,7 @@ La schermata mostra:
 - crediti disponibili;
 - accesso diretto al Dossier.
 
-![La mia rosa](docs/images/07-rosa.webp)
+![La mia rosa](docs/images/07-rosa.png)
 
 ---
 
@@ -109,25 +109,25 @@ La pagina evidenzia:
 - appetibilità media;
 - giudizio sintetico del Fantagente.
 
-![Valutazione complessiva](docs/images/06-valutazione.webp)
+![Valutazione complessiva](docs/images/06-valutazione.png)
 
 ### Analisi dei reparti
 
 Porta, Difesa, Centrocampo e Attacco vengono valutati separatamente per rendere visibili eventuali squilibri nella costruzione della squadra.
 
-![Analisi dei reparti](docs/images/04-analisi-reparti.webp)
+![Analisi dei reparti](docs/images/04-analisi-reparti.png)
 
 ### Migliori acquisti e acquisti da rivedere
 
 Il prezzo pagato viene confrontato con il riferimento FVM per mettere in evidenza gli acquisti più convenienti e quelli su cui il costo pesa maggiormente.
 
-![Migliori acquisti e acquisti da rivedere](docs/images/05-acquisti.webp)
+![Migliori acquisti e acquisti da rivedere](docs/images/05-acquisti.png)
 
 ### Cosa fare adesso
 
 La valutazione termina con una **next action**: un'indicazione pratica sul reparto o sull'aspetto della rosa che merita maggiore attenzione.
 
-![Next action](docs/images/03-next-action.webp)
+![Next action](docs/images/03-next-action.png)
 
 ---
 
