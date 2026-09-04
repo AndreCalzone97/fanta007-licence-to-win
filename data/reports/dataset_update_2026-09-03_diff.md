@@ -1,0 +1,117 @@
+# Fanta007 — Dataset Diff
+
+Stato: **pending_manual_approval**
+
+## Riepilogo
+
+- added: 27
+- removed: 19
+- changed: 506
+- transfers: 7
+- team_identity_changes: 506
+- classic_role_changes: 0
+- mantra_role_changes: 6
+- name_changes: 0
+- valuation_changes: 290
+
+## Modifiche rilevate
+
+- #3 Radunovic: team_identity
+- #4 Sportiello: team_identity
+- #22 De Roon: team_identity, valuation
+- #133 Skorupski: team_identity, valuation
+- #152 Zielinski: team_identity, valuation
+- #158 Lezzerini: team_identity
+- #184 Bernardeschi: team_identity, valuation
+- #219 Sommariva: team_identity
+- #252 Biraghi: team_identity
+- #254 Federico Dimarco: team_identity, valuation
+- #294 Rugani: team_identity
+- #309 Dybala: team_identity, valuation
+- #327 Patric: team_identity
+- #333 Cataldi: team_identity, valuation
+- #418 Goldaniga: team_identity
+- #460 Romagnoli: team_identity, valuation
+- #487 De Silvestri: team_identity
+- #526 Duncan: team_identity
+- #530 Pellegrini Lo.: team_identity, valuation
+- #531 Berardi: team_identity, valuation
+- #536 Politano: team_identity, valuation
+- #543 Padelli: team_identity
+- #554 Zappacosta: team_identity
+- #572 Meret: team_identity, valuation
+- #608 Zapata D.: team_identity, valuation
+- #610 Gollini: team_identity
+- #632 Zaccagni: team_identity, valuation
+- #779 Cristante: team_identity, valuation
+- #791 Sabelli: team_identity
+- #801 Gagliardini: team_identity
+- #827 Manuel Locatelli: team_identity, valuation
+- #1850 Kessiè: team_identity
+- #1852 Spinazzola: team_identity
+- #1870 Barella: team_identity, valuation
+- #1871 Deiola: team_identity, valuation
+- #1926 Di Gennaro: team_identity
+- #1930 Pinsoglio: team_identity
+- #1933 Mandragora: transfer, team_identity, valuation
+- #2012 Milik: team_identity, valuation
+- #2038 Pinamonti: team_identity, valuation
+- #2061 Simeone: team_identity, valuation
+- #2077 Pasalic: team_identity, valuation
+- #2097 Kean: transfer, team_identity, valuation
+- #2120 Bastoni: team_identity
+- #2127 Satalino: team_identity
+- #2134 Falcone: team_identity, valuation
+- #2137 Scamacca: team_identity, valuation
+- #2155 Cutrone: team_identity, valuation
+- #2167 Orsolini: team_identity, valuation
+- #2170 Milinkovic-Savic V.: team_identity, valuation
+- …altri 456 record nel report JSON completo.
+- Nuovo: #256 Juan Jesus
+- Nuovo: #795 El Shaarawy
+- Nuovo: #2874 Ghidotti
+- Nuovo: #4137 Diego Carlos
+- Nuovo: #4147 Caleta-Car
+- Nuovo: #5336 Nzola
+- Nuovo: #5680 Sarr P.
+- Nuovo: #5694 Beto
+- Nuovo: #5742 Drameh
+- Nuovo: #5751 Patterson
+- Nuovo: #6344 Sanchez Ro.
+- Nuovo: #6537 Goglichidze
+- Nuovo: #6752 Woltemade
+- Nuovo: #6833 Mbangula
+- Nuovo: #7092 Jovanovic
+- Nuovo: #7220 Belghali
+- Nuovo: #7232 Fernandez T.
+- Nuovo: #7618 Hutchinson
+- Nuovo: #7619 Monteiro J.
+- Nuovo: #7620 Zeballos
+- Nuovo: #7621 Sugawara
+- Nuovo: #7622 Robinho Junior
+- Nuovo: #7623 Gnonto
+- Nuovo: #7624 Braganca
+- Nuovo: #7625 Goncalves P.
+- Nuovo: #7626 Pompei
+- Nuovo: #7627 Enem
+- Rimosso: #2115 Delli Carri
+- Rimosso: #2593 Martin
+- Rimosso: #4686 Fofana Y.
+- Rimosso: #5544 David
+- Rimosso: #5672 Dia
+- Rimosso: #6271 El Aynaoui
+- Rimosso: #6598 Mutandwa
+- Rimosso: #6814 Norton-Cuffy
+- Rimosso: #6916 Ahanor
+- Rimosso: #6981 Vaz
+- Rimosso: #7008 Gimenez
+- Rimosso: #7027 Azon
+- Rimosso: #7128 Kuhn
+- Rimosso: #7157 Iannoni
+- Rimosso: #7209 Sorensen O.
+- Rimosso: #7313 Ratkov
+- Rimosso: #7356 Mlacic
+- Rimosso: #7396 Macchioni
+- Rimosso: #7545 Vismara
+
+> Il report non attiva il dataset candidato.

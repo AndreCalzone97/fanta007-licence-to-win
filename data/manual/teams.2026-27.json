@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "season": "2026/27",
+    "competition": "Serie A Enilive",
+    "verified_at": "2026-09-03T00:00:00+02:00",
+    "source_urls": [
+      "https://www.legaseriea.it/serie-a/news/aspettando-il-calendario-della-serie-a-enilive-2026-27",
+      "https://www.legaseriea.it/serie-a/statistiche/index",
+      "https://www.fantacalcio.it/quotazioni-fantacalcio/2026-27"
+    ],
+    "team_count": 20
+  },
+  "teams": [
+    {"id":"atalanta","code":"ATA","name":"Atalanta","official_name":"Atalanta BC","aliases":["Atalanta Bergamasca Calcio"],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"bologna","code":"BOL","name":"Bologna","official_name":"Bologna FC 1909","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"cagliari","code":"CAG","name":"Cagliari","official_name":"Cagliari Calcio","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"como","code":"COM","name":"Como","official_name":"Como 1907","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"fiorentina","code":"FIO","name":"Fiorentina","official_name":"ACF Fiorentina","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"frosinone","code":"FRO","name":"Frosinone","official_name":"Frosinone Calcio","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"genoa","code":"GEN","name":"Genoa","official_name":"Genoa CFC","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"inter","code":"INT","name":"Inter","official_name":"FC Internazionale Milano","aliases":["Internazionale","Inter Milan"],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"juventus","code":"JUV","name":"Juventus","official_name":"Juventus FC","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"lazio","code":"LAZ","name":"Lazio","official_name":"SS Lazio","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"lecce","code":"LEC","name":"Lecce","official_name":"US Lecce","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"milan","code":"MIL","name":"Milan","official_name":"AC Milan","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"monza","code":"MON","name":"Monza","official_name":"AC Monza","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"napoli","code":"NAP","name":"Napoli","official_name":"SSC Napoli","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"parma","code":"PAR","name":"Parma","official_name":"Parma Calcio 1913","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"roma","code":"ROM","name":"Roma","official_name":"AS Roma","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"sassuolo","code":"SAS","name":"Sassuolo","official_name":"US Sassuolo Calcio","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"torino","code":"TOR","name":"Torino","official_name":"Torino FC","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"udinese","code":"UDI","name":"Udinese","official_name":"Udinese Calcio","aliases":[],"season":"2026/27","asset":{"status":"fallback"}},
+    {"id":"venezia","code":"VEN","name":"Venezia","official_name":"Venezia FC","aliases":[],"season":"2026/27","asset":{"status":"fallback"}}
+  ]
+}

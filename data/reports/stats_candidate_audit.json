@@ -1,0 +1,45 @@
+{
+  "status": "valid",
+  "activation": "pending_manual_approval",
+  "errors": [],
+  "warnings": [],
+  "summary": {
+    "players": 533,
+    "teams": 20,
+    "roles": {
+      "A": 87,
+      "C": 193,
+      "D": 188,
+      "P": 65
+    },
+    "players_with_statistics": 533,
+    "players_with_external_ids": 0,
+    "media": {
+      "approved": 6,
+      "missing": 489,
+      "pending": 38
+    },
+    "source_hash_matches": true
+  },
+  "dataset_metadata": {
+    "season": "2026/27",
+    "source_file": "Quotazioni_Fantacalcio_Stagione_2026_27_2026-09-03.xlsx",
+    "source_sha256": "55697969a201ae7ad1eaa028f2e14a5717ca66f306236639186509747324bebf",
+    "sheet": "Tutti",
+    "player_count": 533,
+    "generated_at": "2026-09-03T08:22:59.156006Z",
+    "status": "candidate",
+    "official_source_url": "https://www.fantacalcio.it/quotazioni-fantacalcio/2026-27"
+  },
+  "team_catalog_metadata": {
+    "season": "2026/27",
+    "competition": "Serie A Enilive",
+    "verified_at": "2026-09-03T00:00:00+02:00",
+    "source_urls": [
+      "https://www.legaseriea.it/serie-a/news/aspettando-il-calendario-della-serie-a-enilive-2026-27",
+      "https://www.legaseriea.it/serie-a/statistiche/index",
+      "https://www.fantacalcio.it/quotazioni-fantacalcio/2026-27"
+    ],
+    "team_count": 20
+  }
+}

@@ -1,0 +1,40 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Generated/local files
+data/normalized/*.tmp
+data/normalized/archive/
+data/candidates/*.json
+data/reports/*.candidate.json
+*.log
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+data/archive/
+data/cache/
+fanta007_step1/
+bozza ui idea progetto.png
+data/archive/
+data/source/*.xlsx

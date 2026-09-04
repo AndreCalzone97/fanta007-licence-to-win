@@ -1,0 +1,236 @@
+{
+  "5585": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-01T13:54:44.085030+00:00"
+  },
+  "827": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-01T13:54:45.141569+00:00"
+  },
+  "6908": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato errato: il file ritrae Marco Brescianini, non Atta.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "7126": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato errato: il file e dedicato a Nazmi Gripshi, non Baturina.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "4360": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Foto storica di squadra, non ritratto verificabile di Caprile.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "2845": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato errato: Giorgio Contini non e il giocatore del dataset.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "5559": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Identita di Da Cunha non verificabile nel file proposto.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "1926": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Foto storica di squadra, non ritratto verificabile di Di Gennaro.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "6883": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato non calcistico e non pertinente al giocatore Jean.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "7556": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Il file proposto non identifica il giocatore Mora.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "7337": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Foto storica di squadra, non ritratto verificabile di Motta.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "6462": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato errato: foto relativa a ex giocatori NFL, non Okoye.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "5320": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Foto storica di squadra, non ritratto verificabile di Paleari.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "6534": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato errato: il file identifica Claudio Perri, non il giocatore del dataset.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "4518": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Foto storica di squadra, non ritratto verificabile di Russo.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "6650": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato generico di beach soccer, identita di Sherri non verificabile.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "6569": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato errato: Alexander Stolz non corrisponde al giocatore del dataset.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "7475": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato errato: Janez Strajnar non corrisponde al giocatore del dataset.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "2815": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Foto di formazione non sufficiente a identificare il Terracciano del dataset.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "7301": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Foto di squadra del 1917, non il giocatore Tornqvist del dataset.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "4964": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Risultato errato: il file ritrae Buffon ed e attribuito a Roberto Vicario.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "2809": {
+    "status": "rejected",
+    "identity_confidence": 0.0,
+    "review_notes": "Documento storico non pertinente al giocatore Vigorito.",
+    "reviewed_at": "2026-09-02T00:00:00+00:00"
+  },
+  "1870": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-02T07:33:00.121476+00:00"
+  },
+  "7332": {
+    "status": "rejected",
+    "identity_confidence": 0.5,
+    "review_notes": "Decisione manuale: reject",
+    "reviewed_at": "2026-09-02T07:33:03.368379+00:00"
+  },
+  "4431": {
+    "status": "rejected",
+    "identity_confidence": 0.5,
+    "review_notes": "Decisione manuale: reject",
+    "reviewed_at": "2026-09-02T07:33:04.404882+00:00"
+  },
+  "2521": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-02T07:33:05.335724+00:00"
+  },
+  "610": {
+    "status": "rejected",
+    "identity_confidence": 0.5,
+    "review_notes": "Decisione manuale: reject",
+    "reviewed_at": "2026-09-02T07:33:06.106228+00:00"
+  },
+  "4312": {
+    "status": "rejected",
+    "identity_confidence": 0.5,
+    "review_notes": "Decisione manuale: reject",
+    "reviewed_at": "2026-09-02T07:33:07.315483+00:00"
+  },
+  "6482": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-02T07:33:08.528622+00:00"
+  },
+  "4973": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-02T07:33:09.618735+00:00"
+  },
+  "572": {
+    "status": "rejected",
+    "identity_confidence": 0.5,
+    "review_notes": "Decisione manuale: reject",
+    "reviewed_at": "2026-09-02T07:33:11.446617+00:00"
+  },
+  "4236": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-02T07:33:13.944653+00:00"
+  },
+  "1930": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-02T07:33:15.354998+00:00"
+  },
+  "2423": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-02T07:33:16.172917+00:00"
+  },
+  "2379": {
+    "status": "rejected",
+    "identity_confidence": 0.5,
+    "review_notes": "Decisione manuale: reject",
+    "reviewed_at": "2026-09-02T07:33:17.462038+00:00"
+  },
+  "7363": {
+    "status": "rejected",
+    "identity_confidence": 0.5,
+    "review_notes": "Decisione manuale: reject",
+    "reviewed_at": "2026-09-02T07:33:18.738064+00:00"
+  },
+  "4": {
+    "status": "rejected",
+    "identity_confidence": 0.5,
+    "review_notes": "Decisione manuale: reject",
+    "reviewed_at": "2026-09-02T07:33:20.593918+00:00"
+  },
+  "4485": {
+    "status": "rejected",
+    "identity_confidence": 0.5,
+    "review_notes": "Decisione manuale: reject",
+    "reviewed_at": "2026-09-02T07:33:21.923339+00:00"
+  },
+  "4867": {
+    "status": "approved",
+    "identity_confidence": 1.0,
+    "review_notes": "Decisione manuale: approve",
+    "reviewed_at": "2026-09-02T07:33:23.513903+00:00"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "audit_date": "2026-09-04",
+  "active_players": 533,
+  "season_records_verified": 921,
+  "selected_records": {
+    "Fantacalcio Serie A 2026/27": 533,
+    "Fantacalcio Serie A 2025/26": 365,
+    "Fantacalcio EuroLeghe 2025/26 fallback": 23
+  },
+  "field_comparison": {
+    "columns": [
+      "Pv",
+      "Mv",
+      "Fm",
+      "Gf",
+      "Gs",
+      "Rp",
+      "Rc",
+      "R+",
+      "R-",
+      "Ass",
+      "Amm",
+      "Esp",
+      "Au"
+    ],
+    "mismatches": 0,
+    "comparison": "exact by Fantacalcio player Id and season; Serie A 2025/26 has priority over EuroLeghe 2025/26"
+  },
+  "previous_season_missing_players": 145,
+  "serie_b_excel_present": false,
+  "note": "Nessun file Excel Serie B e presente tra le fonti fornite; i giocatori senza fonte 2025/26 verificata restano senza storico anziche essere stimati."
+}

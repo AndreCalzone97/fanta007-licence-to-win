@@ -1,0 +1,44 @@
+@keyframes agent-enter {
+  from { opacity: 0; transform: translateY(12px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes agent-positive {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-4px); }
+}
+
+@keyframes agent-warning {
+  0%, 100% { transform: translateX(0); }
+  35% { transform: translateX(-2px); }
+  70% { transform: translateX(2px); }
+}
+
+.agent-illustration {
+  animation: agent-enter var(--motion-slow) var(--ease-emphasis) both;
+}
+
+.agent-illustration[data-variant="positive"],
+.agent-illustration[data-variant="success"] {
+  animation-name: agent-enter, agent-positive;
+  animation-duration: var(--motion-slow), var(--motion-slow);
+  animation-delay: 0ms, var(--motion-slow);
+  animation-iteration-count: 1, 1;
+}
+
+.agent-illustration[data-variant="warning"],
+.agent-illustration[data-variant="critical"] {
+  animation-name: agent-enter, agent-warning;
+  animation-duration: var(--motion-slow), var(--motion-base);
+  animation-delay: 0ms, var(--motion-slow);
+  animation-iteration-count: 1, 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "254": {
+    "display_name": "Federico Dimarco",
+    "aliases": ["Dimarco"],
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/FC_Salzburg_gegen_Inter_Mailand_%28Testspiel_2023-08-09%29_73_-_Federico_Dimarco_%28cropped%29.jpg",
+      "source": "Wikimedia Commons",
+      "author": "Werner100359; crop by Danyele",
+      "license": "CC BY-SA 4.0",
+      "attribution_url": "https://commons.wikimedia.org/wiki/File:FC_Salzburg_gegen_Inter_Mailand_(Testspiel_2023-08-09)_73_-_Federico_Dimarco_(cropped).jpg"
+    }
+  },
+  "827": {
+    "display_name": "Manuel Locatelli",
+    "aliases": ["Locatelli"],
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Locatelli_Nazionale_2021.jpg",
+      "source": "Wikimedia Commons",
+      "author": "Saggittarius A",
+      "license": "CC BY-SA 4.0",
+      "attribution_url": "https://commons.wikimedia.org/wiki/File:Locatelli_Nazionale_2021.jpg",
+      "portrait_approved": false
+    }
+  },
+  "2764": {
+    "display_name": "Lautaro Martinez",
+    "aliases": ["Martinez L.", "Lautaro"],
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Lautaro_Mart%C3%ADnez_%28cropped%29.jpg",
+      "source": "Wikimedia Commons",
+      "author": "Agencia de Noticias ANDES",
+      "license": "CC BY-SA 2.0",
+      "attribution_url": "https://commons.wikimedia.org/wiki/File:Lautaro_Mart%C3%ADnez_(cropped).jpg"
+    }
+  },
+  "6875": {
+    "display_name": "Nico Paz",
+    "aliases": ["Paz N."],
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Nico_Paz_Como_2025.jpg",
+      "source": "Wikimedia Commons",
+      "author": "Fra Casa",
+      "license": "CC0 1.0",
+      "attribution_url": "https://commons.wikimedia.org/wiki/File:Nico_Paz_Como_2025.jpg"
+    }
+  },
+  "5585": {
+    "display_name": "Donyell Malen",
+    "aliases": ["Malen"],
+    "image": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Donyell_Malen_2021.jpg",
+      "thumbnail_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Donyell_Malen_2021.jpg?width=480",
+      "source": "Wikimedia Commons",
+      "author": "Steffen Proessdorf",
+      "license": "CC BY-SA 4.0",
+      "attribution_url": "https://commons.wikimedia.org/wiki/File:Donyell_Malen_2021.jpg",
+      "attribution_text": "Steffen Proessdorf · CC BY-SA 4.0",
+      "portrait_approved": true
+    }
+  },
+  "6052": {
+    "display_name": "Rasmus Hojlund",
+    "aliases": ["Hojlund", "Rasmus Højlund"],
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Rasmus_H%C3%B8jlund_with_a_fan.jpg",
+      "source": "Wikimedia Commons",
+      "author": "VietnamJ25",
+      "license": "CC0 1.0",
+      "attribution_url": "https://commons.wikimedia.org/wiki/File:Rasmus_H%C3%B8jlund_with_a_fan.jpg",
+      "attribution_text": "VietnamJ25 · CC0 1.0",
+      "portrait_approved": true
+    }
+  },
+  "2194": {
+    "display_name": "Hakan Calhanoglu",
+    "aliases": ["Calhanoglu", "Hakan Çalhanoğlu"],
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Hakan-Calhanoglu.jpg",
+      "source": "Wikimedia Commons",
+      "author": "Gert Zander (Fuguito)",
+      "license": "CC BY-SA 4.0",
+      "attribution_url": "https://commons.wikimedia.org/wiki/File:Hakan-Calhanoglu.jpg",
+      "attribution_text": "Gert Zander (Fuguito) · CC BY-SA 4.0",
+      "portrait_approved": true
+    }
+  }
+}
