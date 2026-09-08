@@ -217,6 +217,44 @@ Frontend locale: `http://localhost:5173`
 
 API health: `http://127.0.0.1:8000/api/v1/health`
 
+### Media Review locale
+
+La lettura della Media Review resta disponibile. Le modifiche tramite
+`PATCH /api/v1/admin/media-review/{player_id}` sono disabilitate per default:
+rispondono **403 Forbidden** con `Operazione non consentita`, senza salvare dati.
+Il controllo avviene nel backend e non dipende dal CORS.
+
+Per abilitare le modifiche, impostare la variabile nel terminale che avvia il
+backend (copiare `.env.example` in `.env` non carica automaticamente le variabili):
+
+```powershell
+$env:FANTA007_ENABLE_MEDIA_REVIEW_ADMIN = "true"
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir .\backend --host 127.0.0.1 --port 8000
+```
+
+Su macOS/Linux, con il virtualenv attivo:
+
+```bash
+FANTA007_ENABLE_MEDIA_REVIEW_ADMIN=true python -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 8000
+```
+
+Aprire `/admin/media-review` nel frontend già avviato per approvare, rifiutare
+o usare il fallback delle immagini. Solo `true` abilita le modifiche, ignorando
+maiuscole/minuscole e spazi esterni; valore assente, `false`, vuoto o non
+riconosciuto mantiene il blocco. Per disabilitare nuovamente, arrestare il backend,
+impostare il flag a `false` e riavviarlo.
+
+Questo flag **non autentica gli utenti**: quando è abilitato, chiunque raggiunga
+l'API può modificare le revisioni. Usarlo soltanto in ambiente locale/fidato;
+mantenerlo disabilitato nei deploy pubblici. CORS regola l'accesso dei browser
+fra origini, ma non verifica l'identità di un client HTTP.
+
+Test autonomi della Media Review, senza Excel esterni:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest .\backend\tests\test_media_review.py -q
+```
+
 ---
 
 ## ✅ Test

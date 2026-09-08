@@ -38,3 +38,8 @@ def allowed_origins() -> list[str]:
         "http://localhost:5173,http://127.0.0.1:5173",
     )
     return [origin.strip() for origin in raw.split(",") if origin.strip()]
+
+
+def media_review_admin_enabled() -> bool:
+    """Only an explicit true enables local administrative mutations."""
+    return os.getenv("FANTA007_ENABLE_MEDIA_REVIEW_ADMIN", "false").strip().casefold() == "true"
