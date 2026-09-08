@@ -1,9 +1,15 @@
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 
+from app.core.config import media_review_admin_enabled
 from app.domain.media import MediaReviewUpdate, PlayerMediaReview
 
 
 router = APIRouter(prefix="/admin/media-review", tags=["media-review"])
+
+
+def require_media_review_admin() -> None:
+    if not media_review_admin_enabled():
+        raise HTTPException(status_code=403, detail="Operazione non consentita")
 
 
 @router.get("", response_model=list[PlayerMediaReview])
@@ -11,7 +17,11 @@ def list_media_reviews(request: Request) -> list[PlayerMediaReview]:
     return request.app.state.media_review_repository.list(request.app.state.player_repository.all())
 
 
-@router.patch("/{player_id}", response_model=PlayerMediaReview)
+@router.patch(
+    "/{player_id}",
+    response_model=PlayerMediaReview,
+    dependencies=[Depends(require_media_review_admin)],
+)
 def update_media_review(request: Request, player_id: int, update: MediaReviewUpdate) -> PlayerMediaReview:
     player = request.app.state.player_repository.get(player_id)
     if player is None:
