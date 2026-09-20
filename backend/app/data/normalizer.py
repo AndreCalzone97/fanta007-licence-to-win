@@ -8,6 +8,7 @@ from typing import Any
 
 from app.domain.player import DatasetMetadata, ExternalIds, Player, PlayerDataset, PlayerImage
 from app.data.excel_parser import RawPlayerRow
+from app.data.validation import validate_dataset
 
 
 AliasMap = dict[int, dict[str, Any]]
@@ -94,6 +95,8 @@ def normalize_dataset(
     official_source_url: str | None = None,
 ) -> PlayerDataset:
     source = Path(source)
+    if existing_dataset is not None:
+        existing_dataset = validate_dataset(existing_dataset)
     existing_by_id = {
         player.id: player for player in existing_dataset.players
     } if existing_dataset else {}
@@ -106,7 +109,7 @@ def normalize_dataset(
         )
         for row in rows
     ]
-    return PlayerDataset(
+    return validate_dataset(PlayerDataset(
         metadata=DatasetMetadata(
             season=season,
             source_file=source.name,
@@ -118,4 +121,4 @@ def normalize_dataset(
             official_source_url=official_source_url,
         ),
         players=players,
-    )
+    ))

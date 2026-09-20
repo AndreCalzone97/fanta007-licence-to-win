@@ -1,4 +1,4 @@
-import { useEffect, type RefObject } from "react";
+import { useEffect, useEffectEvent, type RefObject } from "react";
 
 const focusableSelector = [
   "a[href]",
@@ -10,17 +10,19 @@ const focusableSelector = [
 ].join(",");
 
 export function useFocusTrap(ref: RefObject<HTMLElement | null>, active: boolean, onEscape: () => void) {
+  const escape = useEffectEvent(onEscape);
   useEffect(() => {
     if (!active || !ref.current) return;
     const dialog = ref.current;
     const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const focusables = () => Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector));
+    const focusables = () => Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector)).filter(element => element.tabIndex >= 0 && element.getClientRects().length > 0);
     focusables()[0]?.focus();
 
     function handleKey(event: KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
-        onEscape();
+        event.stopPropagation();
+        escape();
         return;
       }
       if (event.key !== "Tab") return;
@@ -42,5 +44,5 @@ export function useFocusTrap(ref: RefObject<HTMLElement | null>, active: boolean
       document.removeEventListener("keydown", handleKey);
       previouslyFocused?.focus();
     };
-  }, [active, onEscape, ref]);
+  }, [active, ref]);
 }

@@ -1,0 +1,32 @@
+/* Literal equivalents of the original shadcn/Tailwind structure. */
+.expandable-tabs {
+  --et-border: #e4e4e7; --et-background: #fff; --et-muted: #f4f4f5;
+  --et-muted-foreground: #71717a; --et-foreground: #09090b; --et-primary: #18181b;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
+  border-radius: 1rem; border: 1px solid var(--et-border); background: var(--et-background);
+  padding: .25rem; box-shadow: 0 1px 2px 0 rgb(0 0 0 / .05);
+}
+.expandable-tabs .expandable-button {
+  position: relative; display: flex; align-items: center; flex: none;
+  min-width: 44px; min-height: 44px; justify-content: center;
+  border-radius: .75rem; padding: .5rem 1rem; border: 0;
+  font-family: inherit; font-size: .875rem; line-height: 1.25rem; font-weight: 500;
+  background: transparent; cursor: pointer; transition: color .3s, background-color .3s, border-color .3s;
+}
+.expandable-tabs .expandable-selected { background: var(--et-muted); }
+.expandable-tabs .expandable-primary { color: var(--et-primary); }
+.expandable-tabs .expandable-inactive { color: var(--et-muted-foreground); }
+.expandable-tabs .expandable-inactive:hover { background: var(--et-muted); color: var(--et-foreground); }
+.expandable-tabs .expandable-button svg { width: 20px; height: 20px; flex-shrink: 0; }
+.expandable-label { overflow: hidden; white-space: nowrap; }
+.expandable-separator { margin-inline: .25rem; height: 24px; width: 1.2px; background: var(--et-border); }
+.expandable-tabs .expandable-button:focus-visible { outline: 2px solid var(--et-primary); outline-offset: 2px; }
+.dark .expandable-tabs {
+  --et-border: #27272a; --et-background: #09090b; --et-muted: #27272a;
+  --et-muted-foreground: #a1a1aa; --et-foreground: #fafafa; --et-primary: #fafafa;
+}
+/* Dossier placement only, isolated from the old equal-width underline tabs. */
+.dossier-expandable-shell { position: sticky; top: 0; z-index: 5; padding: 12px 28px; background: #f9fbf8; }
+.dossier-expandable-shell .expandable-tabs { width: fit-content; max-width: 100%; }
+@media (max-width: 600px) { .dossier-expandable-shell { padding-inline: 16px; } }
+@media (prefers-reduced-motion: reduce) { .expandable-tabs .expandable-button { transition: none; } }

@@ -61,10 +61,12 @@ def main() -> None:
         require_team_ids=True,
     )
 
-    _write_json_atomic(args.output, candidate.model_dump(mode="json"))
     _write_json_atomic(args.audit_json, report)
     args.audit_markdown.parent.mkdir(parents=True, exist_ok=True)
     args.audit_markdown.write_text(render_audit_markdown(report), encoding="utf-8")
+    if report["status"] != "valid":
+        raise ValueError("Candidato non valido: " + "; ".join(report["errors"]))
+    _write_json_atomic(args.output, candidate.model_dump(mode="json"))
     print(
         f"Candidato creato: {len(candidate.players)} giocatori; "
         f"audit {report['status']}; attivazione {report['activation']}."

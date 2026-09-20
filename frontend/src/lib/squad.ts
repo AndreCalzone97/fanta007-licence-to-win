@@ -41,6 +41,8 @@ export function safeMaximumBid(squad: SquadPlayer[], budget: number): number {
 }
 
 export function acquisitionBlockReason(config: LeagueConfig, squad: SquadPlayer[], player: Player, price: number): string | null {
+  if (!Number.isSafeInteger(config.budget) || config.budget < 25 || config.budget > 100000) return "Budget non valido (25–100000 crediti interi).";
+  if (!Number.isSafeInteger(price) || price < 1) return "Inserisci un prezzo intero di almeno 1 credito.";
   const totals = squadTotals(squad, config.budget);
   if (squad.some((entry) => entry.player.id === player.id)) return "Giocatore già presente nella rosa.";
   if (squad.length >= SQUAD_SIZE) return "Rosa completa: hai già occupato tutti i 25 slot.";

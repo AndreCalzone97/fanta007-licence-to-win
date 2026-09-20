@@ -4,8 +4,9 @@ import argparse
 import json
 from pathlib import Path
 
-from app.data.historical_importer import read_historical_csv
+from app.data.historical_importer import ImportedPlayerStats, merge_player_statistics, read_historical_csv, stats_source_priority
 from app.domain.player import PlayerDataset
+from app.data.validation import validate_dataset
 from app.services.player_identity import PlayerIdentityResolver
 
 
@@ -20,21 +21,26 @@ def main() -> None:
     args = parser.parse_args()
 
     dataset = PlayerDataset.model_validate_json(args.dataset.read_text(encoding="utf-8"))
+    dataset = validate_dataset(dataset)
     resolver = PlayerIdentityResolver(dataset.players)
     by_id = {player.id: player for player in dataset.players}
     report = []
+    incoming = []
     matched = 0
     for name, team, stats in read_historical_csv(args.csv, args.season, args.source_url):
         result = resolver.resolve(name, team)
         if result.status == "matched" and result.player_id is not None:
             player = by_id[result.player_id]
-            retained = [entry for entry in player.statistics if entry.season != stats.season]
-            by_id[player.id] = player.model_copy(update={"statistics": [stats, *retained]})
+            incoming.append(ImportedPlayerStats(player.id, player.name, player.role_classic, stats))
             matched += 1
         else:
             report.append({"name": name, "team": team, "status": result.status, "candidate_id": result.player_id, "confidence": result.confidence})
 
-    updated = dataset.model_copy(update={"players": [by_id[player.id] for player in dataset.players]})
+    updated = merge_player_statistics(dataset, [(stats_source_priority("Fantacalcio.it"), incoming)])
+    updated = updated.model_copy(update={
+        "metadata": dataset.metadata.model_copy(update={"status": "candidate"}),
+    })
+    updated = validate_dataset(updated)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(updated.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     args.report.parent.mkdir(parents=True, exist_ok=True)

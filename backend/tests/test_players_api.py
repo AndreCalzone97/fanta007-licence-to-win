@@ -55,7 +55,8 @@ def test_player_list_supports_team_role_and_pagination(player_dataset):
     payload = page.json()
     assert payload["limit"] == 2
     assert payload["offset"] == 0
-    assert payload["total"] >= len(payload["items"])
+    assert payload["total"] == 3
+    assert len(payload["items"]) == 2
     assert all(item["team"] == "Inter" and item["role_classic"] == "A" for item in payload["items"])
 
 

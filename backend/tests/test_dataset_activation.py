@@ -30,7 +30,8 @@ def test_activation_is_atomic_and_keeps_backup(tmp_path, player_dataset):
 
     assert active.metadata.status == "active"
     assert backup.is_file()
-    assert json.loads(backup.read_text(encoding="utf-8"))["metadata"]["player_count"] == 533
+    assert json.loads(backup.read_text(encoding="utf-8")) == player_dataset.model_dump(mode="json")
+    assert json.loads(backup.read_text(encoding="utf-8"))["metadata"]["player_count"] == 9
     assert json.loads(current_path.read_text(encoding="utf-8"))["metadata"]["status"] == "active"
     assert json.loads(candidate_path.read_text(encoding="utf-8"))["metadata"]["status"] == "candidate"
 

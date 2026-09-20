@@ -1,4 +1,4 @@
-import { AgentIllustration } from "./AgentIllustration";
+import { BudgetAllocation } from "./BudgetAllocation";
 import { AgentInsight } from "./AgentInsight";
 import { Reveal } from "./Reveal";
 import { StarRating } from "./StarRating";
@@ -36,7 +36,8 @@ export function SquadEvaluation({ config, squad, onOpenPlayers }: { config: Leag
   const objectiveFit = averageScore >= requirement && overpays.length <= 3;
 
   if (!complete) return <section className="evaluation-page provisional-evaluation">
-    <header className="evaluation-masthead"><div><span className="section-kicker">Valutazione provvisoria</span><h1>La rosa non è ancora completa.</h1><p>Questa lettura considera i <b>{squad.length} giocatori</b> già acquistati. Cambierà insieme alla rosa.</p></div><div className="evaluation-progress"><strong>{Math.round(squad.length / 25 * 100)}%</strong><span>rosa completata</span></div></header>
+    <header className="evaluation-masthead"><div><h1>Analisi della rosa</h1><p>Valutazione provvisoria basata su regole: considera i <b>{squad.length} giocatori</b> già acquistati. Cambierà insieme alla rosa.</p></div><div className="evaluation-progress"><strong>{Math.round(squad.length / 25 * 100)}%</strong><span>rosa completata</span></div></header>
+    <BudgetAllocation config={config} squad={squad} />
     <AgentInsight insight={advice} onAction={() => onOpenPlayers(advice.recommendedRole)} />
     <Reveal className="provisional-metrics"><div><span>Budget iniziale</span><strong>{config.budget}</strong></div><div><span>Speso</span><strong>{totals.spent}</strong></div><div><span>Disponibile</span><strong>{totals.remaining}</strong></div><div><span>Appetibilità media</span><strong>{evaluated.length ? `${averageRating.toFixed(1)}/5` : "N/D"}</strong></div></Reveal>
     <Reveal className="department-brief" delay={60}><div className="editorial-heading"><h2>Come stanno i reparti</h2><p>Apri il Listone già filtrato sul ruolo che vuoi completare.</p></div>{departments.map((department) => <button className={`role-${department.role.toLowerCase()}`} key={department.role} onClick={() => onOpenPlayers(department.role)}><b>{department.role}</b><span><strong>{department.name}</strong><small>{department.count}/{department.target} · {Math.max(0, department.target - department.count)} slot mancanti</small></span><StarRating value={department.score} compact label={`Punteggio ${department.name}`} /><i>APRI →</i></button>)}</Reveal>
@@ -52,10 +53,11 @@ export function SquadEvaluation({ config, squad, onOpenPlayers }: { config: Leag
   return <article className="evaluation-page final-dossier">
     <header className="final-hero">
       <div className="final-copy"><span>Resoconto rosa</span><h1>Il tuo mercato, in breve.</h1><p>{config.teamName} · {config.mode} · {config.participants} partecipanti</p><div className="final-score"><span>APPETIBILITÀ MEDIA</span><StarRating value={averageRating} label="Appetibilità media della rosa" /></div></div>
-      <AgentIllustration variant={objectiveFit ? "positive" : "warning"} className="final-agent" decorative sizes="(max-width: 700px) 300px, 480px" />
+
       <div className="final-verdict"><span>IL PARERE DEL FANTAGENTE</span><p>{summary}</p></div>
     </header>
 
+    <BudgetAllocation config={config} squad={squad} />
     <Reveal className="mission-ledger"><div className="editorial-heading"><h2>Budget e acquisti</h2><p>I numeri essenziali della tua asta.</p></div><dl><div><dt>Budget iniziale</dt><dd>{config.budget}</dd></div><div><dt>Speso</dt><dd>{totals.spent}</dd></div><div><dt>Rimasto</dt><dd>{totals.remaining}</dd></div><div><dt>Buoni affari</dt><dd>{deals.length}</dd></div><div><dt>Prezzi da rivedere</dt><dd>{overpays.length}</dd></div></dl></Reveal>
 
     <Reveal className="deal-intelligence" delay={40}><section className="evaluation-column"><div className="editorial-heading"><h2>Migliori acquisti</h2><p>Chi hai preso sotto il riferimento FVM.</p></div><PlayerRanking items={deals.slice(0, 4)} empty="Nessun acquisto nettamente sotto il riferimento FVM." /></section><section className="evaluation-column watch"><div className="editorial-heading"><h2>Acquisti da rivedere</h2><p>Dove il prezzo pagato pesa di più.</p></div><PlayerRanking items={overpays.slice(0, 4)} empty="Nessun sovrapprezzo critico: buona gestione." /></section></Reveal>

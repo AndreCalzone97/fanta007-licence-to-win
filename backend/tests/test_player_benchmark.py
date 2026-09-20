@@ -23,7 +23,8 @@ def test_benchmark_is_role_relative_and_deterministic(player_dataset):
     )
     assert benchmark.fvm_rank == 1
     assert benchmark.fvm_percentile == 100
-    assert benchmark.fvm_top_percent == 1
+    assert benchmark.role_total == 2
+    assert benchmark.fvm_top_percent == 50  # Rank 1 among two midfielders.
 
 
 def test_benchmark_ties_share_the_same_rank(player_dataset):

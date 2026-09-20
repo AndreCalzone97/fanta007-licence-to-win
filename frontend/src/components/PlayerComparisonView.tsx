@@ -9,7 +9,7 @@ export function PlayerComparisonView({ players, config, onBack, onOpen }: { play
     ["QA", (player: Player) => value(player.current_quotation)],
     ["FVM / 1000", (player: Player) => value(config.mode === "Mantra" ? player.fvm_mantra : player.fvm)],
     ["FVM lega", (player: Player) => value(normalizedFvm(player, config))],
-    ["Appetibilità", (player: Player) => `${getPlayerAppeal(player, config).level}/5`],
+    ["Appetibilità", (player: Player) => `${getPlayerAppeal(player, config).rating.toFixed(1)}/5`],
     ["MV storica", (player: Player) => value(player.statistics[0]?.average_rating, 2)],
     ["FM storica", (player: Player) => value(player.statistics[0]?.fantasy_average, 2)],
     ["Presenze", (player: Player) => value(player.statistics[0]?.appearances)],

@@ -9,7 +9,7 @@ let getPlayerAppeal;
 let players;
 
 before(async () => {
-  server = await createServer({ root: process.cwd(), server: { middlewareMode: true }, appType: "custom" });
+  server = await createServer({ cacheDir: `node_modules/.vite-tests/${process.pid}`, optimizeDeps: { noDiscovery: true, include: [] }, root: process.cwd(), server: { middlewareMode: true, hmr: false, ws: false }, appType: "custom" });
   ({ getPlayerAppeal } = await server.ssrLoadModule("/src/lib/appeal.ts"));
   const dataset = JSON.parse(await readFile(new URL("../../data/normalized/players.json", import.meta.url), "utf8"));
   players = dataset.players;

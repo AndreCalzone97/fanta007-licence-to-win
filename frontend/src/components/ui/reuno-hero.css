@@ -1,0 +1,53 @@
+/* H1: utility equivalents and animation rules verified in the author's demo.
+   Namespaced to prevent the legacy app's global heading styles leaking in. */
+.fanta-welcome .reuno-hero {
+  position: relative; isolation: isolate; width: 100%; min-height: 100svh;
+  overflow: hidden; color: #e6e1d7;
+  background: linear-gradient(to bottom right, #1a1d18, #000, #2a2e26);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+.reuno-grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.reuno-grid-line { stroke: #c8b4a0; stroke-width: .5px; opacity: 0; stroke-dasharray: 5 5; stroke-dashoffset: 1000px; animation: reuno-grid-draw 2s ease-out forwards; }
+.reuno-detail-dot { fill: #c8b4a0; opacity: 0; animation: reuno-pulse-glow 3s ease-in-out infinite; }
+.reuno-corner { position: absolute; width: 40px; height: 40px; border: 1px solid #c8b4a033; opacity: 0; animation: reuno-word-appear 1s ease-out forwards; pointer-events: none; }
+.reuno-corner::before { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #c8b4a04d; }
+.reuno-top { top: 32px; } .reuno-bottom { bottom: 32px; }
+.reuno-left { left: 32px; } .reuno-right { right: 32px; }
+.reuno-square { position: absolute; width: 8px; height: 8px; opacity: .3; }
+.reuno-square-tl { top: 0; left: 0; } .reuno-square-tr { top: 0; right: 0; }
+.reuno-square-bl { bottom: 0; left: 0; } .reuno-square-br { bottom: 0; right: 0; }
+.reuno-floating { position: absolute; opacity: 0; background: #c8b4a0; border-radius: 50%; width: 2px; height: 2px; animation: reuno-float 4s ease-in-out infinite; pointer-events: none; }
+.reuno-content { position: relative; z-index: 10; min-height: 100svh; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 48px 32px; gap: 48px; }
+.reuno-center { text-align: center; }
+.fanta-welcome .reuno-tagline { margin: 0; font: 300 12px/1.4 ui-monospace, monospace; text-transform: uppercase; letter-spacing: .2em; opacity: .8; }
+.reuno-word { display: inline-block; margin: 0 .1em; transition: .3s; animation: reuno-word-appear .8s ease-out both; }
+.reuno-word:hover { color: #c8b4a0; text-shadow: 0 0 20px #c8b4a080; }
+.reuno-divider { width: 64px; height: 1px; opacity: .3; }
+.reuno-mt { margin-top: 16px; } .reuno-mb { margin-bottom: 16px; }
+.reuno-headline-wrap { max-width: 1024px; margin-inline: auto; text-align: center; }
+.fanta-welcome .reuno-headline { margin: 0; font-family: inherit; font-size: 30px; font-weight: 200; line-height: 1.25; letter-spacing: -.025em; }
+.reuno-headline-main { margin-bottom: 16px; }
+.reuno-headline-sub { font-size: 24px; font-weight: 100; line-height: 1.625; }
+.reuno-side { position: absolute; top: 50%; width: 16px; height: 1px; opacity: .2; }
+.reuno-side-left { left: -32px; } .reuno-side-right { right: -32px; }
+.reuno-dots { margin-top: 24px; display: flex; justify-content: center; gap: 16px; opacity: 0; }
+.reuno-dot { width: 4px; height: 4px; border-radius: 50%; opacity: .4; }
+.reuno-dot-bright { opacity: .6; }
+.reuno-mouse-gradient { position: fixed; pointer-events: none; width: 384px; height: 384px; border-radius: 50%; filter: blur(64px); transition: all .5s ease-out; opacity: 0; }
+.reuno-ripple { position: fixed; width: 4px; height: 4px; background: #c8b4a099; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; animation: reuno-pulse-glow 1s ease-out forwards; }
+/* Product adaptation: working entry action beside the original bottom tagline. */
+.fanta-welcome .reuno-action { display: inline-flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; min-height: 48px; padding: 12px 24px; border: 1px solid #c8b4a0; border-radius: 6px; color: #e6e1d7; background: transparent; font: 500 14px/1.5 ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background .2s, color .2s; }
+.fanta-welcome .reuno-action:hover { background: #c8b4a0; color: #1a1d18; }
+.fanta-welcome .reuno-action:focus-visible { outline: 2px solid #f8f7f5; outline-offset: 5px; }
+.reuno-hero ::selection { background: #c8b4a0; color: #1a1d18; }
+@keyframes reuno-word-appear {
+  0% { opacity: 0; filter: blur(10px); transform: translateY(30px) scale(.8); }
+  50% { opacity: .8; filter: blur(2px); transform: translateY(10px) scale(.95); }
+  100% { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+}
+@keyframes reuno-pulse-glow { 0%, 100% { opacity: .1; transform: scale(1); } 50% { opacity: .3; transform: scale(1.1); } }
+@keyframes reuno-grid-draw { 0% { stroke-dashoffset: 1000px; opacity: 0; } 50% { opacity: .3; } 100% { stroke-dashoffset: 0; opacity: .15; } }
+@keyframes reuno-float { 0%,100% { opacity: .2; transform: translateY(0) translateX(0); } 25% { opacity: .6; transform: translateY(-10px) translateX(5px); } 50% { opacity: .4; transform: translateY(-5px) translateX(-3px); } 75% { opacity: .8; transform: translateY(-15px) translateX(7px); } }
+@media (min-width: 768px) { .reuno-content { padding: 80px 64px; } .fanta-welcome .reuno-tagline { font-size: 14px; } .fanta-welcome .reuno-headline { font-size: 48px; } .reuno-headline-main { margin-bottom: 24px; } .reuno-headline-sub { font-size: 30px; } }
+@media (min-width: 1024px) { .fanta-welcome .reuno-headline { font-size: 60px; } .reuno-headline-sub { font-size: 36px; } }
+@media (prefers-reduced-motion: reduce) { .reuno-word, .reuno-dots, .reuno-corner { opacity: 1; transform: none; filter: none; } .reuno-grid-line { opacity: .15; stroke-dashoffset: 0; } .reuno-mouse-gradient, .reuno-floating, .reuno-detail-dot { display: none; } }

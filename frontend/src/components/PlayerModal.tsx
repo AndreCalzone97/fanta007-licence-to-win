@@ -1,21 +1,25 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useState } from "react";
+import { Activity, BadgeEuro, Gauge, TrendingDown, TrendingUp } from "lucide-react";
 import type { LeagueConfig, Player, PlayerBenchmark as Benchmark } from "../types";
 import { getPlayerInsight } from "../lib/advice";
 import { getPlayerAppeal, objectiveCompatibility } from "../lib/appeal";
 import { embeddedStatsProvider, isNewSerieAArrival, roleAwareStats, seasonContext } from "../lib/playerStats";
 import { normalizedFvm, valueDifference, valueStatus } from "../lib/squad";
-import { useFocusTrap } from "../hooks/useFocusTrap";
+import { ContextPanel } from "./ui/ContextPanel";
 import { AgentInsight } from "./AgentInsight";
 import { AppealBadge } from "./AppealBadge";
+import { AgentReaction } from "./AgentReaction";
 import { PlayerBenchmark } from "./PlayerBenchmark";
 import { Reveal } from "./Reveal";
 import { StatusBadge } from "./StatusBadge";
 import { StarRating } from "./StarRating";
 import { TeamCrest } from "./TeamCrest";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000/api/v1";
+import { DossierTabs } from "./ui/DossierTabs";
+import { API_BASE_URL } from "../lib/api";
+import { StatsCard } from "./ui/StatsCard";
+import { InteractiveBarChart, type InteractiveBarDatum } from "./ui/InteractiveBarChart";
 type Props = { player: Player | null; config: LeagueConfig; purchasePrice?: number; onClose: () => void; primaryActionLabel?: string; onPrimaryAction?: () => void };
-type Tab = "overview" | "performance" | "intelligence";
+type Tab = "overview" | "performance" | "intelligence" | "advice";
 const metric = (value: number | null | undefined, digits = 0) => value == null ? "N/D" : digits ? value.toFixed(digits) : value;
 
 function metricTone(label: string) {
@@ -24,6 +28,29 @@ function metricTone(label: string) {
   if (/^(PV|Minuti)$/i.test(label)) return "metric-volume";
   if (/^(Gialli|Rossi|Autogol)$/i.test(label)) return "metric-discipline";
   return "metric-neutral";
+}
+
+function metricCapacity(label: string) {
+  if (label === "Minuti") return 3420;
+  if (label === "PV") return 38;
+  if (/^(MV|FM)$/i.test(label)) return 10;
+  if (/Gialli/i.test(label)) return 15;
+  if (/Rossi|Autogol|sbagliati/i.test(label)) return 5;
+  if (/Rigori parati/i.test(label)) return 8;
+  if (/Gol subiti/i.test(label)) return 70;
+  if (/Gol|Assist|Rigori/i.test(label)) return 25;
+  return 100;
+}
+
+function performanceChartData(player: Player): InteractiveBarDatum[] {
+  const season = embeddedStatsProvider.seasons(player)[0];
+  if (!season) return [];
+  return roleAwareStats(player.role_classic, season).map(([label, raw]) => {
+    const value = Number(raw ?? 0);
+    const normalized = Math.max(0, Math.min(100, (value / metricCapacity(label)) * 100));
+    const displayValue = Number.isInteger(value) ? String(value) : value.toFixed(2);
+    return { label, value: normalized, displayValue };
+  });
 }
 
 function playerNarrative(player: Player, appeal: ReturnType<typeof getPlayerAppeal>, config: LeagueConfig) {
@@ -63,20 +90,23 @@ function playerNarrative(player: Player, appeal: ReturnType<typeof getPlayerAppe
 export function PlayerModal({ player, config, purchasePrice, onClose, primaryActionLabel, onPrimaryAction }: Props) {
   const [tab, setTab] = useState<Tab>("overview");
   const [benchmark, setBenchmark] = useState<Benchmark | null>(null);
-  const dialogRef = useRef<HTMLElement>(null);
-  useFocusTrap(dialogRef, Boolean(player), onClose);
+  const tabsId = useId();
+  const [benchmarkLoading, setBenchmarkLoading] = useState(false);
+  const [retry, setRetry] = useState(0);
+  useEffect(() => { setTab("overview"); }, [player]);
 
   useEffect(() => {
-    setTab("overview");
     setBenchmark(null);
     if (!player) return;
+    setBenchmarkLoading(true);
     const controller = new AbortController();
     fetch(`${API_BASE_URL}/players/${player.id}/benchmark`, { signal: controller.signal })
       .then((response) => response.ok ? response.json() : Promise.reject())
       .then(setBenchmark)
-      .catch(() => undefined);
+      .catch(() => undefined)
+      .finally(() => { if (!controller.signal.aborted) setBenchmarkLoading(false); });
     return () => controller.abort();
-  }, [player]);
+  }, [player, retry]);
 
   if (!player) return null;
   const insight = benchmark ? getPlayerInsight(player, benchmark, config) : null;
@@ -89,31 +119,42 @@ export function PlayerModal({ player, config, purchasePrice, onClose, primaryAct
     difference: valueDifference(purchasePrice, benchmarkPrice),
     status: valueStatus(purchasePrice, benchmarkPrice),
   };
-  const tabs: Array<[Tab, string]> = [["overview", "Scheda"], ["performance", "Statistiche"], ["intelligence", "Analisi giocatore"]];
+  const chartData = performanceChartData(player);
+  const quotationChange = player.quotation_delta;
+  const quotationChangeLabel = `${quotationChange > 0 ? "+" : ""}${quotationChange} dalla QI`;
 
-  return <div className="modal-backdrop" onMouseDown={onClose}><section ref={dialogRef} className="player-dossier" role="dialog" aria-modal="true" aria-labelledby="dossier-title" onMouseDown={(event) => event.stopPropagation()}>
-    <button className="icon-button dossier-close" aria-label="Chiudi dossier" onClick={onClose}>×</button>
-    <header className="dossier-hero"><TeamCrest team={player.team} teamId={player.team_id} size="lg" /><div className="dossier-identity"><span>FANTA007 · DOSSIER GIOCATORE</span><h2 id="dossier-title">{player.name}</h2><p>{player.team}</p><div className="identity-tags"><b>{player.role_classic}</b>{player.roles_mantra.map((role) => <b key={role}>{role}</b>)}</div><div className="dossier-appeal"><AppealBadge appeal={appeal} /><span className={`confidence confidence-${appeal.confidence.toLowerCase()}`}>FIDUCIA DATI {appeal.confidence}</span></div></div><div className="listone-matrix"><section><span>QUOTAZIONE</span><div><b>{player.current_quotation}</b><b>{player.current_quotation_mantra}</b></div><small><i>Classic</i><i>Mantra</i></small></section><section><span>FVM / 1000</span><div><b>{player.fvm}</b><b>{player.fvm_mantra}</b></div><small><i>Classic</i><i>Mantra</i></small></section></div></header>
-    <div className="dossier-tabs" role="tablist" aria-label="Sezioni dossier">{tabs.map(([value, label]) => <button role="tab" aria-selected={tab === value} className={tab === value ? "active" : ""} key={value} onClick={() => setTab(value)}>{label}</button>)}</div>
+  return <ContextPanel titleId="dossier-title" onClose={onClose} wide className="ops-dossier">
+    <div className="ops-panel-top"><span>Dossier giocatore · #{player.id}</span><button className="ops-close" aria-label="Chiudi dossier" onClick={onClose}>×</button></div>
+    <div className="dossier-team-atmosphere" aria-hidden="true"><TeamCrest team={player.team} teamId={player.team_id} size="lg" decorative /></div>
+    <header className="dossier-hero"><TeamCrest team={player.team} teamId={player.team_id} size="lg" /><div className="dossier-identity"><span>FANTA 007 · DOSSIER</span><h2 id="dossier-title">{player.name}</h2><p>{player.team}</p><div className="identity-tags"><b>{player.role_classic}</b>{player.roles_mantra.map((role) => <b key={role}>{role}</b>)}</div><div className="dossier-appeal"><AppealBadge appeal={appeal} /><span className={`confidence confidence-${appeal.confidence.toLowerCase()}`}>FIDUCIA DATI {appeal.confidence}</span></div></div><div className="listone-matrix"><section><span>QUOTAZIONE</span><div><b>{player.current_quotation}</b><b>{player.current_quotation_mantra}</b></div><small><i>Classic</i><i>Mantra</i></small></section><section><span>FVM / 1000</span><div><b>{player.fvm}</b><b>{player.fvm_mantra}</b></div><small><i>Classic</i><i>Mantra</i></small></section></div></header>
+    <DossierTabs id={tabsId} value={tab} onChange={setTab} />
+    <div id={`${tabsId}-panel`} role="tabpanel" tabIndex={0} aria-labelledby={`${tabsId}-${tab}`} className="dossier-panel" key={tab}>
 
     {tab === "overview" && <div className="dossier-content">
-      <Reveal className="dossier-value-grid"><div><span>QI Classic</span><strong>{player.initial_quotation}</strong></div><div><span>QA Classic</span><strong>{player.current_quotation}</strong></div><div><span>FVM / 1000</span><strong>{player.fvm}</strong></div><div><span>FVM lega</span><strong>{benchmarkPrice}</strong></div></Reveal>
+      <Reveal className="fanta-stats-card-grid">
+        <StatsCard title="QI Classic" value={player.initial_quotation} icon={<BadgeEuro />} change="Quotazione iniziale" changeType="positive" />
+        <StatsCard title="QA Classic" value={player.current_quotation} icon={quotationChange >= 0 ? <TrendingUp /> : <TrendingDown />} change={quotationChangeLabel} changeType={quotationChange >= 0 ? "positive" : "negative"} />
+        <StatsCard title="FVM / 1000" value={player.fvm} icon={<Activity />} change="Riferimento Listone" changeType="positive" />
+        <StatsCard title="FVM per la tua lega" value={benchmarkPrice} icon={<Gauge />} change={`Calibrato su ${config.budget} crediti`} changeType="positive" />
+      </Reveal>
       {purchase && <Reveal className="purchase-intelligence" delay={40}><div><span>PREZZO PAGATO</span><strong>{purchase.price}<small> crediti</small></strong></div><div><span>SCOSTAMENTO DAL FVM</span><strong className={(purchase.difference ?? 0) >= 0 ? "positive" : "negative"}>{purchase.difference == null ? "N/D" : `${purchase.difference > 0 ? "+" : ""}${purchase.difference}%`}</strong></div><StatusBadge {...purchase.status} /></Reveal>}
-      <Reveal delay={70}><PlayerBenchmark benchmark={benchmark} /></Reveal>
+      <div>{benchmarkLoading ? <p className="ops-inline-loading" role="status">Caricamento del confronto di ruolo…</p> : <PlayerBenchmark benchmark={benchmark} />}</div>
       <div className="source-note"><b>Dati correnti verificati</b><span>QI, QA e FVM provengono dal Listone normalizzato presente nel progetto.</span></div>
     </div>}
 
     {tab === "performance" && <div className="dossier-content stats-dossier">
       <div className="editorial-heading"><span>STORICO VERIFICATO</span><h3>Rendimento per stagione</h3><p>Mostriamo soltanto dati con fonte esplicita. N/D significa non disponibile, mai stimato.</p></div>
       {isNewSerieAArrival(player) && <div className="context-flag">NUOVO ARRIVO IN SERIE A · il contesto competitivo precedente può incidere sulla lettura</div>}
+      {chartData.length > 0 && <InteractiveBarChart data={chartData} title={`${historical[0].season} · ${historical[0].competition}`} description="Passa sui valori o usa Tab per ispezionare ogni indicatore verificato." />}
       {historical.length ? historical.map((season, index) => <Reveal as="article" className="season-card" delay={index * 45} key={`${season.season}-${season.competition}`}><header><div><span>{seasonContext(season)}</span><strong>{season.season} · {season.competition}</strong></div><small>{season.club ?? player.team}</small></header><dl>{roleAwareStats(player.role_classic, season).map(([label, value]) => <div className={metricTone(label)} key={label}><dt>{label}</dt><dd>{metric(value, typeof value === "number" && !Number.isInteger(value) ? 2 : 0)}</dd></div>)}</dl><footer><span>Fonte: <b>{season.source}</b></span>{season.updated_at && <span>Aggiornato: {season.updated_at}</span>}{season.source_url && <a href={season.source_url} target="_blank" rel="noreferrer">Apri fonte ↗</a>}</footer></Reveal>) : <div className="data-pending"><h3>Statistiche non ancora disponibili.</h3><p>Stiamo aspettando dati verificati per questo giocatore. Quando saranno disponibili, troverai qui stagione, presenze, gol, assist e medie.</p></div>}
     </div>}
 
     {tab === "intelligence" && <div className="dossier-content intelligence-dossier">
-      <Reveal className="intelligence-verdict"><div><span>IL PARERE DEL FANTAGENTE</span><h3>{appeal.label}</h3><p>{playerNarrative(player, appeal, config)}</p><small className="agent-context">{compatibility.copy}</small></div><AppealBadge appeal={appeal} /></Reveal>
+      <Reveal className="intelligence-verdict"><div><span>LETTURA DEI DATI</span><h3>{appeal.label}</h3><p>{playerNarrative(player, appeal, config)}</p><small className="agent-context">{compatibility.copy}</small></div><AgentReaction appeal={appeal} /></Reveal>
     <Reveal className="intelligence-grid" delay={35}><article><span>APPETIBILITÀ FANTA007</span><StarRating value={appeal.rating} label="Appetibilità Fanta007" /><p>Quanto è interessante questo giocatore per il Fantacalcio, in base ai dati disponibili.</p><ul>{appeal.reasons.map((reason) => <li key={reason}>{reason}</li>)}</ul><details className="smart-toggle"><summary>Come viene calcolata?</summary><p>{appeal.methodology}</p></details></article><article><span>VALORE DELL’ACQUISTO</span><h4>{purchase ? `${purchase.price} crediti` : "Non acquistato"}</h4><p>Riferimento FVM per la lega: {benchmarkPrice} crediti.</p>{purchase ? <StatusBadge {...purchase.status} /> : <small>Il giudizio sul prezzo apparirà dopo aver registrato l’acquisto.</small>}</article><article><span>ADATTO AL TUO OBIETTIVO?</span><h4>{compatibility.label}</h4><p>{config.goal}</p><small>L’obiettivo orienta il consiglio, senza alterare i dati del Listone.</small></article><article><span>AFFIDABILITÀ DEI DATI</span><h4>{appeal.confidence}</h4><p>{historical.length ? `${historical.length} stagioni verificate · ${historical.reduce((sum, item) => sum + (item.appearances ?? 0), 0)} presenze aggregate.` : "Lo storico verificato non è ancora disponibile."}</p><small>Quotazioni e statistiche arrivano da fonti dichiarate nel dossier.</small></article></Reveal>
-      <Reveal delay={70}>{insight ? <AgentInsight insight={insight} /> : <div className="message-state"><b>Benchmark non disponibile</b><span>L’Appetibilità preliminare resta visibile, ma il consiglio dettagliato richiede il confronto di ruolo dal servizio dati.</span></div>}</Reveal>
     </div>}
+    {tab === "advice" && <div className="dossier-content ops-agent-advice"><h3>Il consiglio del Fantagente</h3><p className="ops-caption">Una lettura spiegabile dei dati, non una previsione.</p>{benchmarkLoading ? <p role="status">Caricamento del confronto di ruolo…</p> : insight ? <AgentInsight insight={insight} /> : <div className="message-state"><b>Benchmark non disponibile</b><span>Il consiglio dettagliato richiede il confronto di ruolo dal servizio dati. Le quotazioni restano consultabili.</span><button className="secondary-action" onClick={() => setRetry(value => value + 1)}>Riprova il confronto</button></div>}</div>}
+    </div>
     {onPrimaryAction && <footer className="dossier-primary"><button className="primary-action full" onClick={onPrimaryAction}>{primaryActionLabel ?? "CONTINUA"} →</button></footer>}
-  </section></div>;
+  </ContextPanel>;
 }

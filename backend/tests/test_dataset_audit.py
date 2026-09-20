@@ -1,17 +1,17 @@
-from pathlib import Path
-
 from app.data.dataset_audit import audit_dataset
 from app.data.normalizer import normalize_dataset
 from app.domain.player import PlayerSeasonStats
+from app.domain.team import TeamCatalog
 from app.services.team_catalog import TeamCatalogService
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-
-
-def test_candidate_audit_checks_hash_teams_and_team_ids(raw_players, player_dataset):
-    catalog = TeamCatalogService.from_path(PROJECT_ROOT / "data" / "manual" / "teams.2026-27.json")
-    source = PROJECT_ROOT / "data" / "source" / "Quotazioni_Fantacalcio_Stagione_2026_27_2026-09-03.xlsx"
+def test_candidate_audit_checks_hash_teams_and_team_ids(raw_players, player_dataset, source_path):
+    names = sorted({row.team for row in raw_players})
+    catalog = TeamCatalogService(TeamCatalog.model_validate({
+        "metadata": {"season": "2026/27", "competition": "Test", "verified_at": "2026-01-01T00:00:00Z", "source_urls": [], "team_count": 4},
+        "teams": [{"id": name.lower(), "code": name[:3].upper(), "name": name, "official_name": name, "season": "2026/27"} for name in names],
+    }))
+    source = source_path
     candidate = normalize_dataset(
         raw_players,
         source,
@@ -24,12 +24,12 @@ def test_candidate_audit_checks_hash_teams_and_team_ids(raw_players, player_data
 
     assert report["status"] == "valid"
     assert report["activation"] == "pending_manual_approval"
-    assert report["summary"]["players"] == 533
-    assert report["summary"]["teams"] == 20
+    assert report["summary"]["players"] == 9
+    assert report["summary"]["teams"] == 4
     assert report["summary"]["source_hash_matches"] is True
 
 
-def test_candidate_composition_preserves_enrichments(raw_players, player_dataset):
+def test_candidate_composition_preserves_enrichments(raw_players, player_dataset, source_path):
     locatelli = next(player for player in player_dataset.players if player.id == 827)
     existing = locatelli.model_copy(
         update={
@@ -50,7 +50,7 @@ def test_candidate_composition_preserves_enrichments(raw_players, player_dataset
     enriched_dataset = player_dataset.model_copy(
         update={"players": players}
     )
-    source = PROJECT_ROOT / "data" / "source" / "Quotazioni_Fantacalcio_Stagione_2026_27_2026-09-03.xlsx"
+    source = source_path
 
     candidate = normalize_dataset(raw_players, source, existing_dataset=enriched_dataset)
 

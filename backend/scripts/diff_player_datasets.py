@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from app.domain.player import PlayerDataset
+from app.data.validation import validate_dataset
 
 
 TRACKED_FIELDS = (
@@ -22,6 +23,10 @@ TRACKED_FIELDS = (
     "quotation_delta_mantra",
     "fvm",
     "fvm_mantra",
+    "aliases",
+    "image",
+    "external_ids",
+    "statistics",
 )
 
 
@@ -44,10 +49,13 @@ def _categories(changes: dict) -> list[str]:
         "quotation_delta_mantra", "fvm", "fvm_mantra",
     }:
         categories.append("valuation")
+    categories.extend(field for field in ("aliases", "image", "external_ids", "statistics") if field in fields)
     return categories
 
 
 def build_diff(current: PlayerDataset, candidate: PlayerDataset) -> dict:
+    current = validate_dataset(current)
+    candidate = validate_dataset(candidate)
     old = {player.id: player for player in current.players}
     new = {player.id: player for player in candidate.players}
     added = [new[player_id].model_dump(mode="json") for player_id in sorted(new.keys() - old.keys())]
@@ -62,7 +70,10 @@ def build_diff(current: PlayerDataset, candidate: PlayerDataset) -> dict:
         "valuation_changes": 0,
     }
     for player_id in sorted(old.keys() & new.keys()):
-        changes = {field: {"before": getattr(old[player_id], field), "after": getattr(new[player_id], field)} for field in TRACKED_FIELDS if getattr(old[player_id], field) != getattr(new[player_id], field)}
+        before = old[player_id].model_dump(mode="json")
+        after = new[player_id].model_dump(mode="json")
+        changes = {field: {"before": before[field], "after": after[field]}
+                   for field in TRACKED_FIELDS if before[field] != after[field]}
         if changes:
             categories = _categories(changes)
             changed.append({"player_id": player_id, "player_name": new[player_id].name, "categories": categories, "changes": changes})

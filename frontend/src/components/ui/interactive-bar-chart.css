@@ -1,0 +1,142 @@
+.bklit-interactive-chart {
+  --chart-bar: var(--text-primary, #102e32);
+  --chart-bar-active: var(--accent-strong, #9a6d16);
+  margin: 22px 0 0;
+  padding: 22px 22px 18px;
+  border: 1px solid var(--border, #d8dfd5);
+  border-radius: 16px;
+  background: var(--surface-raised, #fff);
+}
+
+.bklit-interactive-chart figcaption {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.bklit-interactive-chart figcaption span {
+  color: var(--accent-strong, #8c671e);
+  font-size: .63rem;
+  font-weight: 850;
+  letter-spacing: .11em;
+}
+
+.bklit-interactive-chart figcaption h4 {
+  margin: 5px 0 0;
+  color: var(--text-primary, #153236);
+  font-size: 1.15rem;
+  letter-spacing: -.02em;
+}
+
+.bklit-interactive-chart figcaption p {
+  max-width: 38ch;
+  margin: 0;
+  color: var(--text-muted, #657571);
+  font-size: .72rem;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.bklit-interactive-chart__plot {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(10px, 1fr);
+  align-items: end;
+  gap: clamp(4px, .75vw, 10px);
+  height: 218px;
+  padding: 34px 2px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--chart-bar) 16%, transparent);
+}
+
+.bklit-interactive-chart__column {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: crosshair;
+  transition: opacity 160ms ease;
+}
+
+.bklit-interactive-chart__mark {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 8px;
+  border-radius: 3px 3px 0 0;
+  background: var(--chart-bar);
+  transform-origin: bottom;
+  transition: background-color 160ms ease, filter 160ms ease;
+}
+
+.bklit-interactive-chart__column:hover,
+.bklit-interactive-chart__column:focus-visible,
+.bklit-interactive-chart__column.is-active {
+  outline: none;
+}
+
+.bklit-interactive-chart__column:hover .bklit-interactive-chart__mark,
+.bklit-interactive-chart__column:focus-visible .bklit-interactive-chart__mark,
+.bklit-interactive-chart__column.is-active .bklit-interactive-chart__mark { background: var(--chart-bar-active); filter: saturate(1.08); }
+
+.bklit-interactive-chart__column:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--chart-bar-active) 28%, transparent); }
+.bklit-interactive-chart__column.is-faded { opacity: .3; }
+
+.bklit-interactive-chart__tooltip {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: calc(100% + 9px);
+  display: none;
+  min-width: max-content;
+  padding: 8px 10px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 9px;
+  color: #fff;
+  background: rgba(16, 32, 35, .94);
+  box-shadow: 0 10px 30px rgba(11, 25, 28, .2);
+  pointer-events: none;
+}
+
+.bklit-interactive-chart__column.is-active .bklit-interactive-chart__tooltip { display: grid; gap: 2px; }
+.bklit-interactive-chart__tooltip b { font-size: .63rem; font-weight: 600; opacity: .7; }
+.bklit-interactive-chart__tooltip strong { font-size: .78rem; font-variant-numeric: tabular-nums; }
+
+.bklit-interactive-chart__axis {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(10px, 1fr);
+  gap: clamp(4px, .75vw, 10px);
+  padding-top: 9px;
+}
+
+.bklit-interactive-chart__axis span {
+  overflow: hidden;
+  color: var(--text-muted, #657571);
+  font-size: .58rem;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .bklit-interactive-chart { padding: 18px 14px 14px; }
+  .bklit-interactive-chart figcaption { align-items: start; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .bklit-interactive-chart figcaption p { text-align: left; }
+  .bklit-interactive-chart__plot { height: 176px; gap: 4px; }
+  .bklit-interactive-chart__axis { gap: 4px; }
+  .bklit-interactive-chart__axis span { font-size: .52rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bklit-interactive-chart__column { transition: none; }
+}

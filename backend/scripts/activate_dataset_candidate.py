@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from app.domain.player import PlayerDataset
+from app.data.validation import validate_dataset
 
 
 def activate_candidate(
@@ -22,6 +23,9 @@ def activate_candidate(
     current = PlayerDataset.model_validate_json(current_path.read_text(encoding="utf-8"))
     candidate = PlayerDataset.model_validate_json(candidate_path.read_text(encoding="utf-8"))
 
+    current = validate_dataset(current)
+    candidate = validate_dataset(candidate)
+
     if candidate.metadata.status != "candidate":
         raise ValueError("Il file indicato non è marcato come dataset candidato.")
     if expected_source_sha256 and candidate.metadata.source_sha256 != expected_source_sha256.casefold():
@@ -35,12 +39,13 @@ def activate_candidate(
     active = candidate.model_copy(
         update={"metadata": candidate.metadata.model_copy(update={"status": "active"})}
     )
+    active = validate_dataset(active)
     temporary = current_path.with_suffix(current_path.suffix + ".tmp")
     temporary.write_text(
         json.dumps(active.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    PlayerDataset.model_validate_json(temporary.read_text(encoding="utf-8"))
+    validate_dataset(PlayerDataset.model_validate_json(temporary.read_text(encoding="utf-8")))
     temporary.replace(current_path)
     return active, backup_path
 

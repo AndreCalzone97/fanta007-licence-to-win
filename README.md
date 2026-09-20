@@ -259,6 +259,34 @@ Test autonomi della Media Review, senza Excel esterni:
 
 ## ✅ Test
 
+Dalla radice del repository, con il virtualenv attivo:
+
+```bash
+python -m pip install -e "./backend[dev]"
+python -m pytest backend/tests -q -rs
+```
+
+I test di logica/API usano nove giocatori sintetici; parser e importatore leggono
+piccoli Excel generati in directory temporanee da pytest. I test continuano a
+validare i JSON versionati (dataset attivo, alias e catalogo squadre). Le API di
+test usano un repository in memoria e un percorso temporaneo per le revisioni.
+Non servono Excel privati per queste verifiche e nessun dato di produzione viene
+scritto. Eseguire i comandi dalla radice anche per gli import degli script backend.
+
+Quattro verifiche di confronto con gli export ufficiali sono marcate
+`official_exports`: se i relativi file non sono in `data/source`, pytest le indica
+come **skipped**, con il motivo (`-rs`). Quando disponibili, vengono eseguite
+normalmente: errori di formato o valori errati non sono nascosti. I file attesi sono:
+
+- `Quotazioni_Fantacalcio_Stagione_2026_27_2026-09-03.xlsx`
+- `Statistiche_Fantacalcio_Stagione_2026_27.xlsx`
+- `Statistiche_Fantacalcio_Stagione_2025_26.xlsx`
+- `Statistiche_Fantacalcio_EuroLeghe_Stagione_2025_26.xlsx`
+
+Per selezionare solo i test autonomi: `python -m pytest backend/tests -m "not official_exports" -q`.
+Il passaggio di questi test non certifica la corrispondenza del dataset attivo con
+export assenti; quel confronto resta una verifica separata dei dati reali.
+
 ```powershell
 .\.venv\Scripts\python.exe -m pytest .\backend\tests -q
 npm test --prefix .\frontend

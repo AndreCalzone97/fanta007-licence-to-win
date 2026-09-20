@@ -43,3 +43,39 @@ def test_merge_prefers_serie_a_over_euroleghe(player_dataset):
     record = next(entry for entry in merged.players[0].statistics if entry.season == "2025/26")
     assert record.source == "Fantacalcio.it"
     assert record.fantasy_average == 8
+
+
+def test_synthetic_excel_stats_round_trip_all_fields(write_workbook, player_dataset, tmp_path):
+    from app.domain.player import PlayerDataset
+
+    headers = ["Id", "R", "Nome", "Squadra", "Pv", "Mv", "Fm", "Gf", "Gs",
+               "Rp", "Rc", "R+", "R-", "Ass", "Amm", "Esp", "Au"]
+    # Distinct values catch column swaps; repeated ID checks largest sample selection.
+    path = write_workbook("all-stats.xlsx", headers, [
+        [827, "C", "Locatelli", "Juventus", 1, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [827, "C", "Locatelli", "Juventus", 30, 6.25, 7.5, 8, 9, 2, 7, 4, 3, 6, 5, 1, 10],
+        [6875, "C", "Paz N.", "Como", 0, 0, 0, 0, None, None, None, None, None, 0, None, None, None],
+        [999999, "A", "Unknown", "Roma", 10, 6, 7, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+    ])
+    imported = read_fantacalcio_xlsx(path, "2026/27", "https://example.test")
+    merged = merge_player_statistics(player_dataset, [(300, imported)])
+    output = tmp_path / "players.json"
+    output.write_text(merged.model_dump_json(), encoding="utf-8")
+    reloaded = PlayerDataset.model_validate_json(output.read_text(encoding="utf-8"))
+    active = {(p.id, s.season): s for p in reloaded.players for s in p.statistics}
+    assert set(active) == {(827, "2026/27"), (6875, "2026/27")}
+    expected = {
+        "appearances": 30, "average_rating": 6.25, "fantasy_average": 7.5,
+        "goals": 8, "goals_conceded": 9, "penalties_saved": 2, "penalties_taken": 7,
+        "penalties_scored": 4, "penalties_missed": 3, "assists": 6,
+        "yellow_cards": 5, "red_cards": 1, "own_goals": 10,
+    }
+    for field, value in expected.items():
+        assert getattr(active[(827, "2026/27")], field) == value, field
+    no_sample = active[(6875, "2026/27")]
+    assert no_sample.appearances == 0
+    assert no_sample.average_rating is None
+    assert no_sample.fantasy_average is None
+    assert no_sample.goals == no_sample.assists == 0
+    assert no_sample.goals_conceded is None
+    assert all(player.statistics == [] for player in player_dataset.players)

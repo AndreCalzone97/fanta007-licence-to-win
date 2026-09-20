@@ -29,3 +29,4 @@ include = ["app*"]
 testpaths = ["tests"]
 addopts = "--strict-markers"
 
+markers = ["official_exports: optional comparison against locally supplied official Excel exports"]

@@ -1,4 +1,6 @@
 from pathlib import Path
+
+import pytest
 from openpyxl import load_workbook
 
 from app.domain.player import PlayerDataset
@@ -49,7 +51,16 @@ def _expected_value(row, column):
     return value
 
 
+@pytest.mark.official_exports
 def test_active_dataset_matches_official_excel_stats_field_by_field():
+    required = [
+        SOURCE_DIR / "Statistiche_Fantacalcio_Stagione_2026_27.xlsx",
+        SOURCE_DIR / "Statistiche_Fantacalcio_Stagione_2025_26.xlsx",
+        SOURCE_DIR / "Statistiche_Fantacalcio_EuroLeghe_Stagione_2025_26.xlsx",
+    ]
+    missing = [path.name for path in required if not path.is_file()]
+    if missing:
+        pytest.skip("Official statistics exports unavailable: " + ", ".join(missing))
     dataset = PlayerDataset.model_validate_json(DATASET.read_text(encoding="utf-8"))
     active = {(p.id, s.season): s for p in dataset.players for s in p.statistics}
     player_ids = {p.id for p in dataset.players}

@@ -8,7 +8,7 @@ from app.main import create_app
 from app.services.team_catalog import TeamCatalogError, TeamCatalogService
 
 
-def test_official_team_catalog_resolves_all_dataset_teams(player_dataset):
+def test_official_team_catalog_resolves_all_dataset_teams(active_dataset):
     service = TeamCatalogService.from_path(
         __import__("pathlib").Path(__file__).resolve().parents[2]
         / "data"
@@ -19,7 +19,7 @@ def test_official_team_catalog_resolves_all_dataset_teams(player_dataset):
     assert len(service.all()) == 20
     assert service.resolve("INT").name == "Inter"
     assert service.resolve("FC Internazionale Milano").id == "inter"
-    assert service.unknown_names({player.team for player in player_dataset.players}) == []
+    assert service.unknown_names({player.team for player in active_dataset.players}) == []
 
 
 def test_team_catalog_rejects_alias_collisions():

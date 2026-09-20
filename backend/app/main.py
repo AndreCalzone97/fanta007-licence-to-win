@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes.players import router as players_router
+from app.api.routes.squads import router as squads_router
 from app.api.routes.media_review import router as media_review_router
 from app.api.routes.teams import router as teams_router
 from app.core.config import allowed_origins, dataset_path, media_review_path, team_catalog_path
@@ -33,9 +34,10 @@ def create_app(repository: PlayerRepository | None = None) -> FastAPI:
         CORSMiddleware,
         allow_origins=allowed_origins(),
         allow_credentials=False,
-        allow_methods=["GET", "PATCH"],
+        allow_methods=["GET", "PATCH", "POST"],
         allow_headers=["*"],
     )
+    app.include_router(squads_router, prefix="/api/v1")
     app.include_router(players_router, prefix="/api/v1")
     app.include_router(media_review_router, prefix="/api/v1")
     app.include_router(teams_router, prefix="/api/v1")

@@ -1,0 +1,18 @@
+/* Sora Labs utility classes translated to CSS without changing geometry. */
+.sora-dock { width:100%; }
+.sora-dock-list { margin-bottom:0; display:flex; list-style:none; flex-direction:row; align-items:flex-end; justify-content:center; padding:0; font-size:clamp(.875rem,1.4vw,1.125rem); }
+.sora-dock-start { justify-content:flex-start; }
+.sora-dock-end { justify-content:flex-end; }
+.sora-dock-item { position:relative; display:flex; align-items:center; justify-content:center; }
+.sora-dock-link { position:relative; z-index:1; display:flex; height:100%; width:100%; align-items:center; justify-content:center; padding:0 .5em; }
+.sora-dock-icon { height:100%; width:100%; object-fit:contain; }
+.sora-dock-tooltip { pointer-events:none; position:absolute; top:0; z-index:0; white-space:nowrap; border-radius:.25em; background:#f5f5f5; color:#171717; padding:.4em .5em; font-weight:400; font-size:1em; }
+/* Product host and custom icons, supported through the original icon prop. */
+.fanta-sora-dock { position:fixed; bottom:max(16px,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); width:min(calc(100% - 24px),40rem); z-index:100; }
+.fanta-sora-dock .sora-dock-list { margin-top:0; }
+.fanta-sora-dock .sora-dock-icon { display:block; }
+.fanta-sora-dock .sora-dock-icon svg { display:block; width:100%; height:auto; aspect-ratio:1; padding:20%; border-radius:24%; background:#f5f5f5; color:#171717; box-shadow:0 4px 16px #0002; }
+.fanta-sora-dock .sora-dock-link[aria-current="page"] svg { outline:2px solid currentColor; outline-offset:-3px; }
+.fanta-sora-dock .sora-dock-link:focus-visible { outline:2px solid #171717; outline-offset:4px; border-radius:8px; }
+body:has(.fanta-sora-dock) { padding-bottom:150px; }
+.ops-shell-header:has(.fanta-sora-dock) .ops-session { grid-column:-2 / -1; }

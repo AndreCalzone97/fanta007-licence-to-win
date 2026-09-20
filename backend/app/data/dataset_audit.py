@@ -5,6 +5,7 @@ from collections import Counter
 from pathlib import Path
 
 from app.domain.player import PlayerDataset
+from app.data.validation import validate_dataset
 from app.services.team_catalog import TeamCatalogService
 
 
@@ -17,15 +18,13 @@ def audit_dataset(
 ) -> dict:
     errors: list[str] = []
     warnings: list[str] = []
-    ids = [player.id for player in dataset.players]
     source_names = [player.source_name.casefold() for player in dataset.players]
     teams = {player.team for player in dataset.players}
 
-    if dataset.metadata.player_count != len(dataset.players):
-        errors.append("metadata.player_count non coincide con il numero di record.")
-    duplicate_ids = sorted(player_id for player_id, count in Counter(ids).items() if count > 1)
-    if duplicate_ids:
-        errors.append(f"ID duplicati: {duplicate_ids}")
+    try:
+        validate_dataset(dataset)
+    except ValueError as exc:
+        errors.append(str(exc))
     duplicate_names = sorted(name for name, count in Counter(source_names).items() if count > 1)
     if duplicate_names:
         warnings.append(f"Nomi sorgente duplicati da verificare: {duplicate_names}")
@@ -44,12 +43,6 @@ def audit_dataset(
         resolved = team_catalog.resolve(player.team)
         if resolved and require_team_ids and player.team_id != resolved.id:
             team_id_mismatches.append(player.id)
-        if player.quotation_delta != player.current_quotation - player.initial_quotation:
-            errors.append(f"Diff. Classic incoerente per ID {player.id}.")
-        if player.quotation_delta_mantra != (
-            player.current_quotation_mantra - player.initial_quotation_mantra
-        ):
-            errors.append(f"Diff. Mantra incoerente per ID {player.id}.")
     if team_id_mismatches:
         errors.append(f"team_id assente o incoerente per {len(team_id_mismatches)} giocatori.")
 

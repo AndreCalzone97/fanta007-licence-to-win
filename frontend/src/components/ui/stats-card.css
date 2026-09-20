@@ -1,0 +1,73 @@
+.fanta-stats-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fanta-stats-card {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border, #d8dfd5);
+  border-radius: 14px;
+  color: var(--text-primary, #153236);
+  background: var(--surface-raised, #fff);
+  box-shadow: 0 8px 24px rgba(18, 45, 48, .055);
+}
+
+.fanta-stats-card__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 8px;
+}
+
+.fanta-stats-card__header h3 {
+  margin: 0;
+  color: var(--text-muted, #657571);
+  font: 650 .78rem/1.35 inherit;
+}
+
+.fanta-stats-card__icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  color: var(--accent-strong, #8c671e);
+  background: var(--accent-muted, #f8efd9);
+}
+
+.fanta-stats-card__icon svg { width: 17px; height: 17px; }
+.fanta-stats-card__content { padding: 0 18px 18px; }
+
+.fanta-stats-card__content strong {
+  display: block;
+  color: var(--text-primary, #153236);
+  font-size: clamp(1.55rem, 2.7vw, 2rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -.035em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fanta-stats-card__content p {
+  margin: 7px 0 0;
+  color: var(--text-muted, #657571);
+  font-size: .7rem;
+  line-height: 1.45;
+}
+
+.fanta-stats-card__content p.is-positive { color: var(--positive, #27754d); }
+.fanta-stats-card__content p.is-negative { color: var(--danger, #b44646); }
+
+@media (max-width: 760px) {
+  .fanta-stats-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 390px) {
+  .fanta-stats-card-grid { grid-template-columns: 1fr; }
+}
