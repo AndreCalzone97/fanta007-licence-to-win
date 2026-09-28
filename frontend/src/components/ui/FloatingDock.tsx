@@ -18,23 +18,28 @@ import {
   useMotionValue,
   useSpring,
   useTransform,
+  useReducedMotion,
 } from "motion/react";
 
 import { useRef, useState, type ReactNode } from "react";
+
+type DockItem = { title: string; displayLabel?: string; icon: ReactNode; href: string; onSelect?: () => void; current?: boolean };
 
 export const FloatingDock = ({
   items,
   desktopClassName,
   mobileClassName,
+  experimental = false,
 }: {
-  items: { title: string; icon: ReactNode; href: string; onSelect?: () => void; current?: boolean }[];
+  items: DockItem[];
   desktopClassName?: string;
   mobileClassName?: string;
+  experimental?: boolean;
 }) => {
   return (
     <>
-      <FloatingDockDesktop items={items} className={desktopClassName} />
-      <FloatingDockMobile items={items} className={mobileClassName} />
+      <FloatingDockDesktop items={items} className={cn(desktopClassName, experimental ? "home-lab-dock" : undefined)} experimental={experimental} />
+      <FloatingDockMobile items={items} className={cn(mobileClassName, experimental ? "home-lab-dock" : undefined)} experimental={experimental} />
     </>
   );
 };
@@ -42,35 +47,36 @@ export const FloatingDock = ({
 const FloatingDockMobile = ({
   items,
   className,
+  experimental,
 }: {
-  items: { title: string; icon: ReactNode; href: string; onSelect?: () => void; current?: boolean }[];
+  items: DockItem[];
   className?: string;
+  experimental: boolean;
 }) => {
   const [open, setOpen] = useState(false);
+  const reduced = useReducedMotion();
   return (
     <div className={cn("n1-mobile", className)}>
       <AnimatePresence>
         {open && (
           <motion.div
-            layoutId="nav"
+            layoutId={experimental && reduced ? undefined : "nav"}
             className="n1-mobile-items"
           >
             {items.map((item, idx) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 10 }}
+                  initial={experimental && reduced ? false : { opacity: 0, y: 10 }}
                 animate={{
                   opacity: 1,
                   y: 0,
                 }}
-                exit={{
+                exit={experimental && reduced ? { opacity: 1, y: 0, transition: { duration: 0 } } : {
                   opacity: 0,
                   y: 10,
-                  transition: {
-                    delay: idx * 0.05,
-                  },
+                  transition: { delay: idx * 0.05 },
                 }}
-                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
+                  transition={experimental && reduced ? { duration: 0 } : { delay: (items.length - 1 - idx) * 0.05 }}
               >
                 <a
                   href={item.href}
@@ -80,7 +86,9 @@ const FloatingDockMobile = ({
                   key={item.title}
                   className="n1-mobile-link"
                 >
+                  {experimental && item.current && <span className="n1-active-surface" aria-hidden="true" />}
                   <div className="n1-mobile-icon">{item.icon}</div>
+                  {experimental && <span className="n1-mobile-label" aria-hidden="true">{item.displayLabel ?? item.title}</span>}
                 </a>
               </motion.div>
             ))}
@@ -101,22 +109,26 @@ const FloatingDockMobile = ({
 const FloatingDockDesktop = ({
   items,
   className,
+  experimental,
 }: {
-  items: { title: string; icon: ReactNode; href: string; onSelect?: () => void; current?: boolean }[];
+  items: DockItem[];
   className?: string;
+  experimental: boolean;
 }) => {
   let mouseX = useMotionValue(Infinity);
+  const [highlighted, setHighlighted] = useState<string | null>(null);
+  const activeTitle = items.find(item => item.current)?.title ?? null;
   return (
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
-      onMouseLeave={() => mouseX.set(Infinity)}
+      onMouseLeave={() => { mouseX.set(Infinity); setHighlighted(null); }}
       className={cn(
         "n1-desktop",
         className,
       )}
     >
       {items.map((item) => (
-        <IconContainer mouseX={mouseX} key={item.title} {...item} />
+        <IconContainer mouseX={mouseX} key={item.title} {...item} experimental={experimental} highlighted={experimental && (highlighted ?? activeTitle) === item.title} onHighlight={setHighlighted} />
       ))}
     </motion.div>
   );
@@ -125,19 +137,28 @@ const FloatingDockDesktop = ({
 function IconContainer({
   mouseX,
   title,
+  displayLabel,
   icon,
   href,
   onSelect,
   current,
+  experimental,
+  highlighted,
+  onHighlight,
 }: {
   mouseX: MotionValue;
   title: string;
+  displayLabel?: string;
   icon: ReactNode;
   href: string;
   onSelect?: () => void;
   current?: boolean;
+  experimental: boolean;
+  highlighted: boolean;
+  onHighlight: (title: string | null) => void;
 }) {
   let ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
 
   let distance = useTransform(mouseX, (val) => {
     let bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
@@ -145,14 +166,14 @@ function IconContainer({
     return val - bounds.x - bounds.width / 2;
   });
 
-  let widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  let heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
+  let widthTransform = useTransform(distance, [-150, 0, 150], experimental ? [48, 76, 48] : [40, 80, 40]);
+  let heightTransform = useTransform(distance, [-150, 0, 150], experimental ? [48, 76, 48] : [40, 80, 40]);
 
-  let widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
+  let widthTransformIcon = useTransform(distance, [-150, 0, 150], experimental ? [24, 36, 24] : [20, 40, 20]);
   let heightTransformIcon = useTransform(
     distance,
     [-150, 0, 150],
-    [20, 40, 20],
+    experimental ? [24, 36, 24] : [20, 40, 20],
   );
 
   let width = useSpring(widthTransform, {
@@ -181,29 +202,31 @@ function IconContainer({
 
   return (
     <a href={href} aria-label={title} aria-current={current ? "page" : undefined}
-      onFocus={() => setHovered(true)} onBlur={() => setHovered(false)}
+      onFocus={() => { setHovered(true); if (experimental) onHighlight(title); }} onBlur={() => { setHovered(false); if (experimental) onHighlight(null); }}
       onClick={event => { if (onSelect) { event.preventDefault(); onSelect(); } }}>
       <motion.div
         ref={ref}
-        style={{ width, height }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        style={experimental && reduced ? { width: 48, height: 48 } : { width, height }}
+        onMouseEnter={() => { setHovered(true); if (experimental) onHighlight(title); }}
+        onMouseLeave={() => { setHovered(false); if (experimental) onHighlight(null); }}
         className="n1-item"
       >
+        {highlighted && <motion.span className="n1-active-surface" layoutId="home-lab-dock-highlight" aria-hidden="true" transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 330, damping: 31 }} />}
         <AnimatePresence>
           {hovered && (
             <motion.div
-              initial={{ opacity: 0, y: 10, x: "-50%" }}
+              initial={experimental && reduced ? false : { opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
-              exit={{ opacity: 0, y: 2, x: "-50%" }}
+              exit={experimental && reduced ? { opacity: 0, y: 0, x: "-50%", transition: { duration: 0 } } : { opacity: 0, y: 2, x: "-50%" }}
+              transition={experimental && reduced ? { duration: 0 } : undefined}
               className="n1-tooltip"
             >
-              {title}
+              {displayLabel ?? title}
             </motion.div>
           )}
         </AnimatePresence>
         <motion.div
-          style={{ width: widthIcon, height: heightIcon }}
+          style={experimental && reduced ? { width: 24, height: 24 } : { width: widthIcon, height: heightIcon }}
           className="n1-icon"
         >
           {icon}

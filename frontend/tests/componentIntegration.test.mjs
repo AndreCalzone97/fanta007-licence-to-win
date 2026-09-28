@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { test, before, after } from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 
-let server, AgentReaction, reactionVariants, TeamSelector, FantaFaq, AppearText, DossierTabs, BottomNavigation, expandable;
+let server, AgentReaction, reactionVariants, TeamSelector, FantaFaq, AppearText, DossierTabs, BottomNavigation, ActionToast, expandable;
 before(async () => {
   server = await createServer({ cacheDir: `node_modules/.vite-tests/${process.pid}`, optimizeDeps: { noDiscovery: true, include: [] }, server: { middlewareMode: true, hmr: false, ws: false }, appType: "custom" });
   ({ AgentReaction, reactionVariants } = await server.ssrLoadModule("/src/components/AgentReaction.tsx"));
@@ -13,17 +14,35 @@ before(async () => {
   ({ AppearText } = await server.ssrLoadModule("/src/components/ui/AppearText.tsx"));
   ({ DossierTabs } = await server.ssrLoadModule("/src/components/ui/DossierTabs.tsx"));
   ({ BottomNavigation } = await server.ssrLoadModule("/src/components/BottomNavigation.tsx"));
+  ({ ActionToast } = await server.ssrLoadModule("/src/components/ui/ActionToast.tsx"));
   expandable = await server.ssrLoadModule("/src/components/ui/ExpandableTabs.tsx");
 });
 after(async () => server?.close());
-test("Expandable Tabs preserves the supplied animation contract and initially collapsed labels", () => {
+test("action toast announces an undoable success without shifting the layout", () => {
+  const html = renderToStaticMarkup(createElement(ActionToast, { message: "Rasmus Højlund aggiunto a 32 crediti", onDismiss() {}, onUndo() {} }));
+  assert.match(html, /class="action-toast fanta-action-toast"/);
+  assert.match(html, /role="status" aria-live="polite"/);
+  assert.match(html, /Rasmus Højlund aggiunto a 32 crediti/);
+  assert.match(html, />Annulla<\/button>/);
+});
+test("action toast auto-dismisses with a timed fade and cleans up both timers", async () => {
+  const source = await readFile(new URL("../src/components/ui/ActionToast.tsx", import.meta.url), "utf8");
+  const styles = await readFile(new URL("../src/styles/action-toast.css", import.meta.url), "utf8");
+  assert.match(source, /setTimeout\(\(\) => setExiting\(true\), 3500\)/);
+  assert.match(source, /setTimeout\(\(\) => dismissRef\.current\(\), 220\)/);
+  assert.equal((source.match(/clearTimeout\(timer\)/g) ?? []).length, 2);
+  assert.match(styles, /data-exiting="true"[^\n]*fanta-toast-out/);
+  assert.match(styles, /prefers-reduced-motion/);
+});
+test("Expandable Tabs keeps its animation contract while the dossier shows persistent tab labels", () => {
   assert.deepEqual(expandable.transition, {delay: .1, type: "spring", bounce: 0, duration: .6});
   assert.deepEqual(expandable.buttonVariants.animate(true), {gap: ".5rem", paddingLeft: "1rem", paddingRight: "1rem"});
   assert.deepEqual(expandable.buttonVariants.animate(false), {gap: 0, paddingLeft: ".5rem", paddingRight: ".5rem"});
   assert.deepEqual(expandable.spanVariants.exit, {width: 0, opacity: 0});
   const html = renderToStaticMarkup(createElement(DossierTabs, {value: "overview", id: "test-dossier", onChange() {}}));
   assert.match(html, /expandable-tabs/);
-  assert.doesNotMatch(html, /class="expandable-label"/);
+  assert.equal((html.match(/class="expandable-label"/g) ?? []).length, 4);
+  assert.match(html, /aria-selected="true"/);
   assert.doesNotMatch(html, /ops-tab-selection/);
   assert.equal((html.match(/aria-label="(Scheda|Statistiche|Analisi|Consiglio)"/g) ?? []).length, 4);
 });
@@ -42,6 +61,15 @@ test("N1 dock exposes five named destinations, current page and a closed mobile 
     assert.match(html, new RegExp(`aria-label="${settingsOpen ? "Impostazioni" : "Listone"}" aria-current="page"`));
     assert.match(html, /aria-expanded="false"/);
   }
+});
+test("experimental Home dock adds a scoped active background without changing destinations", () => {
+  const html = renderToStaticMarkup(createElement(BottomNavigation, {
+    active: "home", experimental: true, onNavigate() {}, onSettings() {},
+  }));
+  assert.match(html, /home-lab-dock/);
+  assert.match(html, /n1-active-surface/);
+  assert.equal((html.match(/aria-current="page"/g) ?? []).length, 1);
+  for (const name of ["Home", "La mia rosa", "Listone", "Valutazione", "Impostazioni"]) assert.match(html, new RegExp(`aria-label="${name}"`));
 });
 test("all appeal levels use existing FANTA007 reaction assets without changing ratings", () => {
   assert.deepEqual(Object.values(reactionVariants), ["critical", "warning", "thinking", "positive", "positive"]);

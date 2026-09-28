@@ -4,7 +4,7 @@ import { AppearText } from "./AppearText";
 // FAQ3's approved centered layout, implemented with our existing Radix primitive.
 const items = [
   { id: "start", question: "Da dove comincio?", answer: "Configura nome della squadra, partecipanti, regole della lega, budget e obiettivo. Poi apri il Listone, combina i filtri per squadra e ruolo e consulta il dossier prima di registrare un acquisto." },
-  { id: "save", question: "Dove viene salvata la mia rosa?", answer: "Su questo browser, senza un account. Il sito pubblico e la preview locale hanno salvataggi separati. Cambiando dispositivo non ritrovi automaticamente la tua squadra." },
+  { id: "save", question: "Dove viene salvata la mia rosa?", answer: "Su questo browser, senza un account. Ogni browser e dispositivo conserva i propri dati separatamente: cambiando dispositivo non ritrovi automaticamente la tua squadra." },
   { id: "data", question: "Cosa significano QA e FVM?", answer: "QA è la quotazione attuale del listone. FVM è il valore di mercato su base 1000; il valore per la tua lega viene proporzionato al budget configurato. Nessuno dei due è il prezzo che hai pagato." },
   { id: "rating", question: "Il giudizio dell’agente è una previsione?", answer: "No. L’appetibilità confronta quotazioni, FVM, trend e storico disponibile con i giocatori dello stesso ruolo. La reazione dell’agente accompagna quel punteggio: non garantisce prestazioni future." },
   { id: "missing", question: "Perché alcune statistiche sono N/D?", answer: "N/D indica un dato non disponibile. Zero è invece un valore presente nella fonte: per esempio, zero assist non significa dato mancante." },

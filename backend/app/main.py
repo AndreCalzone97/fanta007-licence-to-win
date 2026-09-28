@@ -9,6 +9,7 @@ from app.api.routes.players import router as players_router
 from app.api.routes.squads import router as squads_router
 from app.api.routes.media_review import router as media_review_router
 from app.api.routes.teams import router as teams_router
+from app.api.routes.serie_a import router as serie_a_router
 from app.core.config import allowed_origins, dataset_path, media_review_path, team_catalog_path
 from app.repositories.media_review_repository import JsonMediaReviewRepository
 from app.repositories.json_player_repository import JsonPlayerRepository
@@ -25,9 +26,9 @@ def create_app(repository: PlayerRepository | None = None) -> FastAPI:
         yield
 
     app = FastAPI(
-        title="Fanta007 API",
-        description="Data layer e ricerca giocatori per Fanta007 — Licence to Win.",
-        version="0.1.0",
+        title="FANTA007 API",
+        description="Dati e ricerca giocatori per FANTA007.",
+        version="0.5.0",
         lifespan=lifespan,
     )
     app.add_middleware(
@@ -41,6 +42,7 @@ def create_app(repository: PlayerRepository | None = None) -> FastAPI:
     app.include_router(players_router, prefix="/api/v1")
     app.include_router(media_review_router, prefix="/api/v1")
     app.include_router(teams_router, prefix="/api/v1")
+    app.include_router(serie_a_router, prefix="/api/v1")
 
     @app.get("/api/v1/health", tags=["system"])
     def health() -> dict[str, str]:

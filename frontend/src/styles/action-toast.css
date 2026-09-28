@@ -1,0 +1,30 @@
+.studio-ui .fanta-action-toast {
+  z-index: 1000;
+  min-height: 56px;
+  gap: 11px;
+  padding: 10px 12px;
+  color: #edf9f1;
+  border: 1px solid rgba(102, 190, 137, .42);
+  border-radius: 12px;
+  background: rgba(15, 36, 27, .96);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .36);
+  backdrop-filter: blur(10px);
+  animation: fanta-toast-in 220ms cubic-bezier(.22, 1, .36, 1) both;
+}
+.studio-ui .fanta-action-toast[data-exiting="true"] { pointer-events: none; animation: fanta-toast-out 220ms ease-in both; }
+.studio-ui .fanta-action-toast[data-tone="warning"] { border-color: rgba(210, 168, 96, .55); }
+.studio-ui .fanta-action-toast[data-tone="error"] { border-color: rgba(231, 116, 116, .6); }
+.studio-ui .fanta-toast-icon { display: grid; flex: none; place-items: center; width: 26px; height: 26px; border-radius: 7px; color: #102a1d; background: #87ddb0; font-size: .88rem; font-weight: 800; }
+.studio-ui .fanta-action-toast[data-tone="warning"] .fanta-toast-icon { background: #d2a860; }
+.studio-ui .fanta-action-toast[data-tone="error"] .fanta-toast-icon { background: #e77474; }
+.studio-ui .fanta-toast-message { flex: 1; min-width: 0; color: #edf9f1; font-size: .82rem; line-height: 1.35; }
+.studio-ui .fanta-action-toast button { min-height: 36px; color: #a7ecc4; font-size: .75rem; font-weight: 700; }
+.studio-ui .fanta-action-toast button:focus-visible { outline: 2px solid #b8f6d1; outline-offset: 2px; border-radius: 5px; }
+.studio-ui .fanta-action-toast .fanta-toast-close { min-width: 36px; color: #c9d9ce; font-size: 1.15rem; font-weight: 400; }
+@keyframes fanta-toast-in { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes fanta-toast-out { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, 6px); } }
+@media (max-width: 779px) {
+  @keyframes fanta-toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fanta-toast-out { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(6px); } }
+}
+@media (prefers-reduced-motion: reduce) { .studio-ui .fanta-action-toast { animation: none; transition: none; } }

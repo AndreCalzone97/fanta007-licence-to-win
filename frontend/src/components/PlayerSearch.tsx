@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { ClassicRole, LeagueConfig, Player, PlayerSort, Team } from "../types";
 import { PlayerCompactCard } from "./PlayerCompactCard";
-import { PlayerComparisonView } from "./PlayerComparisonView";
-import { PlayerCompareTray } from "./PlayerCompareTray";
 import { StudioIcon } from "./StudioIcon";
 import { ParticleInterlockLoader } from "./ui/ReferenceComponents";
 import { TeamSelector } from "./TeamSelector";
@@ -28,8 +26,6 @@ export function PlayerSearch({ open, onClose, onSelect, excludedIds, config, var
   const [favorites, setFavorites] = useState<number[]>(savedFavorites);
   const [teams, setTeams] = useState<Team[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
-  const [selected, setSelected] = useState<Player[]>([]);
-  const [compareOpen, setCompareOpen] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -88,36 +84,32 @@ export function PlayerSearch({ open, onClose, onSelect, excludedIds, config, var
     return () => { controller.abort(); window.clearTimeout(timer); };
   }, [open, query, role, team, sort, retry, pageIndex]);
 
-  function toggleCompare(player: Player) { setSelected(current => current.some(item => item.id === player.id) ? current.filter(item => item.id !== player.id) : current.length < 3 ? [...current, player] : current); }
   function toggleFavorite(id: number) { setFavorites(current => current.includes(id) ? current.filter(value => value !== id) : [...current, id]); }
   function resetFilters() { setRole(""); setTeam(""); setSort("fvm_desc"); setPageIndex(0); }
   function changePage(index: number) { setPageIndex(index); listRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); listRef.current?.focus({ preventScroll: true }); }
 
   if (!open) return null;
   const content = <section className="ops-market" aria-labelledby="search-title">
-    {compareOpen ? <PlayerComparisonView players={selected} config={config} onBack={() => setCompareOpen(false)} onOpen={onSelect} /> : <>
       <header className="ops-page-heading"><div>{variant === "page" ? <h1 id="search-title">Il mercato giocatori</h1> : <h2 id="search-title">Il mercato giocatori</h2>}<p>Cerca il profilo. Confronta il valore. Scegli il prezzo.</p></div><span className="ops-market-context">{config.mode} <b>{excludedIds.length}/25 in rosa</b></span>{variant === "sheet" && <button className="icon-button" aria-label="Chiudi Listone" onClick={onClose}>×</button>}</header>
       {teamsError && <div className="message-state error-state" role="alert"><span>{teamsError}</span><button className="secondary-action" onClick={() => setRetry(value => value + 1)}>Riprova filtro squadra</button></div>}
       {preferenceError && <p className="ops-caption" role="status">{preferenceError}</p>}
-      <div className="ops-market-tools">
-        <div className="ops-search-line"><label className="ops-search"><StudioIcon name="search" /><input ref={inputRef} aria-label="Cerca giocatore" value={query} onChange={event => { setQuery(event.target.value); setPageIndex(0); }} placeholder="Cerca un nome, una certezza, una scommessa…" /><kbd aria-hidden="true">/</kbd></label>{query && <button className="ops-clear-search" aria-label="Cancella ricerca" onClick={() => { setQuery(""); setPageIndex(0); inputRef.current?.focus(); }}>×</button>}<button className="ops-filter-toggle" aria-expanded={filtersOpen} aria-controls="market-filters" onClick={() => setFiltersOpen(value => !value)}><StudioIcon name="settings" />Filtri{activeFilterCount ? ` (${activeFilterCount})` : ""}</button></div>
-        <div className="ops-role-selector" aria-label="Filtro ruolo"><button aria-pressed={!role} onClick={() => { setRole(""); setPageIndex(0); }}>Tutti</button>{(Object.keys(roleLabels) as ClassicRole[]).map(value => <button aria-label={roleLabels[value]} aria-pressed={role === value} key={value} onClick={() => { setRole(value); setPageIndex(0); }}><b>{value}</b><span>{roleLabels[value]}</span></button>)}</div>
+      <div className="ops-market-tools glass-surface-base">
+        <div className="ops-search-line"><label className="ops-search"><StudioIcon name="search" /><input ref={inputRef} aria-label="Cerca giocatore" aria-keyshortcuts="/" value={query} onChange={event => { setQuery(event.target.value); setPageIndex(0); }} placeholder="Cerca un nome, una certezza, una scommessa…" /><kbd aria-hidden="true">/</kbd></label>{query && <button className="ops-clear-search" aria-label="Cancella ricerca" onClick={() => { setQuery(""); setPageIndex(0); inputRef.current?.focus(); }}>×</button>}<button className="ops-filter-toggle" aria-expanded={filtersOpen} aria-controls="market-filters" onClick={() => setFiltersOpen(value => !value)}><StudioIcon name="settings" />Filtri{activeFilterCount ? ` (${activeFilterCount})` : ""}</button></div>
+        <div className="ops-role-selector" role="group" aria-label="Filtro ruolo"><button type="button" aria-pressed={!role} onClick={() => { setRole(""); setPageIndex(0); }}>Tutti</button>{(Object.keys(roleLabels) as ClassicRole[]).map(value => <button type="button" aria-label={roleLabels[value]} aria-pressed={role === value} key={value} onClick={() => { setRole(value); setPageIndex(0); }}><b>{value}</b><span>{roleLabels[value]}</span></button>)}</div>
         <div id="market-filters" className={`ops-extra-filters ${filtersOpen ? "open" : ""}`}>
           <div><label id="club-filter-label">Squadra</label><TeamSelector teams={teams} value={team} onChange={value => { setTeam(value); setPageIndex(0); }} /></div>
           <label>Ordina per<select aria-label="Ordina giocatori" value={sort} onChange={event => { setSort(event.target.value as PlayerSort); setPageIndex(0); }}>{sortOptions.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
           {activeFilterCount > 0 && <button className="text-action" onClick={resetFilters}>Azzera filtri</button>}
         </div>
       </div>
-      <div className="ops-results-bar"><p role="status">{loading ? "Aggiornamento del Listone…" : `${total} giocatori${team ? " · " + team : ""}`}</p><span>Valori {config.mode} · budget {config.budget} cr.</span></div>
+      <div className="ops-results-bar"><p role="status">{loading ? "Aggiornamento del Listone…" : `${total} ${total === 1 ? "giocatore" : "giocatori"}${team ? " · " + team : ""}`}</p><span>Valori {config.mode} · budget {config.budget} cr.</span></div>
       <div className="ops-market-list" ref={listRef} tabIndex={-1} aria-busy={loading}>
-        <div className="ops-list-columns" aria-hidden="true"><span /><span><b>Giocatore</b><b>Appetibilità</b><b>QA</b><b>FVM / 1000</b><b>FVM lega</b><b>Δ quota</b><b>Stato</b></span><StudioIcon name="compare" /></div>
-        {error ? <div className="ops-empty" role="alert"><h2>Giocatori non disponibili</h2><p>{error}</p><button className="secondary-action" onClick={() => setRetry(value => value + 1)}>Riprova</button></div> : loading ? <div className="ops-list-loading" aria-label="Caricamento giocatori"><ParticleInterlockLoader label="Aggiorno il Listone…" />{Array.from({ length: 6 }, (_, index) => <div key={index}><i /><span /><b /><b /><b /></div>)}</div> : !players.length ? <div className="ops-empty"><StudioIcon name="search" /><h2>Nessun giocatore trovato</h2><p>Prova un altro nome o amplia squadra e ruolo.</p><button className="secondary-action" onClick={() => { setQuery(""); resetFilters(); }}>Azzera ricerca e filtri</button></div> : players.map(player => <PlayerCompactCard key={player.id} player={player} config={config} owned={excluded.has(player.id)} favorite={favorites.includes(player.id)} compared={selected.some(item => item.id === player.id)} compareDisabled={selected.length >= 3} onOpen={() => onSelect(player)} onToggleCompare={() => toggleCompare(player)} onToggleFavorite={() => toggleFavorite(player.id)} />)}
+        <div className="ops-list-columns" aria-hidden="true"><span /><span><b>Giocatore</b><b>Appetibilità</b><b>QA</b><b>FVM / 1000</b><b>FVM lega</b><b>Δ quota</b><b>Stato</b></span></div>
+        {error ? <div className="ops-empty" role="alert"><h2>Giocatori non disponibili</h2><p>{error}</p><button className="secondary-action" onClick={() => setRetry(value => value + 1)}>Riprova</button></div> : loading ? <div className="ops-list-loading" aria-label="Caricamento giocatori"><ParticleInterlockLoader label="Aggiorno il Listone…" />{Array.from({ length: 6 }, (_, index) => <div key={index}><i /><span /><b /><b /><b /></div>)}</div> : !players.length ? <div className="ops-empty"><StudioIcon name="search" /><h2>Nessun giocatore trovato</h2><p>Prova un altro nome o amplia squadra e ruolo.</p><button className="secondary-action" onClick={() => { setQuery(""); resetFilters(); }}>Azzera ricerca e filtri</button></div> : players.map(player => <PlayerCompactCard key={player.id} player={player} config={config} owned={excluded.has(player.id)} favorite={favorites.includes(player.id)} onOpen={() => onSelect(player)} onToggleFavorite={() => toggleFavorite(player.id)} />)}
       </div>
       {!error && total > 0 && <nav className="ops-pagination" aria-label="Pagine del Listone"><span>{pageIndex * PAGE_SIZE + 1}–{Math.min((pageIndex + 1) * PAGE_SIZE, total)} di {total}</span><div><button className="secondary-action" disabled={loading || pageIndex === 0} onClick={() => changePage(pageIndex - 1)}>← Precedente</button><span>Pagina {pageIndex + 1} / {pageCount}</span><button className="secondary-action" disabled={loading || pageIndex + 1 >= pageCount} onClick={() => changePage(pageIndex + 1)}>Successiva →</button></div></nav>}
       <p className="ops-caption">QA: quotazione attuale · FVM: valore di mercato · Δ: variazione dalla quotazione iniziale. FVM lega rapportato ai tuoi {config.budget} crediti.</p>
       <p className="ops-caption">QI · QA · FVM dal Listone Fantacalcio 2026/27 normalizzato nel progetto.</p>
-      <PlayerCompareTray players={selected} onRemove={id => setSelected(current => current.filter(player => player.id !== id))} onCompare={() => { setCompareOpen(true); window.scrollTo({ top: 0, behavior: "instant" }); }} />
-    </>}
   </section>;
   return variant === "sheet" ? <div className="sheet-backdrop" onMouseDown={onClose}><div onMouseDown={event => event.stopPropagation()}>{content}</div></div> : <main id="studio-content" tabIndex={-1} className="ops-content">{content}</main>;
 }

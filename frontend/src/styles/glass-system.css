@@ -1,0 +1,291 @@
+/*
+ * FANTA007 glass experiment.
+ * Remove this stylesheet import in main.tsx to restore the pre-glass surfaces.
+ * Kokonut-inspired liquid glass is the shared material; Smit-inspired light
+ * is reserved for a few focal panels. No geometry or behavior lives here.
+ */
+:root {
+  --glass-line: rgba(187, 232, 199, .36);
+  --glass-line-strong: rgba(205, 244, 215, .53);
+  --glass-highlight: inset 0 1px 0 rgba(240, 255, 242, .2), inset 1px 0 0 rgba(202, 244, 213, .055), inset 0 -1px 0 rgba(7, 18, 11, .24);
+  --glass-shadow: 0 18px 42px rgba(2, 10, 7, .33);
+  --glass-soft: rgba(25, 48, 36, .67);
+  --glass-base: rgba(25, 47, 35, .74);
+  --glass-strong: rgba(16, 33, 24, .9);
+  --glass-subtle: rgba(35, 59, 43, .72);
+  --glass-spotlight: rgba(27, 54, 38, .83);
+  --glass-liquid-soft: linear-gradient(125deg, rgba(236, 255, 239, .13), transparent 36%), radial-gradient(ellipse at 94% 4%, rgba(106, 173, 128, .15), transparent 55%), var(--glass-soft);
+  --glass-liquid-base: linear-gradient(125deg, rgba(231, 255, 235, .15), transparent 34%), radial-gradient(ellipse at 100% 0%, rgba(106, 178, 130, .2), transparent 58%), var(--glass-base);
+  --glass-liquid-strong: linear-gradient(125deg, rgba(232, 255, 236, .11), transparent 36%), var(--glass-strong);
+  --glass-liquid-spotlight: radial-gradient(ellipse at 84% 5%, rgba(145, 217, 166, .25), transparent 52%), linear-gradient(125deg, rgba(238, 255, 239, .18), transparent 40%), var(--glass-spotlight);
+  --glass-blur: 10px;
+}
+
+/* Reusable material levels. These helpers are intentionally geometry-neutral. */
+.glass-surface-soft {
+  background: var(--glass-liquid-soft);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+}
+.glass-surface-base {
+  background: var(--glass-liquid-base);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+}
+.glass-surface-strong {
+  background: var(--glass-liquid-strong);
+  border-color: var(--glass-line-strong);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+}
+.glass-surface-spotlight {
+  background: var(--glass-liquid-spotlight);
+  border-color: var(--glass-line-strong);
+  box-shadow: var(--glass-highlight), 0 22px 48px rgba(1, 9, 6, .36);
+}
+.glass-interactive {
+  background-color: var(--glass-subtle);
+  border-color: var(--glass-line);
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.glass-interactive:hover,
+.glass-interactive:focus-visible {
+  background-color: rgba(47, 75, 54, .84);
+  border-color: var(--glass-line-strong);
+  box-shadow: var(--glass-highlight), 0 12px 28px rgba(2, 12, 7, .26);
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .glass-surface-soft { backdrop-filter: blur(7px) saturate(112%); }
+  .glass-surface-base { backdrop-filter: blur(var(--glass-blur)) saturate(118%); }
+  .glass-surface-strong { backdrop-filter: blur(14px) saturate(115%); }
+  .glass-surface-spotlight { backdrop-filter: blur(12px) saturate(122%); }
+  .glass-interactive { backdrop-filter: blur(6px) saturate(112%); }
+
+  /* Shared app shell: keep the blur on a paint layer so the fixed dock geometry stays put. */
+  .studio-ui .ops-dossier .ops-panel-top,
+  .onboarding-topbar { backdrop-filter: blur(9px) saturate(112%); }
+  .ops-identity-v21 .ops-shell-header::before { backdrop-filter: blur(10px) saturate(112%); }
+  .ops-identity-v21 .home-lab-dock.n1-desktop,
+  .ops-identity-v21 .home-lab-dock .n1-mobile-items { backdrop-filter: blur(12px) saturate(118%); }
+
+  /* Landing remains cinematic: only its small controls and existing feature cards receive glass. */
+  body .fanta-welcome .reuno-action--secondary,
+  body .bento-features__card { backdrop-filter: blur(7px) saturate(112%); }
+
+  /* A / Kokonut-style soft liquid material for existing operational surfaces. */
+  .studio-ui .onboarding-shell :is(.setup-summary, .setup-form),
+  .home-lab :is(.home-lab-terminal, .home-lab-card),
+  .home-lab-feed-rail .home-lab-rail-viewport,
+  .listone-v21-shell .listone-context-rail,
+  .squad-v21 :is(.squad-command-metrics, .squad-departments, .ops-roster-detail),
+  .listone-v21-shell :is(.ops-market-tools, .ops-market-list),
+  .evaluation-v21 :is(.evaluation-hero, .evaluation-bento-card, .evaluation-signal-card, .evaluation-next),
+  .studio-ui .ops-dossier :is(.dossier-hero, .dossier-value-grid, .fanta-stats-card, .purchase-intelligence, .benchmark-card, .season-card, .explainable-insight),
+  .studio-ui.ops-overlay .settings-center-card { backdrop-filter: blur(var(--glass-blur)) saturate(116%); }
+
+  /* Strong separation for overlays; dense content within them stays opaque below. */
+  .serie-a-overlay-panel,
+  .evaluation-dialog,
+  .studio-ui.ops-overlay .ops-panel.ops-settings-v21,
+  .studio-ui .ops-dossier,
+  .studio-ui.ops-overlay .ops-panel:not(.ops-settings-v21) { backdrop-filter: blur(14px) saturate(112%); }
+}
+
+/* Shell / dock material only. Position, dimensions, order and responsive behavior are unchanged. */
+.ops-identity-v21 .ops-shell-header {
+  isolation: isolate;
+  background-color: transparent;
+  border-bottom-color: var(--glass-line);
+  box-shadow: 0 8px 28px rgba(1, 9, 6, .23);
+}
+.ops-identity-v21 .ops-shell-header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(17, 38, 30, .9);
+}
+.ops-identity-v21 .home-lab-dock.n1-desktop {
+  background: var(--glass-liquid-strong);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), 0 14px 35px rgba(1, 8, 6, .42);
+}
+
+/* Landing / onboarding: lightly translucent, with readable copy and unchanged composition. */
+body .fanta-welcome .reuno-action--secondary {
+  background: var(--glass-liquid-soft);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), 0 10px 24px rgba(1, 9, 6, .18);
+}
+body .bento-features__card {
+  background: var(--glass-liquid-soft);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), 0 16px 38px rgba(1, 9, 6, .25);
+}
+body .bento-features__card:hover {
+  background: linear-gradient(125deg, rgba(235, 255, 240, .18), transparent 38%), radial-gradient(ellipse at 100% 0%, rgba(117, 189, 138, .22), transparent 58%), rgba(29, 53, 39, .78);
+  border-color: var(--glass-line-strong);
+}
+.studio-ui .onboarding-shell .setup-summary,
+.studio-ui .onboarding-shell .setup-form {
+  background: var(--glass-liquid-base);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+}
+
+/* Home: A is the default; the advice card is the single D-style spotlight. */
+.home-lab .home-lab-card {
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+}
+.home-lab .home-lab-terminal {
+  background: var(--glass-liquid-soft);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), 0 14px 34px rgba(1, 8, 5, .28);
+}
+.home-lab .home-lab-card:not(.home-lab-metric):not(.home-lab-tracker) {
+  background: var(--glass-liquid-base);
+}
+.home-lab .home-lab-metric {
+  background: var(--glass-liquid-base);
+}
+.home-lab .home-lab-tracker {
+  background: var(--glass-liquid-spotlight);
+  border-color: var(--glass-line-strong);
+  box-shadow: inset 0 1px 0 rgba(244, 255, 244, .17), inset 0 0 0 1px rgba(172, 224, 184, .06), 0 22px 48px rgba(1, 9, 6, .38);
+}
+.home-lab .home-lab-card:is(:hover, :focus-within),
+.squad-v21 .squad-department:is(:hover, :focus-within),
+.evaluation-v21 .evaluation-focus-card:is(:hover, :focus-visible) {
+  border-color: var(--glass-line-strong);
+  box-shadow: var(--glass-highlight), 0 18px 40px rgba(1, 9, 6, .34);
+}
+.home-lab-video-rail .home-lab-rail-viewport { box-shadow: inset -1px 0 rgba(214, 246, 222, .2), inset -22px 0 36px rgba(9, 29, 19, .28); }
+.home-lab .home-lab-stats-grid > div,
+.home-lab .home-lab-role,
+.home-lab .home-lab-flow li,
+.home-lab .home-lab-recent-list button { background-color: rgba(23, 40, 31, .96); }
+.home-lab-feed-rail { background: var(--glass-liquid-base); border-left-color: var(--glass-line); }
+.home-lab-feed-rail .home-lab-rail-viewport { box-shadow: var(--glass-highlight), inset 1px 0 rgba(214, 246, 222, .14); }
+.serie-a-match-row { background-color: rgba(25, 49, 34, .96); }
+
+/* Rosa: shared A material for overview surfaces; player and data rows remain solid. */
+.squad-v21 :is(.squad-command-metrics, .squad-departments, .ops-roster-detail) {
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+}
+.squad-v21 .squad-command-metrics { background: var(--glass-liquid-base); }
+.squad-v21 .squad-departments { background: var(--glass-liquid-base); }
+.squad-v21 .ops-roster-detail { background: var(--glass-liquid-strong); }
+.squad-v21 .squad-department { background: var(--glass-liquid-soft); border-color: var(--glass-line); box-shadow: inset 0 1px rgba(238, 255, 241, .1); }
+.squad-v21 :is(.ops-roster-group, .squad-list-wrap) { background-color: rgba(23, 42, 31, .97); }
+
+/* Listone: soft search/filter shell, opaque results/table for scanability. */
+.listone-v21-shell .ops-market-tools {
+  background: var(--glass-liquid-base);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), 0 14px 34px rgba(2, 10, 7, .22);
+}
+.listone-v21-shell .ops-market-list { background: var(--glass-liquid-strong); border-color: var(--glass-line); box-shadow: var(--glass-highlight), var(--glass-shadow); }
+.listone-v21-shell .ops-player-row { background-color: rgba(22, 40, 30, .96); }
+.listone-v21-shell .listone-context-rail { background: var(--glass-liquid-base); border-color: var(--glass-line); box-shadow: var(--glass-highlight); }
+.listone-v21-shell .ops-list-columns { background-color: #294235; }
+
+/* Dossier: A on cards; dense season figures remain almost opaque. */
+.studio-ui .ops-dossier :is(.dossier-hero, .dossier-value-grid, .season-card, .explainable-insight) {
+  background: var(--glass-liquid-base);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), 0 14px 34px rgba(2, 10, 6, .22);
+}
+.studio-ui section.ops-dossier > header.dossier-hero { background: var(--glass-liquid-base); border-bottom-color: var(--glass-line-strong); }
+.studio-ui .ops-dossier .dossier-expandable-shell { background: var(--glass-liquid-strong); border-bottom-color: var(--glass-line); }
+.studio-ui .ops-dossier :is(.fanta-stats-card, .purchase-intelligence, .benchmark-card) { background: var(--glass-liquid-base); border-color: var(--glass-line); box-shadow: var(--glass-highlight), 0 12px 28px rgba(2, 10, 6, .2); }
+.studio-ui .ops-dossier .explainable-insight { background: var(--glass-liquid-spotlight); border-color: var(--glass-line-strong); box-shadow: var(--glass-highlight), 0 18px 38px rgba(2, 10, 6, .32); }
+.studio-ui .ops-dossier .season-card dl > div { background-color: rgba(36, 56, 42, .97); }
+
+/* Evaluation: one D-style focal verdict within an A-style hero and bento. */
+.evaluation-v21 :is(.evaluation-hero, .evaluation-bento-card) {
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+}
+.evaluation-v21 .evaluation-hero { background: var(--glass-liquid-base); }
+.evaluation-v21 .evaluation-bento-card { background: var(--glass-liquid-base); }
+.evaluation-v21 .evaluation-verdict-panel {
+  background: var(--glass-liquid-spotlight);
+  box-shadow: inset 1px 0 rgba(220, 249, 224, .09);
+}
+.evaluation-v21 .evaluation-focus-card { background: rgba(30, 55, 39, .96); border-color: var(--glass-line); }
+.evaluation-v21 :is(.evaluation-signal-card, .evaluation-next, .evaluation-budget-context > div) { background: var(--glass-liquid-base); border-color: var(--glass-line); box-shadow: var(--glass-highlight), var(--glass-shadow); }
+.evaluation-v21 .evaluation-context-rail { background: var(--glass-liquid-base); border-color: var(--glass-line); }
+.evaluation-dialog { background: var(--glass-strong); border-color: var(--glass-line-strong); box-shadow: var(--glass-highlight), 0 30px 85px rgba(0, 0, 0, .58); }
+
+/* Strong modal/sheet shell with stable, nearly opaque data surfaces inside. */
+.serie-a-overlay { background: rgba(3, 14, 9, .82); }
+.serie-a-overlay-panel {
+  background: var(--glass-liquid-strong);
+  border-color: var(--glass-line-strong);
+  box-shadow: var(--glass-highlight), 0 26px 70px rgba(0, 0, 0, .56);
+}
+.serie-a-table thead th { background: #182820; }
+.studio-ui.ops-overlay .ops-panel.ops-settings-v21 {
+  background: var(--glass-liquid-strong);
+  border-color: var(--glass-line-strong);
+  box-shadow: var(--glass-highlight), -18px 0 60px rgba(0, 0, 0, .45);
+}
+.studio-ui.ops-overlay .settings-center-card {
+  background: var(--glass-liquid-base);
+  border-color: var(--glass-line);
+  box-shadow: var(--glass-highlight), 0 12px 30px rgba(1, 8, 6, .26);
+}
+.studio-ui .ops-dossier { background-color: var(--glass-strong); }
+
+@media (max-width: 700px) {
+  :root {
+    --glass-blur: 5px;
+    --glass-shadow: 0 10px 26px rgba(2, 10, 7, .24);
+  }
+  .glass-surface-soft,
+  .glass-surface-base,
+  .glass-surface-strong,
+  .glass-surface-spotlight,
+  .glass-interactive,
+  .ops-identity-v21 .home-lab-dock .n1-mobile-items,
+  .serie-a-overlay-panel,
+  .evaluation-dialog,
+  .studio-ui .ops-dossier,
+  .studio-ui.ops-overlay .ops-panel.ops-settings-v21 { backdrop-filter: blur(5px) saturate(108%); }
+  .serie-a-overlay-panel,
+  .evaluation-dialog,
+  .studio-ui .ops-dossier,
+  .studio-ui.ops-overlay .ops-panel.ops-settings-v21 { background-color: #14251c; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --glass-soft: #1a2f24;
+    --glass-base: #193022;
+    --glass-strong: #102118;
+    --glass-subtle: #233b2b;
+    --glass-spotlight: #1a3324;
+    --glass-liquid-soft: #1a2f24;
+    --glass-liquid-base: #193022;
+    --glass-liquid-strong: #102118;
+    --glass-liquid-spotlight: #1a3324;
+  }
+  .home-lab .home-lab-tracker,
+  .evaluation-v21 .evaluation-verdict-panel { background-color: #1a3324; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-interactive { transition: none; }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-surface-soft { background-color: #1a2f24; }
+  .glass-surface-base { background-color: #193022; }
+  .glass-surface-strong { background-color: #102118; }
+  .home-lab .home-lab-card:not(.home-lab-metric) { background-color: #1c3026; }
+  .listone-v21-shell .ops-market-tools,
+  .evaluation-v21 .evaluation-bento-card { background-color: #1c3026; }
+}

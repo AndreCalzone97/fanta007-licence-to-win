@@ -1,0 +1,17 @@
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body {
+    cursor: url('/cursor-fanta007.svg') 6 5, auto;
+  }
+
+  :is(a, button, summary, select, label, [role="button"], [role="link"], [role="tab"], [role="menuitem"], [role="checkbox"], [role="radio"], [tabindex]:not([tabindex="-1"])) {
+    cursor: url('/cursor-fanta007.svg') 6 5, auto !important;
+  }
+
+  :is(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"], [role="textbox"]) {
+    cursor: text !important;
+  }
+
+  [draggable="true"] { cursor: grab !important; }
+  [draggable="true"]:active { cursor: grabbing !important; }
+}

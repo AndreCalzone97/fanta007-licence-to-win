@@ -8,8 +8,9 @@ import thinking240 from "../assets/agent/agent-thinking-240.webp";
 import thinking480 from "../assets/agent/agent-thinking-480.webp";
 import warning240 from "../assets/agent/agent-warning-240.webp";
 import warning480 from "../assets/agent/agent-warning-480.webp";
+import companion from "../assets/landing/fantagente-hero-v2.webp";
 
-export type AgentVariant = "hero" | "thinking" | "positive" | "warning" | "critical";
+export type AgentVariant = "hero" | "thinking" | "positive" | "warning" | "critical" | "companion";
 
 type Asset = {
   alt: string;
@@ -27,6 +28,7 @@ const assets: Record<AgentVariant, Asset> = {
   positive: { alt: "Fantagente 007 con valutazione positiva", width: 480, height: 525, small: positive240, smallWidth: 240, large: positive480, largeWidth: 480 },
   warning: { alt: "Fantagente 007 segnala attenzione", width: 480, height: 519, small: warning240, smallWidth: 240, large: warning480, largeWidth: 480 },
   critical: { alt: "Fantagente 007 segnala un rischio critico", width: 480, height: 576, small: critical240, smallWidth: 240, large: critical480, largeWidth: 480 },
+  companion: { alt: "Nuovo Fantagente FANTA007 con tablet e interfaccia dati", width: 1024, height: 1536, small: companion, smallWidth: 1024, large: companion, largeWidth: 1024 },
 };
 
 type Props = {
@@ -49,7 +51,7 @@ export function AgentIllustration({ alt, className = "", decorative = false, pri
       loading={priority ? "eager" : "lazy"}
       sizes={sizes ?? (variant === "hero" ? "(max-width: 700px) 76vw, 430px" : "(max-width: 700px) 120px, 180px")}
       src={asset.small}
-      srcSet={`${asset.small} ${asset.smallWidth}w, ${asset.large} ${asset.largeWidth}w`}
+      srcSet={asset.small === asset.large ? undefined : `${asset.small} ${asset.smallWidth}w, ${asset.large} ${asset.largeWidth}w`}
       width={asset.width}
     />
   </figure>;

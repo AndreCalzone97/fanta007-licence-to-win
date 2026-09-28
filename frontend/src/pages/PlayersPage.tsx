@@ -7,6 +7,8 @@ import { acquisitionBlockReason } from "../lib/squad";
 import { StudioHeader } from "../components/StudioHeader";
 import { BottomNavigation } from "../components/BottomNavigation";
 import { SectionArrival } from "../components/SectionArrival";
+import { ListoneRails } from "../components/ListoneRails";
+import { ActionToast } from "../components/ui/ActionToast";
 
 export function PlayersPage({ config, squad, onSquadChange, onNavigate, onSettings, settingsOpen = false }: { config: LeagueConfig; squad: SquadPlayer[]; onSquadChange: (squad: SquadPlayer[]) => Promise<boolean>; onNavigate: (section: NavigationSection) => void; onSettings: () => void; settingsOpen?: boolean }) {
   const [preview, setPreview] = useState<Player | null>(null);
@@ -30,11 +32,12 @@ export function PlayersPage({ config, squad, onSquadChange, onNavigate, onSettin
     setLastAdded(null);
   }
 
-  return <div className="ops-app">
-    <StudioHeader teamName={config.teamName}><BottomNavigation active="listone" onNavigate={onNavigate} onSettings={onSettings} settingsOpen={settingsOpen} /></StudioHeader>
+  return <div className="ops-app ops-identity-v21 listone-v21-shell">
+    <StudioHeader teamName={config.teamName} cleanLogo><BottomNavigation active="listone" onNavigate={onNavigate} onSettings={onSettings} settingsOpen experimental /></StudioHeader>
+    <ListoneRails config={config} squad={squad} />
     <SectionArrival><PlayerSearch open config={config} variant="page" initialRole={initialRole} onClose={() => onNavigate("home")} onSelect={setPreview} excludedIds={squad.map((entry) => entry.player.id)} /></SectionArrival>
     <PlayerPreview player={preview} config={config} squad={squad} onClose={() => setPreview(null)} onAdd={add} onDossier={(player) => { setPreview(null); setDossier(player); }} />
     <PlayerModal player={dossier} purchasePrice={squad.find((entry) => entry.player.id === dossier?.id)?.paidPrice} config={config} onClose={() => setDossier(null)} primaryActionLabel="TORNA ALL'ACQUISTO" onPrimaryAction={dossier ? () => { setPreview(dossier); setDossier(null); } : undefined} />
-    {lastAdded && <div className="action-toast" role="status"><span><b>{lastAdded.player.name}</b> aggiunto a {lastAdded.paidPrice}</span><button onClick={undoAdd}>ANNULLA</button><button aria-label="Chiudi notifica" onClick={() => setLastAdded(null)}>×</button></div>}
+    {lastAdded && <ActionToast key={`${lastAdded.player.id}-${lastAdded.addedAt}`} message={`${lastAdded.player.name} aggiunto a ${lastAdded.paidPrice} crediti`} onUndo={undoAdd} onDismiss={() => setLastAdded(null)} />}
   </div>;
 }

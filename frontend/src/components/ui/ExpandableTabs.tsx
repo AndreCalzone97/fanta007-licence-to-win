@@ -14,6 +14,7 @@ interface ExpandableTabsProps {
   tabs: TabItem[]; className?: string; activeColor?: string;
   onChange?: (index: number | null) => void;
   activeIndex?: number; panelId?: string; label?: string;
+  persistentLabels?: boolean;
 }
 export const buttonVariants = {
   initial: { gap: 0, paddingLeft: ".5rem", paddingRight: ".5rem" },
@@ -24,7 +25,7 @@ export const spanVariants = {
   initial: { width: 0, opacity: 0 }, animate: { width: "auto", opacity: 1 }, exit: { width: 0, opacity: 0 },
 };
 export const transition = { delay: 0.1, type: "spring" as const, bounce: 0, duration: 0.6 };
-export function ExpandableTabs({ tabs, className, activeColor = "expandable-primary", onChange, activeIndex, panelId, label }: ExpandableTabsProps) {
+export function ExpandableTabs({ tabs, className, activeColor = "expandable-primary", onChange, activeIndex, panelId, label, persistentLabels = false }: ExpandableTabsProps) {
   const [selected, setSelected] = React.useState<number | null>(null);
   const outsideClickRef = React.useRef<HTMLDivElement>(null);
   const buttons = React.useRef<(HTMLButtonElement | null)[]>([]);
@@ -55,12 +56,12 @@ export function ExpandableTabs({ tabs, className, activeColor = "expandable-prim
         aria-label={tab.title} title={tab.title}
         aria-selected={activeIndex === undefined ? undefined : activeIndex === index}
         aria-controls={panelId} tabIndex={activeIndex === undefined ? undefined : activeIndex === index ? 0 : -1}
-        variants={buttonVariants} initial={false} animate="animate" custom={selected === index}
+        variants={buttonVariants} initial={false} animate="animate" custom={persistentLabels || selected === index}
         onClick={() => handleSelect(index)} onKeyDown={event => navigate(event, index)} transition={animationTransition}
-        className={cn("expandable-button", selected === index ? cn("expandable-selected", activeColor) : "expandable-inactive")}>
+        className={cn("expandable-button", (persistentLabels ? activeIndex === index : selected === index) ? cn("expandable-selected", activeColor) : "expandable-inactive")}>
         <Icon size={20} aria-hidden="true" />
         <AnimatePresence initial={false}>
-          {selected === index && <motion.span variants={spanVariants} initial="initial" animate="animate" exit="exit"
+          {(persistentLabels || selected === index) && <motion.span variants={spanVariants} initial={persistentLabels ? false : "initial"} animate="animate" exit="exit"
             transition={animationTransition} className="expandable-label">{tab.title}</motion.span>}
         </AnimatePresence>
       </motion.button>;

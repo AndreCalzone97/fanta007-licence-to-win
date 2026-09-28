@@ -21,6 +21,8 @@ frontend/vite.config.d.ts
 !.env.example
 
 # Generated/local files
+.firecrawl/
+.uv-cache/
 data/normalized/*.tmp
 data/normalized/archive/
 data/candidates/*.json

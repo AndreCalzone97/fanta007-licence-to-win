@@ -1,0 +1,6 @@
+/* The shared SVG crests sit directly on the surface; only the black Juventus mark
+   needs a light treatment against FANTA007's dark operational panels. */
+.ops-identity-v21 .team-crest[data-team="juventus"] img,
+.ops-dossier .dossier-hero > .team-crest[data-team="juventus"] img {
+  filter: brightness(0) invert(1);
+}

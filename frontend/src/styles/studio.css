@@ -66,7 +66,7 @@ body:has(.studio-ui) { background: var(--background); }
 .studio-ui .app-shell { background: var(--background); padding-bottom: 24px; }
 .studio-ui .app-topbar { display: flex; justify-content: space-between; gap: 20px; width: 100%; min-height: 88px; padding: 18px 32px; background: var(--background); border-bottom: 1px solid var(--border); }
 .studio-brand, .studio-brand.compact { display: flex; align-items: center; gap: 14px; width: auto; height: auto; }
-.studio-brand > b { position: relative; font-family: Manrope,Inter,sans-serif; font-size: 2.15rem; letter-spacing: -.04em; line-height: 1; color: var(--accent-strong); }
+.studio-brand > b { position: relative; font-family: 'Sora Variable',sans-serif; font-size: 2.15rem; letter-spacing: -.04em; line-height: 1; color: var(--accent-strong); }
 .studio-brand > b > span { display: block; width: 20px; height: 2px; margin-top: 5px; background: currentColor; }
 .studio-brand > div { font-size: 1.1rem; font-weight: 650; line-height: 1.2; }
 .studio-brand small { display: block; margin-top: 5px; font-size: .72rem; font-weight: 400; color: var(--text-muted); }
@@ -296,7 +296,7 @@ body:has(.studio-ui) { background: var(--background); }
 .studio-welcome, .studio-setup { max-width: 1480px; margin: 0 auto; padding: 0 clamp(20px,5vw,80px); }
 .welcome-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 112px; border-bottom: 1px solid var(--border); }
 .welcome-editorial { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,.85fr); gap: clamp(32px,6vw,96px); align-items: center; padding: 76px 0 64px; }
-.studio-ui .welcome-copy h1 { font-family: Manrope,Inter,sans-serif; font-size: clamp(2.6rem,4.8vw,4.8rem); font-weight: 600; line-height: 1.08; letter-spacing: -.04em; margin: 0 0 28px; text-wrap: balance; }
+.studio-ui .welcome-copy h1 { font-family: 'Sora Variable',sans-serif; font-size: clamp(2.6rem,4.8vw,4.8rem); font-weight: 600; line-height: 1.08; letter-spacing: -.04em; margin: 0 0 28px; text-wrap: balance; }
 .welcome-copy h1 em, .setup-intro h1 em { font-style: normal; color: var(--accent); }
 .welcome-copy > p { font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary); max-width: 48ch; margin: 0 0 32px; }
 .welcome-local-note { display: block; color: var(--text-muted); font-size: .8rem; margin-top: 20px; }

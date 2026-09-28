@@ -10,6 +10,7 @@ export function DossierTabs({ value, onChange, id: suppliedId }: { value: Dossie
   const id = suppliedId ?? generatedId;
   const icons = [FileText, ChartNoAxesColumn, ScanSearch, MessageSquare];
   return <div className="dossier-expandable-shell"><ExpandableTabs
+    persistentLabels
     tabs={tabs.map(([tab, title], index) => ({ title, icon: icons[index], id: `${id}-${tab}` }))}
     activeIndex={tabs.findIndex(([tab]) => tab === value)} panelId={`${id}-panel`} label="Sezioni dossier"
     onChange={index => { if (index !== null) onChange(tabs[index][0]); }}

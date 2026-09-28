@@ -1,0 +1,169 @@
+/* La mia rosa V2.1: operational dark system, scoped to this section only. */
+.ops-app:has(.squad-v21), body:has(.squad-v21) { background:#101a19; }
+.ops-app:has(.squad-v21) .ops-content { max-width:1480px; }
+.ops-squad.squad-v21 { --squad-ink:#f1f5ee; --squad-muted:#becfc4; --squad-line:#4a6256; position:relative; isolation:isolate; min-width:0; color:var(--squad-ink); }
+.squad-agent-rail { display:none; }
+.squad-v21::before { content:""; position:absolute; z-index:-1; inset:-36px -40px auto; height:360px; pointer-events:none; opacity:.38; background:radial-gradient(ellipse 60% 70% at 26% 8%,#3d745180,transparent 70%),radial-gradient(ellipse 48% 60% at 77% 11%,#31584575,transparent 75%); animation:squad-aurora 18s ease-in-out infinite alternate; }
+.squad-v21 .ops-page-heading { margin-bottom:24px; align-items:end; }
+.ops-app .squad-v21 .ops-page-heading h1 { color:#f4f7f0; font-size:clamp(2rem,3vw,2.75rem); }
+.ops-app .squad-v21 .ops-page-heading p { color:var(--squad-muted); font-size:.9rem; }
+.ops-app .squad-v21 .primary-action { border:1px solid #a4dfb5; background:#a6e3b7; color:#143024; box-shadow:0 8px 22px #04110b3b; }
+.ops-app .squad-v21 .primary-action:hover { background:#c1f0ce; }
+.ops-app .squad-v21 :is(button,a):focus-visible { outline:2px solid #b8f0c6; outline-offset:3px; }
+.squad-command-metrics { display:grid; grid-template-columns:1.25fr 1fr 1fr; min-width:0; overflow:hidden; border:1px solid #587565; border-radius:14px; background:#1b2d27; box-shadow:0 18px 38px #06110c3d; }
+.squad-metric { display:flex; flex-direction:column; justify-content:center; min-width:0; min-height:150px; padding:23px 26px; }
+.squad-metric + .squad-metric { border-left:1px solid #506959; }
+.squad-metric > span { color:#bed4c4; font-size:.85rem; font-weight:650; }
+.squad-metric strong { margin:8px 0; color:#f4f8f2; font-size:clamp(2rem,3vw,2.8rem); line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
+.squad-metric strong small { color:#adc7b5; font-size:.9rem; font-weight:550; letter-spacing:0; }
+.squad-metric p { color:#adbeaf; font-size:.78rem; }
+.squad-slot-progress { display:flex; gap:4px; width:100%; min-width:0; height:7px; margin-top:14px; }
+.squad-slot-progress span { flex:1 1 0; min-width:0; border-radius:3px; background:#506156; }
+.squad-slot-progress span[data-filled="true"] { background:#a2dfb3; }
+.squad-budget-progress { display:flex; gap:4px; width:100%; min-width:0; height:7px; margin-top:16px; }
+.squad-budget-progress > span { flex:1 1 0; min-width:0; border-radius:3px; background:#506156; }
+.squad-budget-progress > span[data-filled="true"] { background:#a2dfb3; }
+.squad-departments-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin:36px 0 14px; }
+.ops-app .squad-v21 .squad-departments-head h2 { color:#eef5ec; font-size:1.3rem; }
+.squad-departments-head p { color:#afc2b5; font-size:.82rem; }
+.squad-departments { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); min-width:0; overflow:hidden; border:1px solid #4b6557; border-radius:14px; background:#172720; }
+.squad-department { position:relative; min-width:0; padding:20px; transition:background-color .2s ease; }
+.squad-department + .squad-department { border-left:1px solid #41584b; }
+.squad-department:hover { background:#20382b; }
+.squad-department-top { display:flex; align-items:center; gap:9px; min-width:0; }
+.squad-role-mark { display:grid; width:29px; height:29px; flex:none; place-items:center; border:1px solid #7ca68b; border-radius:7px; color:#c8efd0; font-size:.95rem; font-weight:800; }
+.ops-app .squad-v21 .squad-department h3 { min-width:0; color:#eef5ec; font-size:.91rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.squad-department-state { margin-left:auto; color:#cee7d2; font-size:.7rem; font-weight:700; text-align:right; }
+.squad-department-count { display:flex; align-items:baseline; gap:6px; margin-top:16px; }
+.squad-department-count strong { color:#f3f8f1; font-size:2rem; line-height:1; }
+.squad-department-count span { color:#b5cabb; font-size:.77rem; }
+.squad-department .squad-slot-progress { margin-top:17px; height:6px; }
+.squad-department > p { margin-top:15px; color:#adc2b3; font-size:.78rem; }
+.squad-department > p b { color:#e4f3e7; }
+.squad-v21 .ops-roster-toolbar { align-items:center; margin:30px 0 16px; }
+.squad-v21 .ops-roster-toolbar p { color:#b8cbbd; font-size:.82rem; line-height:1.45; }
+.squad-v21 .ops-segmented { flex:none; padding:4px; border:1px solid #52695b; border-radius:9px; background:#192a22; }
+.squad-v21 .ops-segmented button { min-height:44px; padding:8px 17px; border-radius:6px; color:#c7d7cb; font-size:.85rem; font-weight:650; }
+.squad-v21 .ops-segmented button:hover { background:#2c4937; }
+.squad-v21 .ops-segmented button[aria-pressed="true"] { background:#a6e3b7; color:#193326; box-shadow:0 3px 12px #04110c4d; }
+.squad-v21 .ops-roster-layout { grid-template-columns:minmax(0,1fr) minmax(260px,292px); gap:18px; }
+.squad-v21 .ops-roster-master { display:grid; gap:12px; min-width:0; background:transparent; }
+.squad-v21 .ops-roster-group { grid-template-columns:160px minmax(0,1fr); gap:20px; padding:18px 20px; border:1px solid #456052; border-radius:12px; background:#1a2b24; }
+.squad-v21 .ops-roster-role { padding-top:5px; }
+.squad-v21 .ops-roster-role > span { color:#a6e3b7; }
+.ops-app .squad-v21 .ops-roster-role h2 { color:#eef5ed; font-size:1rem; }
+.squad-v21 .ops-roster-role :is(p,small) { color:#b4c8b9; font-size:.77rem; }
+.squad-v21 .ops-roster-entries { min-width:0; }
+.squad-v21 .ops-roster-columns { border-bottom:1px solid #486354; color:#a9c4af; font-size:.72rem; }
+.squad-v21 .ops-roster-entry { min-height:54px; border-bottom:1px solid #3b5145; border-radius:0; color:#eaf4eb; }
+.squad-v21 .ops-roster-entry:hover { background:#2b4937; }
+.squad-v21 .ops-roster-entry[aria-pressed="true"] { background:#315641; box-shadow:inset 2px 0 #a6e3b7; }
+.squad-v21 .ops-roster-entry strong { color:#f2f7f1; }
+.squad-v21 .ops-roster-entry small { color:#afc5b5; }
+.squad-v21 .ops-add-role { min-height:44px; border-color:#4f6d58; color:#b9e9c6; font-size:.8rem!important; }
+.squad-v21 .ops-add-role:hover { background:#294232; }
+.squad-v21 .ops-roster-inspector { top:98px; }
+.squad-v21 .ops-roster-detail { min-width:0; border:1px solid #597363; background:#20362a; color:#ecf4eb; box-shadow:0 18px 36px #07140d33; }
+.squad-v21 .ops-detail-heading .team-crest { border:1px solid #5a8067; background:#294435; }
+.squad-v21 .ops-detail-heading > span,.squad-v21 .ops-roster-detail dt { color:#b8cbbd; }
+.ops-app .squad-v21 .ops-detail-heading h2 { color:#f4f7f0; }
+.squad-v21 .ops-roster-detail dl { border-color:#597363; }
+.squad-v21 .ops-roster-detail dd,.squad-v21 .ops-roster-detail dd small { color:#ecf4eb; }
+.ops-app .squad-v21 .ops-roster-detail .positive { color:#ade5bd; }
+.ops-app .squad-v21 .ops-roster-detail .negative { color:#ffb4aa; }
+.ops-app .squad-v21 .status-badge.positive { color:#ade5bd!important; }
+.ops-app .squad-v21 .status-badge.warning { color:#f3d499!important; }
+.ops-app .squad-v21 .status-badge.danger { color:#ffb4aa!important; }
+.ops-app .squad-v21 .status-badge.info { color:#c5d9ce!important; }
+.squad-v21 .ops-remove-player { color:#ffc3b7; }
+.squad-v21 .ops-empty-roster { min-height:310px; align-content:center; border:1px solid #567263; background:radial-gradient(circle at 50% 0,#2f5a3f66,transparent 48%),#1b2e25; }
+.squad-v21 .ops-empty-roster > svg { width:42px; height:42px; color:#a6e3b7; }
+.ops-app .squad-v21 .ops-empty-roster h2 { color:#f2f7ef; font-size:1.45rem; }
+.squad-v21 .ops-empty-roster > p { color:#c6d8c8; font-size:.9rem; line-height:1.55; }
+.squad-list-wrap { min-width:0; overflow:hidden; border:1px solid #4d6758; border-radius:12px; background:#1a2b24; }
+.squad-list-table { width:100%; border-collapse:collapse; color:#ecf4eb; font-size:.84rem; font-variant-numeric:tabular-nums; }
+.squad-list-table caption { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.squad-list-table thead { background:#22392c; }
+.squad-list-table :is(th,td) { border-bottom:1px solid #435a4b; padding:10px 13px; text-align:left; }
+.squad-list-table thead th { color:#bed5c3; font-size:.73rem; font-weight:700; white-space:nowrap; }
+.squad-list-table tbody tr:hover { background:#274334; }
+.squad-list-table tbody tr[data-selected="true"] { background:#315640; }
+.squad-list-table tbody th { font-weight:600; }
+.squad-list-table tbody th button { display:flex; align-items:center; gap:10px; width:100%; min-width:0; border:0; background:transparent; color:#f3f8f0; text-align:left; }
+.squad-list-table tbody th button span { overflow-wrap:anywhere; }
+.squad-list-table tbody td small { display:none; }
+.squad-list-table tbody :is(td:nth-last-child(1),td:nth-last-child(2)) { white-space:nowrap; }
+.squad-v21 ::selection { background:#85c69c; color:#102719; }
+@keyframes squad-aurora { from { transform:translateX(-2%); opacity:.25; } to { transform:translateX(2%); opacity:.42; } }
+@media (min-width:1320px) {
+  .ops-app:has(.squad-v21) .ops-content { --squad-rail-width:max(190px,calc((100vw - 1100px)/2)); max-width:none; padding-inline:var(--squad-rail-width); }
+  .squad-agent-rail { position:fixed; z-index:0; top:80px; bottom:0; left:0; display:block; width:var(--squad-rail-width); overflow:hidden; background:#101a19; pointer-events:none; }
+  .squad-agent-rail .squad-rail-media { width:100%; height:100%; border:0; border-radius:0; }
+  .squad-agent-rail .squad-rail-media :is(img,video) { object-position:47% center; }
+  .squad-agent-rail::after { content:""; position:absolute; z-index:2; inset:0; background:linear-gradient(90deg,#101a19a8,transparent 42%,#101a19a8),linear-gradient(0deg,#101a19 1%,transparent 30%,transparent 70%,#101a19a8); }
+  .squad-rail-caption { position:absolute; z-index:3; bottom:30px; left:12px; display:grid; gap:4px; color:#edfaed; font-size:.76rem; font-weight:800; letter-spacing:.09em; text-shadow:0 2px 8px #07120e; }
+  .squad-rail-caption small { color:#b1e6c5; font-size:.62rem; }
+}
+@media (max-width:1180px) {
+  .squad-v21 .squad-department { padding:16px 12px; }
+  .squad-v21 .squad-department-top { flex-wrap:wrap; }
+  .squad-v21 .squad-department-state { width:100%; margin-left:0; text-align:left; }
+  .squad-v21 .ops-roster-group { grid-template-columns:120px minmax(0,1fr); }
+  .squad-list-table :is(th,td) { padding-inline:8px; }
+}
+@media (max-width:1000px) {
+  .squad-v21 .ops-roster-layout { grid-template-columns:1fr; }
+  .squad-v21 .ops-roster-inspector { display:none; }
+  .squad-v21 .ops-roster-inline { display:block; }
+  .squad-v21 .ops-roster-inline .ops-roster-detail { margin:10px 0 0; background:#244031; }
+  .squad-v21 .ops-roster-group { grid-template-columns:1fr; }
+  .squad-v21 .ops-roster-role > div { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px; }
+  .squad-v21 .ops-roster-role :is(p,small) { margin:0; }
+  .squad-v21 .squad-list-wrap > .ops-roster-inline { padding:12px; }
+}
+@media (max-width:700px) {
+  .ops-app:has(.squad-v21) .ops-content { padding-inline:16px; }
+  .squad-v21::before { inset:-24px -16px auto; height:290px; }
+  .squad-v21 .ops-page-heading { display:grid; gap:16px; }
+  .squad-v21 .ops-page-heading > button { width:100%; margin:0; }
+  .squad-command-metrics { grid-template-columns:1fr 1fr; }
+  .squad-metric { min-height:128px; padding:17px; }
+  .squad-metric-primary { grid-column:1/-1; min-height:130px; border-bottom:1px solid #506959; }
+  .squad-metric:nth-child(2) { border-left:0; }
+  .squad-metric strong { font-size:2rem; }
+  .squad-departments-head { display:block; margin-top:28px; }
+  .squad-departments-head p { margin-top:5px; }
+  .squad-departments { grid-template-columns:1fr 1fr; }
+  .squad-department { min-height:167px; }
+  .squad-department:nth-child(3) { border-left:0; border-top:1px solid #41584b; }
+  .squad-department:nth-child(4) { border-top:1px solid #41584b; }
+  .squad-v21 .ops-roster-toolbar { align-items:stretch; flex-direction:column; gap:12px; }
+  .squad-v21 .ops-segmented { align-self:flex-start; }
+  .squad-v21 .ops-roster-group { padding:16px 12px; }
+  .squad-v21 .ops-roster-entry { grid-template-columns:minmax(0,1fr) 45px 53px; gap:8px; }
+  .squad-v21 .ops-roster-columns { grid-template-columns:minmax(0,1fr) 45px 53px; gap:8px; }
+  .squad-list-table,.squad-list-table tbody,.squad-list-table tr { display:block; }
+  .squad-list-table thead { display:none; }
+  .squad-list-table tbody tr { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px 12px; padding:15px; border-bottom:1px solid #435a4b; }
+  .squad-list-table :is(th,td) { border:0; padding:0; }
+  .squad-list-table tbody th { grid-column:1/-1; margin-bottom:5px; }
+  .squad-list-table tbody td { display:grid; gap:2px; overflow-wrap:anywhere; }
+  .squad-list-table tbody td small { display:block; color:#a8c4af; font-size:.7rem; }
+  .squad-list-table tbody td:nth-child(4) { display:none; }
+}
+@media (max-width:420px) {
+  .squad-department { padding:13px 10px; }
+  .squad-department-top { gap:6px; }
+  .ops-app .squad-v21 .squad-department h3 { flex:1 1 72px; white-space:normal; overflow:visible; text-overflow:clip; overflow-wrap:anywhere; line-height:1.25; }
+  .squad-department-count strong { font-size:1.65rem; }
+  .squad-metric { padding:14px; }
+  .squad-metric > span { font-size:.78rem; }
+}
+@media (max-width:370px) {
+  .squad-department-top { display:grid; grid-template-columns:1fr; }
+  .squad-department-state { width:auto; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .squad-v21::before { animation:none; }
+  .squad-v21 :is(.squad-budget-progress > span,.squad-department) { transition:none; }
+}

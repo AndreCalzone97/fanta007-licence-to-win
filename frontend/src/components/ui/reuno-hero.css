@@ -1,53 +1,691 @@
-/* H1: utility equivalents and animation rules verified in the author's demo.
-   Namespaced to prevent the legacy app's global heading styles leaking in. */
 .fanta-welcome .reuno-hero {
-  position: relative; isolation: isolate; width: 100%; min-height: 100svh;
-  overflow: hidden; color: #e6e1d7;
-  background: linear-gradient(to bottom right, #1a1d18, #000, #2a2e26);
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  --intro: 1;
+  --scene: 0;
+  --detail: 0;
+  --outro: 0;
+  --drift: 0;
+  --hero-bg: #020504;
+  --hero-scene: #071611;
+  --hero-panel: rgba(7, 22, 17, .9);
+  --hero-line: rgba(137, 210, 181, .24);
+  --hero-line-strong: rgba(85, 237, 177, .48);
+  --hero-accent: #35e7a1;
+  --hero-accent-soft: #92f2c8;
+  --hero-text: #f5f8f6;
+  --hero-muted: #b8c7c1;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 360svh;
+  color: var(--hero-text);
+  background: #dfe7e2;
 }
-.reuno-grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.reuno-grid-line { stroke: #c8b4a0; stroke-width: .5px; opacity: 0; stroke-dasharray: 5 5; stroke-dashoffset: 1000px; animation: reuno-grid-draw 2s ease-out forwards; }
-.reuno-detail-dot { fill: #c8b4a0; opacity: 0; animation: reuno-pulse-glow 3s ease-in-out infinite; }
-.reuno-corner { position: absolute; width: 40px; height: 40px; border: 1px solid #c8b4a033; opacity: 0; animation: reuno-word-appear 1s ease-out forwards; pointer-events: none; }
-.reuno-corner::before { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #c8b4a04d; }
-.reuno-top { top: 32px; } .reuno-bottom { bottom: 32px; }
-.reuno-left { left: 32px; } .reuno-right { right: 32px; }
-.reuno-square { position: absolute; width: 8px; height: 8px; opacity: .3; }
-.reuno-square-tl { top: 0; left: 0; } .reuno-square-tr { top: 0; right: 0; }
-.reuno-square-bl { bottom: 0; left: 0; } .reuno-square-br { bottom: 0; right: 0; }
-.reuno-floating { position: absolute; opacity: 0; background: #c8b4a0; border-radius: 50%; width: 2px; height: 2px; animation: reuno-float 4s ease-in-out infinite; pointer-events: none; }
-.reuno-content { position: relative; z-index: 10; min-height: 100svh; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 48px 32px; gap: 48px; }
-.reuno-center { text-align: center; }
-.fanta-welcome .reuno-tagline { margin: 0; font: 300 12px/1.4 ui-monospace, monospace; text-transform: uppercase; letter-spacing: .2em; opacity: .8; }
-.reuno-word { display: inline-block; margin: 0 .1em; transition: .3s; animation: reuno-word-appear .8s ease-out both; }
-.reuno-word:hover { color: #c8b4a0; text-shadow: 0 0 20px #c8b4a080; }
-.reuno-divider { width: 64px; height: 1px; opacity: .3; }
-.reuno-mt { margin-top: 16px; } .reuno-mb { margin-bottom: 16px; }
-.reuno-headline-wrap { max-width: 1024px; margin-inline: auto; text-align: center; }
-.fanta-welcome .reuno-headline { margin: 0; font-family: inherit; font-size: 30px; font-weight: 200; line-height: 1.25; letter-spacing: -.025em; }
-.reuno-headline-main { margin-bottom: 16px; }
-.reuno-headline-sub { font-size: 24px; font-weight: 100; line-height: 1.625; }
-.reuno-side { position: absolute; top: 50%; width: 16px; height: 1px; opacity: .2; }
-.reuno-side-left { left: -32px; } .reuno-side-right { right: -32px; }
-.reuno-dots { margin-top: 24px; display: flex; justify-content: center; gap: 16px; opacity: 0; }
-.reuno-dot { width: 4px; height: 4px; border-radius: 50%; opacity: .4; }
-.reuno-dot-bright { opacity: .6; }
-.reuno-mouse-gradient { position: fixed; pointer-events: none; width: 384px; height: 384px; border-radius: 50%; filter: blur(64px); transition: all .5s ease-out; opacity: 0; }
-.reuno-ripple { position: fixed; width: 4px; height: 4px; background: #c8b4a099; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; animation: reuno-pulse-glow 1s ease-out forwards; }
-/* Product adaptation: working entry action beside the original bottom tagline. */
-.fanta-welcome .reuno-action { display: inline-flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; min-height: 48px; padding: 12px 24px; border: 1px solid #c8b4a0; border-radius: 6px; color: #e6e1d7; background: transparent; font: 500 14px/1.5 ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background .2s, color .2s; }
-.fanta-welcome .reuno-action:hover { background: #c8b4a0; color: #1a1d18; }
-.fanta-welcome .reuno-action:focus-visible { outline: 2px solid #f8f7f5; outline-offset: 5px; }
-.reuno-hero ::selection { background: #c8b4a0; color: #1a1d18; }
-@keyframes reuno-word-appear {
-  0% { opacity: 0; filter: blur(10px); transform: translateY(30px) scale(.8); }
-  50% { opacity: .8; filter: blur(2px); transform: translateY(10px) scale(.95); }
-  100% { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+
+.reuno-hero__sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
 }
-@keyframes reuno-pulse-glow { 0%, 100% { opacity: .1; transform: scale(1); } 50% { opacity: .3; transform: scale(1.1); } }
-@keyframes reuno-grid-draw { 0% { stroke-dashoffset: 1000px; opacity: 0; } 50% { opacity: .3; } 100% { stroke-dashoffset: 0; opacity: .15; } }
-@keyframes reuno-float { 0%,100% { opacity: .2; transform: translateY(0) translateX(0); } 25% { opacity: .6; transform: translateY(-10px) translateX(5px); } 50% { opacity: .4; transform: translateY(-5px) translateX(-3px); } 75% { opacity: .8; transform: translateY(-15px) translateX(7px); } }
-@media (min-width: 768px) { .reuno-content { padding: 80px 64px; } .fanta-welcome .reuno-tagline { font-size: 14px; } .fanta-welcome .reuno-headline { font-size: 48px; } .reuno-headline-main { margin-bottom: 24px; } .reuno-headline-sub { font-size: 30px; } }
-@media (min-width: 1024px) { .fanta-welcome .reuno-headline { font-size: 60px; } .reuno-headline-sub { font-size: 36px; } }
-@media (prefers-reduced-motion: reduce) { .reuno-word, .reuno-dots, .reuno-corner { opacity: 1; transform: none; filter: none; } .reuno-grid-line { opacity: .15; stroke-dashoffset: 0; } .reuno-mouse-gradient, .reuno-floating, .reuno-detail-dot { display: none; } }
+
+.reuno-canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--hero-text);
+  background: var(--hero-bg);
+  border-radius: calc(var(--outro) * 34px);
+  transform: scale(calc(1 - var(--outro) * .028));
+  transform-origin: center bottom;
+  box-shadow: 0 36px 80px rgba(3, 13, 9, calc(var(--outro) * .28));
+}
+
+.reuno-canvas::before,
+.reuno-canvas::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.reuno-canvas::before {
+  inset: 0;
+  z-index: 0;
+  border: 1px solid rgba(178, 224, 205, .09);
+  background: var(--hero-scene);
+  opacity: calc(var(--scene) * .94);
+}
+
+.reuno-canvas::after {
+  z-index: 7;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(136, 219, 186, .1);
+  opacity: calc(.18 + var(--scene) * .42);
+}
+
+.reuno-atmosphere,
+.reuno-atmosphere__beam,
+.reuno-atmosphere__orbit {
+  position: absolute;
+  pointer-events: none;
+}
+
+.reuno-atmosphere {
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.reuno-atmosphere__beam {
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background: rgba(104, 238, 185, .28);
+  box-shadow: 0 0 96px 36px rgba(45, 205, 146, .13);
+  opacity: calc(.12 + var(--scene) * .72);
+  transform: translateX(-50%);
+}
+
+.reuno-atmosphere__orbit {
+  top: 47%;
+  left: 50%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(94, 223, 172, .14);
+  border-radius: 50%;
+  opacity: calc(var(--scene) * .7);
+  transform: translate(-50%, -50%) scale(calc(.7 + var(--scene) * .3));
+}
+
+.reuno-atmosphere__orbit--one { width: min(56vw, 820px); }
+.reuno-atmosphere__orbit--two {
+  width: min(39vw, 570px);
+  border-style: dashed;
+  opacity: calc(var(--scene) * .43);
+}
+
+.reuno-masthead {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1500px, calc(100% - 72px));
+  min-height: 78px;
+  border-bottom: 1px solid rgba(181, 222, 205, .15);
+  transform: translateX(-50%);
+}
+
+.reuno-logo {
+  display: block;
+  width: clamp(202px, 17vw, 260px);
+  height: auto;
+  opacity: 1;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .38));
+  transform: translate3d(calc((1 - var(--intro)) * 0px), 0, 0) scale(calc(.94 + (1 - var(--intro)) * .06));
+}
+
+.reuno-live-status {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: #d4dfdb;
+  font-size: .78rem;
+  font-weight: 720;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.reuno-live-status > i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hero-accent);
+  box-shadow: 0 0 0 5px rgba(53, 231, 161, .1), 0 0 20px rgba(53, 231, 161, .54);
+}
+
+.reuno-status-copy { grid-area: 1 / 2; transition: opacity 220ms ease, transform 220ms ease; }
+.reuno-status-copy--scene { opacity: 0; transform: translateY(5px); }
+.reuno-hero[data-phase="scene"] .reuno-status-copy--intro { opacity: 0; transform: translateY(-5px); }
+.reuno-hero[data-phase="scene"] .reuno-status-copy--scene { opacity: 1; transform: none; }
+
+.reuno-intro {
+  position: absolute;
+  z-index: 10;
+  top: 49%;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  width: min(1040px, calc(100% - 64px));
+  text-align: center;
+  opacity: var(--intro);
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(calc(.9 + var(--intro) * .1));
+}
+
+.reuno-hero[data-phase="scene"] .reuno-intro {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.fanta-welcome .reuno-intro h1 {
+  max-width: 15ch;
+  margin: 0;
+  color: var(--hero-text);
+  font-size: clamp(4.05rem, 6.95vw, 7.45rem);
+  font-weight: 520;
+  line-height: .91;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+
+.reuno-intro h1 span,
+.reuno-intro h1 strong { display: block; }
+
+.reuno-intro h1 strong {
+  margin-top: .08em;
+  color: #a9b4b0;
+  font-weight: inherit;
+}
+
+.reuno-lede {
+  max-width: 65ch;
+  margin: 28px 0 0;
+  color: var(--hero-muted);
+  font-size: clamp(1.02rem, 1.25vw, 1.22rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.reuno-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.fanta-welcome .reuno-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  min-height: 54px;
+  padding: 14px 23px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font: 720 .96rem/1.2 inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform .2s ease, background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+.fanta-welcome .reuno-action--primary {
+  color: #02110b;
+  background: var(--hero-accent);
+  box-shadow: 0 15px 34px rgba(19, 166, 110, .24);
+}
+
+.fanta-welcome .reuno-action--secondary {
+  color: #edf5f2;
+  border-color: rgba(159, 220, 197, .34);
+  background: rgba(5, 16, 13, .8);
+}
+
+.fanta-welcome .reuno-action:hover { transform: translateY(-2px); }
+.fanta-welcome .reuno-action--primary:hover { background: #74f5c1; box-shadow: 0 18px 39px rgba(19, 166, 110, .32); }
+.fanta-welcome .reuno-action--secondary:hover { border-color: rgba(88, 238, 180, .66); background: rgba(16, 43, 34, .9); }
+.fanta-welcome .reuno-action:active { transform: translateY(0); }
+.fanta-welcome .reuno-action:focus-visible,
+.reuno-scroll-cue:focus-visible { outline: 2px solid #f0fff9; outline-offset: 4px; }
+
+.reuno-scene {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  opacity: var(--scene);
+  transform: scale(calc(.92 + var(--scene) * .08));
+}
+
+.reuno-scene-copy {
+  position: absolute;
+  z-index: 8;
+  top: 33%;
+  left: max(48px, calc((100% - 1500px) / 2));
+  width: min(31vw, 470px);
+  opacity: var(--detail);
+  transform: translateX(calc(-38px + var(--detail) * 38px));
+}
+
+.fanta-welcome .reuno-scene-copy h2 {
+  max-width: 12ch;
+  margin: 0;
+  color: var(--hero-text);
+  font-size: clamp(2.7rem, 4vw, 4.85rem);
+  font-weight: 560;
+  line-height: .98;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+
+.reuno-scene-copy p {
+  max-width: 43ch;
+  margin: 22px 0 0;
+  color: #b9cbc4;
+  font-size: clamp(1rem, 1.08vw, 1.12rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.reuno-copy-keep { white-space: nowrap; }
+
+.reuno-scene-word {
+  position: absolute;
+  z-index: 1;
+  top: 36%;
+  right: -1.5%;
+  color: rgba(197, 229, 217, .105);
+  font-size: clamp(6rem, 13.6vw, 14rem);
+  font-weight: 780;
+  line-height: .78;
+  letter-spacing: -.075em;
+  opacity: var(--detail);
+  white-space: nowrap;
+  transform: translateX(calc(58px - var(--detail) * 58px));
+}
+
+.reuno-data-plane {
+  position: absolute;
+  z-index: 2;
+  inset: 13% 20% 10% 19%;
+  border: 1px solid rgba(115, 218, 178, .13);
+  opacity: calc(.18 + var(--detail) * .75);
+}
+
+.reuno-data-plane::before,
+.reuno-data-plane::after {
+  content: "";
+  position: absolute;
+  background: rgba(102, 207, 166, .12);
+}
+
+.reuno-data-plane::before { top: 0; bottom: 0; left: 34%; width: 1px; }
+.reuno-data-plane::after { top: 43%; right: 0; left: 0; height: 1px; }
+.reuno-data-plane__line,
+.reuno-data-plane__node { position: absolute; display: block; }
+.reuno-data-plane__line { height: 1px; background: rgba(76, 228, 169, .34); transform-origin: left; }
+.reuno-data-plane__line--one { top: 30%; left: 8%; width: 74%; transform: rotate(-7deg); }
+.reuno-data-plane__line--two { top: 67%; left: 16%; width: 67%; transform: rotate(8deg); }
+.reuno-data-plane__node {
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--hero-accent);
+  border-radius: 50%;
+  background: #081712;
+  box-shadow: 0 0 18px rgba(53, 231, 161, .48);
+}
+.reuno-data-plane__node--one { top: 26%; left: 25%; }
+.reuno-data-plane__node--two { right: 13%; bottom: 28%; }
+
+.reuno-data-plane__line::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 18%;
+  height: 3px;
+  background: rgba(120, 255, 204, .72);
+  opacity: .75;
+  animation: reuno-signal-travel 5.6s linear infinite;
+}
+
+.reuno-data-plane__line--two::after { animation-delay: -2.4s; }
+.reuno-data-plane__node { animation: reuno-node-pulse 3.2s ease-in-out infinite; }
+.reuno-data-plane__node--two { animation-delay: -1.4s; }
+
+.reuno-mission-core {
+  position: absolute;
+  z-index: 9;
+  top: 15%;
+  left: 67%;
+  display: grid;
+  gap: 8px;
+  min-width: 246px;
+  padding: 15px 17px;
+  color: #dceae5;
+  border: 1px solid rgba(92, 223, 171, .25);
+  background: rgba(5, 20, 15, .88);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .32);
+  opacity: var(--detail);
+  transform: translate(-50%, calc(20px - var(--detail) * 20px));
+  backdrop-filter: blur(10px);
+}
+
+.reuno-mission-core > span {
+  color: #9fc5b6;
+  font-size: .78rem;
+  font-weight: 740;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.reuno-mission-core > strong { display: flex; align-items: center; gap: 10px; font-size: .92rem; font-weight: 670; }
+.reuno-mission-core i { display: block; width: 16px; height: 1px; background: var(--hero-accent); box-shadow: 0 0 12px rgba(53, 231, 161, .45); }
+
+.reuno-agent-frame {
+  position: absolute;
+  z-index: 5;
+  bottom: -8%;
+  left: 50%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: min(55vw, 790px);
+  height: 96%;
+  overflow: hidden;
+  opacity: var(--scene);
+  transform: translateX(-50%) translateY(calc(12% - var(--scene) * 12%));
+}
+
+.reuno-agent-frame::after {
+  content: "";
+  position: absolute;
+  right: 15%;
+  bottom: 8%;
+  left: 15%;
+  height: 2px;
+  background: rgba(60, 234, 166, .42);
+  box-shadow: 0 0 42px 15px rgba(45, 202, 143, .22);
+}
+
+.reuno-agent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 106%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: saturate(.93) contrast(1.04) drop-shadow(0 28px 36px rgba(0, 0, 0, .38));
+  transform: translate3d(0, calc(var(--drift) * -10px), 0) scale(calc(.92 + var(--scene) * .08));
+}
+
+.reuno-agent-scan {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 19%;
+  width: 32%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(63, 249, 177, .34);
+  border-radius: 50%;
+  opacity: calc(var(--detail) * .86);
+  box-shadow: inset 0 0 36px rgba(36, 229, 153, .08), 0 0 30px rgba(36, 229, 153, .08);
+}
+
+.reuno-agent-scan::before,
+.reuno-agent-scan::after {
+  content: "";
+  position: absolute;
+  inset: 15%;
+  border: 1px dashed rgba(76, 247, 183, .31);
+  border-radius: inherit;
+}
+
+.reuno-agent-scan::after { inset: 35%; border-style: solid; }
+.reuno-agent-scan::before { animation: reuno-scan-turn 12s linear infinite; }
+.reuno-agent-scan::after { animation: reuno-scan-breathe 3.6s ease-in-out infinite; }
+
+.reuno-target {
+  position: absolute;
+  z-index: 11;
+  top: 60%;
+  left: 43%;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  color: var(--hero-accent-soft);
+  border: 1px solid rgba(69, 247, 178, .45);
+  border-radius: 50%;
+  background: rgba(4, 16, 12, .5);
+  opacity: var(--detail);
+  box-shadow: 0 0 0 11px rgba(53, 231, 161, .05);
+}
+
+.reuno-target svg { animation: reuno-target-breathe 3.4s ease-in-out infinite; }
+
+.reuno-hud-card {
+  position: absolute;
+  z-index: 12;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 11px;
+  width: 220px;
+  padding: 15px 16px;
+  color: #e4eee9;
+  border: 1px solid var(--hero-line);
+  background: var(--hero-panel);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .32);
+  opacity: var(--detail);
+  backdrop-filter: blur(11px);
+}
+
+.reuno-hud-card svg { grid-row: 1 / span 2; align-self: center; color: var(--hero-accent); }
+.reuno-hud-card span { color: #a5c5b9; font-size: .78rem; font-weight: 740; letter-spacing: .1em; text-transform: uppercase; }
+.reuno-hud-card strong { font-size: .91rem; font-weight: 660; line-height: 1.35; }
+.reuno-hud-card--1 { top: 22%; left: 29%; transform: translateY(calc(26px - var(--detail) * 26px)); }
+.reuno-hud-card--2 { top: 25%; right: 5%; transform: translateX(calc(30px - var(--detail) * 30px)); }
+.reuno-hud-card--3 { right: 7%; bottom: 21%; transform: translateY(calc(30px - var(--detail) * 30px)); }
+
+.reuno-hud-card::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--hero-accent);
+  animation: reuno-hud-pulse 2.8s ease-in-out infinite;
+}
+
+.reuno-hud-card--2::after { animation-delay: -.9s; }
+.reuno-hud-card--3::after { animation-delay: -1.8s; }
+
+@keyframes reuno-signal-travel {
+  0% { transform: translateX(-20%); opacity: 0; }
+  18%, 78% { opacity: .8; }
+  100% { transform: translateX(560%); opacity: 0; }
+}
+
+@keyframes reuno-node-pulse { 50% { box-shadow: 0 0 24px rgba(53, 231, 161, .72); } }
+@keyframes reuno-scan-turn { to { transform: rotate(360deg); } }
+@keyframes reuno-scan-breathe { 50% { transform: scale(.86); opacity: .55; } }
+@keyframes reuno-target-breathe { 50% { transform: scale(.82); opacity: .68; } }
+@keyframes reuno-hud-pulse { 50% { opacity: .35; box-shadow: 0 0 14px rgba(53, 231, 161, .54); } }
+
+.reuno-dashboard-teaser {
+  position: absolute;
+  z-index: 18;
+  right: max(36px, calc((100% - 1500px) / 2));
+  bottom: 3.2%;
+  left: max(36px, calc((100% - 1500px) / 2));
+  display: grid;
+  grid-template-columns: minmax(220px, .65fr) minmax(0, 2fr);
+  gap: 34px;
+  align-items: center;
+  min-height: 102px;
+  padding: 18px 22px;
+  border-top: 1px solid var(--hero-line-strong);
+  border-bottom: 1px solid rgba(91, 224, 172, .17);
+  background: rgba(5, 19, 14, .86);
+  opacity: var(--detail);
+  transform: translateY(calc(34px - var(--detail) * 34px));
+  backdrop-filter: blur(12px);
+}
+
+.reuno-dashboard-teaser__heading { display: grid; gap: 6px; }
+.reuno-dashboard-teaser__heading span,
+.reuno-dashboard-teaser__signals span { color: #9bbcaf; font-size: .78rem; font-weight: 740; letter-spacing: .11em; text-transform: uppercase; }
+.reuno-dashboard-teaser__heading b { color: #f0f5f2; font-size: 1.01rem; line-height: 1.35; }
+.reuno-dashboard-teaser__signals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.reuno-dashboard-teaser__signals > div { display: grid; gap: 6px; min-width: 0; padding: 5px 22px; border-left: 1px solid rgba(123, 191, 165, .23); }
+.reuno-dashboard-teaser__signals b { overflow: hidden; color: #d9e6e1; font-size: .88rem; font-weight: 620; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+
+.reuno-scroll-cue {
+  position: absolute;
+  z-index: 22;
+  right: 24px;
+  bottom: 22px;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  color: #d1dfda;
+  border: 1px solid rgba(149, 211, 188, .34);
+  border-radius: 50%;
+  background: rgba(6, 18, 15, .82);
+  cursor: pointer;
+  opacity: calc(1 - var(--outro));
+  touch-action: manipulation;
+  transition: color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.reuno-scroll-cue:hover { color: var(--hero-accent); border-color: rgba(53, 231, 161, .66); transform: translateY(2px); }
+.reuno-hero ::selection { color: #02110b; background: var(--hero-accent-soft); }
+
+@media (max-width: 1100px) {
+  .reuno-scene-copy { left: 32px; width: 34vw; }
+  .reuno-agent-frame { width: min(63vw, 760px); }
+  .reuno-hud-card--1 { left: 27%; }
+  .reuno-hud-card--2 { right: 3%; }
+  .reuno-hud-card--3 { right: 4%; }
+}
+
+@media (max-height: 720px) and (min-width: 821px) {
+  .reuno-intro { top: 56%; }
+  .fanta-welcome .reuno-intro h1 { font-size: clamp(3.8rem, 6.6vw, 6rem); }
+  .reuno-lede { margin-top: 19px; font-size: 1rem; line-height: 1.5; }
+  .reuno-actions { margin-top: 23px; }
+  .reuno-scene-copy { top: 29%; }
+  .fanta-welcome .reuno-scene-copy h2 { font-size: clamp(2.45rem, 3.5vw, 3.8rem); }
+  .reuno-dashboard-teaser { min-height: 90px; padding-block: 14px; }
+}
+
+@media (max-width: 820px) {
+  .fanta-welcome .reuno-hero { height: 315svh; }
+  .reuno-masthead { width: calc(100% - 36px); min-height: 70px; }
+  .reuno-logo { width: 188px; }
+  .reuno-live-status { font-size: .7rem; }
+  .reuno-intro { top: 54%; width: calc(100% - 36px); }
+  .fanta-welcome .reuno-intro h1 { max-width: 13ch; font-size: clamp(3.25rem, 10.1vw, 5.25rem); line-height: .94; }
+  .reuno-lede { max-width: 56ch; margin-top: 22px; }
+  .reuno-scene-copy { top: 14%; left: 24px; width: calc(100% - 48px); }
+  .fanta-welcome .reuno-scene-copy h2 { max-width: 11ch; font-size: clamp(2.5rem, 7vw, 3.9rem); }
+  .reuno-scene-copy p { max-width: 44ch; margin-top: 15px; }
+  .reuno-scene-word { top: 54%; right: -16%; font-size: 19vw; }
+  .reuno-data-plane { inset: 32% 5% 14%; }
+  .reuno-mission-core { top: 37%; left: 20px; min-width: 228px; transform: translateY(calc(20px - var(--detail) * 20px)); }
+  .reuno-agent-frame { bottom: -4%; left: 53%; width: min(99vw, 700px); height: 72%; }
+  .reuno-target { top: 66%; left: 33%; }
+  .reuno-hud-card--1 { top: 42%; left: auto; right: 24px; }
+  .reuno-hud-card--2 { top: auto; right: 24px; bottom: 25%; }
+  .reuno-hud-card--3 { display: none; }
+  .reuno-dashboard-teaser { right: 20px; bottom: 2.5%; left: 20px; grid-template-columns: 1fr; gap: 12px; padding: 15px 17px; }
+  .reuno-dashboard-teaser__signals > div { padding: 3px 14px; }
+  .reuno-dashboard-teaser__signals > div:first-child { padding-left: 0; border-left: 0; }
+}
+
+@media (max-width: 560px) {
+  .fanta-welcome .reuno-hero { height: 300svh; }
+  .reuno-masthead { width: calc(100% - 28px); min-height: 64px; }
+  .reuno-logo { width: 150px; }
+  .reuno-live-status { max-width: 112px; gap: 8px; text-align: right; line-height: 1.3; letter-spacing: .07em; }
+  .reuno-intro { width: calc(100% - 28px); }
+  .fanta-welcome .reuno-intro h1 { max-width: 12ch; font-size: clamp(2.75rem, 12.8vw, 4rem); line-height: .96; }
+  .reuno-lede { margin-top: 20px; font-size: .98rem; line-height: 1.56; }
+  .reuno-actions { display: grid; width: min(100%, 390px); margin-top: 26px; }
+  .fanta-welcome .reuno-action { width: 100%; min-height: 52px; }
+  .reuno-scene-copy {
+    top: 12%;
+    left: 17px;
+    width: calc(100% - 34px);
+    transform: translateY(calc(22px - var(--detail) * 22px));
+  }
+  .fanta-welcome .reuno-scene-copy h2 { max-width: 10ch; font-size: clamp(2.35rem, 11vw, 3.25rem); }
+  .reuno-scene-copy p { max-width: 31ch; font-size: .96rem; line-height: 1.55; }
+  .reuno-scene-word { top: 56%; right: -30%; font-size: 24vw; }
+  .reuno-data-plane { inset: 35% 3% 16%; }
+  .reuno-mission-core { display: none; }
+  .reuno-mission-core > span { font-size: .7rem; }
+  .reuno-mission-core > strong { font-size: .82rem; }
+  .reuno-agent-frame { bottom: -7%; left: 58%; width: 126vw; height: 60%; }
+  .reuno-agent { height: 103%; object-position: center bottom; }
+  .reuno-target { top: 64%; left: 23%; width: 45px; height: 45px; }
+  .reuno-hud-card { width: 184px; padding: 11px 12px; }
+  .reuno-hud-card span { font-size: .69rem; }
+  .reuno-hud-card strong { font-size: .79rem; }
+  .reuno-hud-card--1 { display: none; }
+  .reuno-hud-card--2 { right: 12px; bottom: 23%; }
+  .reuno-dashboard-teaser { right: 12px; bottom: 2%; left: 12px; min-height: 0; gap: 8px; padding: 12px 13px; }
+  .reuno-dashboard-teaser__heading { gap: 3px; }
+  .reuno-dashboard-teaser__heading span,
+  .reuno-dashboard-teaser__signals span { font-size: .68rem; }
+  .reuno-dashboard-teaser__heading b { font-size: .88rem; }
+  .reuno-dashboard-teaser__signals { grid-template-columns: 1fr; }
+  .reuno-dashboard-teaser__signals > div { display: grid; grid-template-columns: 75px 1fr; gap: 8px; padding: 5px 0; border-top: 1px solid rgba(123, 191, 165, .18); border-left: 0; }
+  .reuno-dashboard-teaser__signals b { font-size: .75rem; white-space: normal; }
+  .reuno-scroll-cue { right: 14px; bottom: 12px; width: 44px; height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fanta-welcome .reuno-hero { height: auto; background: var(--hero-bg); }
+  .reuno-hero__sticky { position: relative; height: auto; overflow: visible; }
+  .reuno-canvas { position: relative; min-height: 1500px; border-radius: 0; transform: none; box-shadow: none; }
+  .reuno-canvas::before { opacity: .94; }
+  .reuno-intro { position: relative; top: auto; left: auto; min-height: 710px; margin: 0 auto; padding-top: 155px; opacity: 1; visibility: visible; transform: none; }
+  .reuno-scene { position: relative; min-height: 790px; opacity: 1; transform: none; }
+  .reuno-scene-copy,
+  .reuno-scene-word,
+  .reuno-data-plane,
+  .reuno-mission-core,
+  .reuno-agent-frame,
+  .reuno-target,
+  .reuno-hud-card,
+  .reuno-dashboard-teaser { opacity: 1; }
+  .reuno-scene-copy,
+  .reuno-scene-word,
+  .reuno-mission-core,
+  .reuno-agent-frame,
+  .reuno-hud-card,
+  .reuno-dashboard-teaser { transform: none; }
+  .reuno-scroll-cue { display: none; }
+  .fanta-welcome .reuno-action { transition: none; }
+  .reuno-status-copy { transition: none; }
+  .reuno-data-plane__line::after,
+  .reuno-data-plane__node,
+  .reuno-agent-scan::before,
+  .reuno-agent-scan::after,
+  .reuno-target svg,
+  .reuno-hud-card::after { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 820px) {
+  .reuno-canvas { min-height: 1510px; }
+  .reuno-intro { min-height: 700px; padding-top: 135px; }
+  .reuno-scene { min-height: 810px; }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 560px) {
+  .reuno-canvas { min-height: 1590px; }
+  .reuno-intro { min-height: 760px; padding-top: 118px; }
+  .reuno-scene { min-height: 830px; }
+}

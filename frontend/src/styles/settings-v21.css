@@ -1,0 +1,66 @@
+/* Settings-only treatment. The operational shell and navigation stay untouched. */
+.studio-ui.ops-overlay:has(.ops-settings-v21) { background:rgba(3,16,15,.7); backdrop-filter:blur(5px); }
+.studio-ui.ops-overlay .ops-panel.ops-settings-v21 { width:min(480px,94vw); background:#0e1d1b; color:#eef4ee; border-left:1px solid #527b684d; box-shadow:-22px 0 70px #030e0db3; }
+.studio-ui.ops-overlay .ops-panel.ops-settings-v21 > .ops-panel-handle { background:#789489; }
+.studio-ui.ops-overlay .ops-panel.ops-settings-v21 > .settings-center { position:relative; min-height:100%; padding:0; }
+.studio-ui.ops-overlay .settings-center-content { min-height:100%; }
+.studio-ui.ops-overlay .settings-center-header { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:34px 28px 26px; border-bottom:1px solid #a5c3b032; background:radial-gradient(circle at 90% 0%,#2a68543b,transparent 54%),linear-gradient(145deg,#18332c,#11221f 65%); }
+.studio-ui.ops-overlay .settings-center-kicker { display:block; color:#a4d4bc; font-size:.7rem; font-weight:750; letter-spacing:.14em; line-height:1.5; }
+.studio-ui.ops-overlay .settings-center-kicker span { padding:0 5px; color:#759383; }
+.studio-ui.ops-overlay .settings-center-header h2 { margin:12px 0 0; color:#f4f7f2; font-size:clamp(1.7rem,3vw,2rem); line-height:1.12; letter-spacing:-.045em; }
+.studio-ui.ops-overlay .settings-center-header p { max-width:315px; margin-top:9px; color:#b8c9bf; font-size:.9rem; line-height:1.5; }
+.studio-ui.ops-overlay .settings-center-close { display:grid; flex:none; place-items:center; width:44px; height:44px; padding:0; border:1px solid #a6c8b34a; border-radius:50%; background:#25463878; color:#eef4ee; transition:background-color .2s,border-color .2s,transform .2s; }
+.studio-ui.ops-overlay .settings-center-close:hover { background:#315e49; border-color:#9fd8b6; transform:translateY(-1px); }
+.studio-ui.ops-overlay .settings-center-sections { display:grid; align-content:start; gap:26px; padding:26px 28px 36px; }
+.studio-ui.ops-overlay .settings-center-group { min-width:0; }
+.studio-ui.ops-overlay .settings-center-section-heading { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.studio-ui.ops-overlay .settings-center-marker { display:grid; place-items:center; width:27px; height:24px; flex:none; border:1px solid #88bf9d72; border-radius:6px; background:#2a5a428a; color:#b9e8c7; font-size:.68rem; font-weight:800; letter-spacing:.02em; }
+.studio-ui.ops-overlay .settings-center-section-heading h3 { color:#dcece0; font-size:.88rem; font-weight:750; letter-spacing:.06em; text-transform:uppercase; }
+.studio-ui.ops-overlay .settings-center-card { overflow:hidden; border:1px solid #91b6a33d; border-radius:14px; background:linear-gradient(130deg,#203830eb,#182b27f2 60%,#1b312b); box-shadow:inset 0 1px #e8fff31a,0 10px 26px #06110d42; }
+.studio-ui.ops-overlay .settings-center-mission-card { background:radial-gradient(circle at 100% 0%,#38755754,transparent 55%),linear-gradient(130deg,#234237,#172d27 70%); }
+.studio-ui.ops-overlay .settings-center-card dl { margin:0; }
+.studio-ui.ops-overlay .settings-center-card dl > div { display:flex; align-items:baseline; justify-content:space-between; gap:16px; min-width:0; padding:15px 17px; border-bottom:1px solid #a0c1ad2d; }
+.studio-ui.ops-overlay .settings-center-card dl > div:last-child { border-bottom:0; }
+.studio-ui.ops-overlay .settings-center-card dt { color:#afc2b6; font-size:.83rem; line-height:1.4; }
+.studio-ui.ops-overlay .settings-center-card dd { max-width:62%; margin:0; color:#f2f6f0; font-size:.91rem; font-weight:680; line-height:1.4; overflow-wrap:anywhere; text-align:right; }
+.studio-ui.ops-overlay .settings-center-card dd span { color:#aec2b5; font-size:.78rem; font-weight:500; }
+.studio-ui.ops-overlay .settings-center-edit { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; min-height:48px; padding:11px 17px; border:0; border-top:1px solid #9ec8a342; background:#68a47b20; color:#d0f0d6; font-size:.85rem; font-weight:720; text-align:left; transition:background-color .2s,color .2s; }
+.studio-ui.ops-overlay .settings-center-edit:hover { background:#6eb48633; color:#fff; }
+.studio-ui.ops-overlay .settings-center-danger-card { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:15px; padding:16px 17px; border-color:#b19a9854; background:linear-gradient(125deg,#302b2a,#202826); box-shadow:inset 0 1px #ffe1d20d; }
+.studio-ui.ops-overlay .settings-center-danger-card > div { flex:1 1 210px; }
+.studio-ui.ops-overlay .settings-center-danger-card strong { color:#f4eeea; font-size:.91rem; }
+.studio-ui.ops-overlay .settings-center-danger-card p { margin-top:5px; color:#c4b9b5; font-size:.82rem; line-height:1.5; }
+.studio-ui.ops-overlay .settings-center-reset-trigger { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:10px 13px; border:1px solid #c58b85a3; border-radius:8px; background:#703a3570; color:#ffded8; font-size:.8rem; font-weight:750; transition:background-color .2s,border-color .2s; }
+.studio-ui.ops-overlay .settings-center-reset-trigger:hover { background:#93483f; border-color:#e6a29a; }
+.studio-ui.ops-overlay .settings-reset-overlay { position:absolute; z-index:2; inset:0; display:grid; place-items:center; padding:20px; background:#06110ee8; animation:settings-dialog-in .18s ease-out; }
+.studio-ui.ops-overlay .settings-reset-dialog { width:min(100%,390px); padding:25px; border:1px solid #a8c2b058; border-radius:16px; background:linear-gradient(145deg,#243932,#182622); color:#eff4ee; box-shadow:0 25px 70px #0009,inset 0 1px #efffed1c; }
+.studio-ui.ops-overlay .settings-reset-eyebrow { color:#f2ada5; font-size:.7rem; font-weight:750; letter-spacing:.12em; text-transform:uppercase; }
+.studio-ui.ops-overlay .settings-reset-dialog h3 { margin-top:11px; color:#fff; font-size:1.35rem; line-height:1.25; }
+.studio-ui.ops-overlay .settings-reset-dialog p { margin-top:10px; color:#c4d1c8; font-size:.88rem; line-height:1.55; }
+.studio-ui.ops-overlay .settings-reset-actions { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:9px; margin-top:23px; }
+.studio-ui.ops-overlay .settings-reset-actions button { min-height:44px; padding:10px 14px; border-radius:8px; font-size:.85rem; font-weight:720; }
+.studio-ui.ops-overlay .settings-reset-cancel { border:1px solid #9bb4a466; background:#334a3e; color:#f0f5ef; }
+.studio-ui.ops-overlay .settings-reset-cancel:hover { background:#415c4d; }
+.studio-ui.ops-overlay .settings-reset-confirm { border:1px solid #e49990; background:#b2453d; color:#fff; }
+.studio-ui.ops-overlay .settings-reset-confirm:hover { background:#cc544a; }
+.studio-ui.ops-overlay .ops-settings-v21 button:focus-visible { outline:3px solid #a7e2b9; outline-offset:3px; }
+@keyframes settings-dialog-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+@media (max-width:700px) {
+  .studio-ui.ops-overlay .ops-panel.ops-settings-v21 { width:100%; max-height:94dvh; border-left:0; border-top:1px solid #527b684d; }
+  .studio-ui.ops-overlay .settings-center-header { padding:20px 20px 21px; }
+  .studio-ui.ops-overlay .settings-center-sections { gap:22px; padding:22px 20px 28px; }
+  .studio-ui.ops-overlay .settings-reset-overlay { position:fixed; padding:16px; }
+  .studio-ui.ops-overlay .settings-reset-dialog { padding:22px; }
+}
+@media (max-width:420px) {
+  .studio-ui.ops-overlay .settings-center-header h2 { font-size:1.65rem; }
+  .studio-ui.ops-overlay .settings-center-card dl > div { padding:13px 14px; }
+  .studio-ui.ops-overlay .settings-center-danger-card { padding:14px; }
+  .studio-ui.ops-overlay .settings-center-reset-trigger { width:100%; }
+  .studio-ui.ops-overlay .settings-reset-actions { display:grid; grid-template-columns:1fr; }
+  .studio-ui.ops-overlay .settings-reset-actions button { width:100%; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .studio-ui.ops-overlay .settings-reset-overlay { animation:none; }
+  .studio-ui.ops-overlay .ops-settings-v21 * { transition:none !important; }
+}

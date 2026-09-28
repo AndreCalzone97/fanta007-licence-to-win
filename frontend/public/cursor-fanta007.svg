@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="40" viewBox="0 0 36 40" fill="none">
+  <!-- Transparent, cursor-sized rendering of the approved arrow-and-green-glow asset. -->
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.1"/>
+    </filter>
+  </defs>
+  <path d="M6 4.5 8.3 29l5.4-6.8 5.3 10.1 4.1-2.1-5.2-10.1 8.4-.4L6 4.5Z" stroke="#62e789" stroke-width="4.5" stroke-linejoin="round" filter="url(#glow)" opacity=".78"/>
+  <path d="M6 4.5 8.3 29l5.4-6.8 5.3 10.1 4.1-2.1-5.2-10.1 8.4-.4L6 4.5Z" fill="#0b1713" stroke="#eef9e9" stroke-width="1.65" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,30 @@
+/* Shared operational shell: Home is the reference for Rosa and an open Dossier. */
+.ops-identity-v21 .ops-shell-header { border-bottom:1px solid #426254; background:#142c27; }
+.studio-ui .ops-identity-v21 .ops-shell-header .fanta-brand.compact { position:relative; width:clamp(224px,18vw,260px); height:58px; }
+.studio-ui .ops-identity-v21 .ops-shell-header .fanta-brand.compact::before { content:none; }
+.studio-ui .ops-identity-v21 .ops-shell-header .fanta-brand-clean > svg { display:block; width:100%; height:100%; overflow:visible; }
+.ops-identity-v21 .home-lab-dock.n1-desktop { border:1px solid #65736e; background:#1b2725; box-shadow:0 10px 27px #06110c55; color:#e9eee9; }
+.ops-identity-v21 .home-lab-dock .n1-item { background:#34433f; color:#e9eee9; transition:background-color .18s ease,color .18s ease; }
+.ops-identity-v21 .home-lab-dock a:hover .n1-item { background:#456457; color:#fff; }
+.ops-identity-v21 .home-lab-dock a:active .n1-item,.ops-identity-v21 .home-lab-dock .n1-mobile-link:active { background:#567d61; }
+.ops-identity-v21 .home-lab-dock a:focus-visible { outline:2px solid #b9f2c8; outline-offset:5px; border-radius:14px; }
+.ops-identity-v21 .home-lab-dock .n1-active-surface { position:absolute; inset:0; border:1px solid #9bd9ad; border-radius:inherit; background:#456d54; box-shadow:inset 0 0 0 1px #c5edcf20; }
+.ops-identity-v21 .home-lab-dock .n1-icon { position:relative; z-index:1; }
+.ops-identity-v21 .home-lab-dock .n1-tooltip { top:-2.6rem; z-index:2; border-color:#84998c; background:#273b34; padding:5px 9px; color:#f4f4ec; font-size:.8rem; line-height:1.2; font-weight:700; box-shadow:0 8px 18px #06110c66; pointer-events:none; }
+.ops-identity-v21 .home-lab-dock .n1-mobile-link,.ops-identity-v21 .home-lab-dock .n1-mobile-trigger { position:relative; border:1px solid #65736e; background:#253630; color:#eef2eb; box-shadow:0 6px 18px #07100c50; }
+.ops-identity-v21 .home-lab-dock .n1-mobile-icon { position:relative; z-index:1; }
+.ops-identity-v21 .home-lab-dock .n1-mobile-items { left:auto; right:0; width:196px; }
+.ops-identity-v21 .home-lab-dock .n1-mobile-link { width:100%; min-height:48px; height:auto; justify-content:flex-start; gap:11px; border-radius:10px; padding:8px 12px; text-decoration:none; }
+.ops-identity-v21 .home-lab-dock .n1-mobile-icon { flex:none; width:21px; height:21px; }
+.ops-identity-v21 .home-lab-dock .n1-mobile-label { position:relative; z-index:1; color:#f2f5ed; font-size:.8rem; font-weight:700; white-space:nowrap; }
+.ops-identity-v21 .home-lab-dock .n1-mobile-trigger { width:50px; height:50px; }
+.ops-identity-v21 .home-lab-dock .n1-mobile-link:hover { border-color:#a3d8b1; background:#365945; }
+.ops-identity-v21 .home-lab-dock .n1-toggle-icon { color:#dcebe0; }
+.ops-identity-v21 .home-lab-dock a[aria-current="page"] > .n1-item,.ops-identity-v21 .home-lab-dock .n1-mobile-link[aria-current="page"] { outline:2px solid #a6e9b8; outline-offset:2px; }
+@media (max-width:1200px) { .studio-ui .ops-identity-v21 .ops-shell-header .fanta-brand.compact { width:194px; height:51px; } }
+@media (max-width:700px) { .studio-ui .ops-identity-v21 .ops-shell-header .fanta-brand.compact { width:min(184px,100%); height:47px; } }
+@media (prefers-reduced-motion:reduce) { .ops-identity-v21 .home-lab-dock .n1-item { transition:none; } }
+.agent-ambient-media { position:relative; display:block; flex:none; overflow:hidden; border:1px solid #587865; border-radius:12px; background:#10251c; }
+.agent-ambient-media :is(img,video) { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 37%; }
+.agent-ambient-media video { z-index:1; }
+.agent-ambient-media::after { content:""; position:absolute; z-index:2; inset:0; pointer-events:none; background:linear-gradient(0deg,#0c211ba6,transparent 55%); }

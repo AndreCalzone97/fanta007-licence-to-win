@@ -182,12 +182,12 @@
 
 /* Major composition pass: warm editorial canvas, a petrol club rail, gold actions.
    Motion is bounded; no transform on ancestors of fixed dialogs. */
-.studio-ui { --background:#f5f4ef; --surface-soft:#eeeee7; --border:#dadfd8; --text-primary:#172f32; --text-secondary:#506364; --text-muted:#627172; --accent:#dbb85e; --motion-ease:cubic-bezier(.22,1,.36,1); background:var(--background); font-family:Inter,sans-serif; }
+.studio-ui { --background:#f5f4ef; --surface-soft:#eeeee7; --border:#dadfd8; --text-primary:#172f32; --text-secondary:#506364; --text-muted:#627172; --accent:#dbb85e; --motion-ease:cubic-bezier(.22,1,.36,1); background:var(--background); font-family:'Sora Variable',sans-serif; }
 .studio-ui ::selection { background:#edcc7d; color:#172f32; }
 .studio-ui :is(input,select) { caret-color:#326762; }
 .studio-ui :is(button,a,input,select,summary,[tabindex]):focus-visible { outline:3px solid #387b77; outline-offset:4px; }
 .studio-ui :is(button,a) { touch-action:manipulation; }
-.studio-ui :is(h1,h2,h3) { font-family:Manrope,Inter,sans-serif; letter-spacing:-.035em; text-wrap:balance; }
+.studio-ui :is(h1,h2,h3) { font-family:'Sora Variable',sans-serif; letter-spacing:-.035em; text-wrap:balance; }
 .studio-ui :is(dd,.compact-player-metrics,.preview-metrics,.listone-matrix) { font-variant-numeric:tabular-nums; }
 .studio-ui :is(.primary-action,.secondary-action,.role-chips button,.choice-grid button) { transition:background-color .2s,border-color .2s,box-shadow .2s,transform .2s var(--motion-ease); }
 .studio-ui :is(.primary-action,.secondary-action):active:not(:disabled) { transform:scale(.98); }

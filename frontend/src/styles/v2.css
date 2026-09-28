@@ -39,7 +39,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .mission-kpis > div { padding: 17px 16px 17px 0; }
 .mission-kpis > div + div { padding-left: 16px; border-left: 1px solid var(--border); }
 .mission-kpis span, .mission-kpis small { display: block; color: var(--text-muted); font-size: .64rem; }
-.mission-kpis strong { display: block; margin: 2px 0; font: 800 1.8rem Manrope, sans-serif; }
+.mission-kpis strong { display: block; margin: 2px 0; font: 800 1.8rem 'Sora Variable', sans-serif; }
 .mission-glance { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-top: 15px; }
 .mission-glance div { min-width: 0; }
 .mission-glance span, .mission-glance strong { display: block; }
@@ -47,7 +47,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .mission-glance strong { margin-top: 3px; color: var(--text-primary); font-size: .82rem; }
 .mission-actions { display: flex; gap: 10px; margin-top: 24px; }
 .agent-command { position: relative; min-width: 0; min-height: 510px; background: radial-gradient(circle at 50% 20%, rgba(197, 157, 71, .2), transparent 18rem), linear-gradient(160deg, #2a3e50, #102131 72%); overflow: hidden; isolation: isolate; }
-.agent-command::before { content: ""; position: absolute; top: 44px; left: 50%; width: min(270px, 68%); height: 155px; transform: translateX(-50%); opacity: .055; background: url("../assets/agent/agent-brand-360.webp") center / contain no-repeat; }
+.agent-command::before { content: ""; position: absolute; top: 44px; left: 50%; width: min(270px, 68%); height: 155px; transform: translateX(-50%); opacity: .075; background: url("../assets/landing/fanta007-logo-v2.webp") center / contain no-repeat; }
 .command-agent { position: absolute; z-index: 2; left: 50%; bottom: 135px; width: min(350px, 84%); height: 345px; transform: translateX(-50%); animation: agent-crossfade var(--motion-cinematic) var(--ease-emphasis) both; pointer-events: none; }
 @keyframes positioned-agent-enter { from { opacity: .2; } to { opacity: 1; } }
 .agent-command .command-agent { animation: positioned-agent-enter var(--motion-cinematic) var(--ease-emphasis) both; }
@@ -71,11 +71,11 @@ button { -webkit-tap-highlight-color: transparent; }
 .department-rail i { color: var(--accent-strong); font-style: normal; }
 
 /* Shared crests */
-.team-crest { display: inline-grid; place-items: center; flex: 0 0 auto; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: #fff; box-shadow: 0 5px 15px rgba(14, 27, 42, .08); }
-.team-crest-sm { width: 34px; height: 34px; padding: 5px; border-radius: 10px; }
-.team-crest-md { width: 50px; height: 50px; padding: 7px; }
-.team-crest-lg { width: 96px; height: 96px; padding: 12px; border-radius: 22px; }
-.team-crest img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.team-crest { display: inline-grid; place-items: center; flex: 0 0 auto; overflow: hidden; border: 0; border-radius: 10px; background: transparent; box-shadow: none; }
+.team-crest-sm { width: 34px; height: 34px; padding: 2px; }
+.team-crest-md { width: 50px; height: 50px; padding: 3px; }
+.team-crest-lg { width: 96px; height: 96px; padding: 7px; }
+.team-crest img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .team-crest b { color: var(--accent-strong); font-size: .65rem; }
 
 /* Rosa master/detail */
@@ -112,7 +112,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .roster-detail dl { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 0; }
 .roster-detail dl div { padding: 13px; border: 1px solid var(--border); border-radius: 13px; background: #fff; }
 .roster-detail dt { color: var(--text-muted); font-size: .6rem; }
-.roster-detail dd { margin: 3px 0 0; font: 800 1.3rem Manrope; }
+.roster-detail dd { margin: 3px 0 0; font: 800 1.3rem 'Sora Variable', sans-serif; }
 .detail-actions { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
 .recent-signings { padding-top: 4px; }
 .recent-signings .section-heading { display: flex; align-items: flex-end; justify-content: space-between; }

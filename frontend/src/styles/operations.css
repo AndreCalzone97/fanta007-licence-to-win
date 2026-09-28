@@ -28,11 +28,11 @@
 .ops-app ::selection, .ops-overlay ::selection { background:#ecd396; color:#173730; }
 .ops-app input, .ops-panel input { caret-color:#397862; }
 .ops-app input::placeholder { color:#65736b; }
-.ops-app .team-crest, .ops-panel .team-crest { background:#fff; border:0; box-shadow:none; border-radius:8px; flex-shrink:0; }
+.ops-app .team-crest, .ops-panel .team-crest { background:transparent; border:0; box-shadow:none; border-radius:8px; flex-shrink:0; }
 .ops-content { width:100%; max-width:1416px; margin:auto; padding:36px 40px 64px; }
 .ops-shell-header { position:sticky; top:0; z-index:60; display:grid; grid-template-columns:minmax(160px,1fr) auto minmax(160px,1fr); align-items:center; gap:20px; min-height:80px; padding:12px 32px; background:#122f2e; color:#f6f8f4; }
-.ops-shell-header .fanta-brand { gap:10px; }
-.ops-shell-header .fanta-brand img { width:58px; height:42px; object-fit:contain; filter:none; }
+.studio-ui .ops-shell-header .fanta-brand.compact { width:clamp(142px, 12vw, 176px); height:46px; gap:0; }
+.studio-ui .ops-shell-header .fanta-brand.compact > img { width:100%; height:100%; object-fit:contain; object-position:left center; filter:brightness(1.16) drop-shadow(0 5px 12px rgba(0,0,0,.28)); }
 .ops-shell-header .fanta-brand > div { color:#fff; font-size:1.0625rem; }
 .ops-shell-header .fanta-brand small { color:#c3d1ca; font-size:.75rem; }
 .ops-session { display:grid; justify-items:end; gap:2px; min-width:0; }
@@ -166,15 +166,13 @@
 .ops-results-bar p { font-weight:650; }
 .ops-results-bar > span { color:var(--text-muted); font-size:.75rem; }
 .ops-market-list { background:#fff; border-radius:12px; scroll-margin-top:96px; }
-.ops-list-columns { display:grid; grid-template-columns:44px minmax(0,1fr) 44px; gap:4px; padding:13px 14px; background:#e6ece6; border-radius:12px 12px 0 0; font-size:.6875rem; color:#536959; }
+.ops-list-columns { display:grid; grid-template-columns:44px minmax(0,1fr); gap:4px; padding:13px 14px; background:#e6ece6; border-radius:12px 12px 0 0; font-size:.6875rem; color:#536959; }
 .ops-list-columns > span:nth-child(2), .ops-player-select { display:grid; grid-template-columns:minmax(220px,1fr) 100px 55px 84px 77px 66px 72px; gap:14px; align-items:center; }
 .ops-list-columns b { font-weight:600; text-align:right; white-space:nowrap; }
 .ops-list-columns b:first-child { text-align:left; }
-.ops-list-columns > svg { width:16px; height:16px; justify-self:center; }
-.ops-player-row { display:grid; grid-template-columns:44px minmax(0,1fr) 44px; gap:4px; align-items:center; padding:3px 14px; border-bottom:1px solid #e7ece8; transition:background-color 160ms ease-out; }
+.ops-player-row { display:grid; grid-template-columns:44px minmax(0,1fr); gap:4px; align-items:center; padding:3px 14px; border-bottom:1px solid #e7ece8; transition:background-color 160ms ease-out; }
 .ops-player-row:last-child { border:0; border-radius:0 0 12px 12px; }
 .ops-player-row:hover,.ops-player-row:focus-within { background:#eef4e9; }
-.ops-player-row.compared { background:#e7efe4; }
 .ops-player-select { width:100%; min-height:72px !important; border:0; background:transparent; color:var(--text-primary); text-align:left; padding:8px 0; }
 .ops-player-identity { display:flex; align-items:center; gap:12px; min-width:0; }
 .ops-player-identity .team-crest { width:34px; height:38px; }
@@ -189,12 +187,11 @@
 .ops-player-number > small { display:none; }
 .ops-league-value b { color:#315c44; }
 .ops-player-status { font-size:.6875rem; color:#52705e; white-space:nowrap; text-align:right; }
-.ops-row-favorite,.ops-row-compare { display:flex; justify-content:center; align-items:center; width:40px; height:44px; padding:0; background:none; border:0; color:#5b7266; border-radius:6px; }
-.ops-row-favorite svg,.ops-row-compare svg { width:17px; height:17px; }
+.ops-row-favorite { display:flex; justify-content:center; align-items:center; width:40px; height:44px; padding:0; background:none; border:0; color:#5b7266; border-radius:6px; }
+.ops-row-favorite svg { width:17px; height:17px; }
 .ops-row-favorite[aria-pressed=true] { color:#896319; }
 .ops-row-favorite[aria-pressed=true] svg { fill:#ead698; }
-.ops-row-compare[aria-pressed=true] { color:#24472d; background:#cfdfc8; }
-.ops-row-favorite:hover,.ops-row-compare:hover { background:#dce9d5; }
+.ops-row-favorite:hover { background:#dce9d5; }
 .ops-pagination { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 0; font-size:.8125rem; }
 .ops-pagination > div { display:flex; align-items:center; gap:18px; }
 .ops-pagination .secondary-action { background:transparent; }
@@ -258,7 +255,7 @@
 .ops-roster-list .ops-roster-role :is(p,small) { margin:0; }
 .ops-roster-inspector { position:sticky; top:104px; }
 .ops-roster-detail { padding:25px; border-radius:12px; background:#fff; }
-.ops-detail-heading .team-crest { width:72px; height:72px; margin-bottom:20px; background:#f3f7f0; padding:8px; }
+.ops-detail-heading .team-crest { width:72px; height:72px; margin-bottom:20px; padding:8px; }
 .ops-detail-heading > span { display:block; color:var(--text-muted); font-size:.8125rem; }
 .ops-detail-heading h2 { font-size:1.5rem; line-height:1.25; margin:6px 0 15px; }
 .ops-roster-detail dl { margin:20px 0; display:grid; grid-template-columns:1fr 1fr; gap:18px 14px; padding-block:18px; border-block:1px solid var(--border); }
@@ -441,7 +438,7 @@
   .ops-content { padding:28px 24px 56px; }
   .ops-shell-header { padding:12px 24px; gap:14px; grid-template-columns:minmax(140px,1fr) auto minmax(100px,1fr); }
   .ops-dock button { padding-inline:10px; gap:6px; }
-  .ops-shell-header .fanta-brand img { width:46px; }
+  .studio-ui .ops-shell-header .fanta-brand.compact { width:138px; height:42px; }
   .ops-market-tools { grid-template-columns:1fr; }
   .ops-role-selector { justify-content:space-between; }
   .ops-extra-filters { border-top:1px solid var(--border); }
@@ -493,7 +490,7 @@
 }
 @media (max-width:700px) {
   .ops-shell-header { min-height:64px; padding:10px 16px; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px; }
-  .ops-shell-header .fanta-brand img { width:42px; height:35px; }
+  .studio-ui .ops-shell-header .fanta-brand.compact { width:132px; height:40px; }
   .ops-shell-header .fanta-brand { gap:7px; }
   .ops-shell-header .fanta-brand > div { font-size:.9375rem; }
   .ops-shell-header .fanta-brand small { font-size:.6875rem; }
@@ -576,9 +573,7 @@
   .ops-player-number > small { display:block; font-size:.6875rem; color:var(--text-muted); margin-bottom:2px; }
   .ops-player-number:nth-of-type(6) { display:none; }
   .ops-player-status { display:none; }
-  .ops-row-favorite,.ops-row-compare { position:absolute; width:44px; min-height:44px !important; height:44px; bottom:5px; padding:0; }
-  .ops-row-favorite { right:48px; }
-  .ops-row-compare { right:4px; }
+  .ops-row-favorite { position:absolute; width:44px; min-height:44px !important; height:44px; right:4px; bottom:5px; padding:0; }
   .ops-player-number:nth-of-type(5) { margin-right:18px; }
   .ops-pagination { align-items:start; flex-direction:column; padding:18px 0 8px; gap:10px; }
   .ops-pagination > div { width:100%; justify-content:space-between; gap:6px; }

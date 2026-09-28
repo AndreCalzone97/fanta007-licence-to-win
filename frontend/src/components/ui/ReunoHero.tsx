@@ -1,311 +1,215 @@
-"use client";
- 
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useRef } from "react";
+import {
+  Activity,
+  ArrowRight,
+  ChevronDown,
+  Radar,
+  ShieldCheck,
+  Target,
+} from "lucide-react";
+import logoUrl from "../../assets/landing/fanta007-logo-v2.webp";
+import agentUrl from "../../assets/landing/fantagente-hero-v2.webp";
 import "./reuno-hero.css";
- 
-const colors = {
-  50: "#f8f7f5",
-  100: "#e6e1d7",
-  200: "#c8b4a0",
-  300: "#a89080",
-  400: "#8a7060",
-  500: "#6b5545",
-  600: "#544237",
-  700: "#3c4237",
-  800: "#2a2e26",
-  900: "#1a1d18",
+
+type ReunoHeroProps = {
+  onStart: () => void;
+  resume?: boolean;
 };
- 
-export function ReunoHero({ onStart, resume = false }: { onStart: () => void; resume?: boolean }) {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const gridId = useId();
-  const gradientRef = useRef<HTMLDivElement>(null);
- 
+
+const hudSignals = [
+  { icon: Activity, label: "Stagione", value: "Segnali ogni giornata" },
+  { icon: Radar, label: "Rosa", value: "Budget sotto controllo" },
+  { icon: ShieldCheck, label: "Decisioni", value: "Regole spiegate" },
+];
+
+function clamp(value: number) {
+  return Math.min(1, Math.max(0, value));
+}
+
+export function ReunoHero({ onStart }: ReunoHeroProps) {
+  const heroRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const gradient = gradientRef.current;
-    const timers = new Set<ReturnType<typeof setTimeout>>();
-    const ripples = new Set<HTMLDivElement>();
-    const later = (fn: () => void, delay: number) => {
-      const timer = setTimeout(() => { timers.delete(timer); fn(); }, delay);
-      timers.add(timer);
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    const renderProgress = () => {
+      frame = 0;
+
+      if (reduceMotion.matches) {
+        hero.dataset.phase = "reduced";
+        hero.style.setProperty("--intro", "1");
+        hero.style.setProperty("--scene", "1");
+        hero.style.setProperty("--detail", "1");
+        hero.style.setProperty("--outro", "0");
+        hero.style.setProperty("--drift", "0");
+        return;
+      }
+
+      const rect = hero.getBoundingClientRect();
+      const distance = Math.max(1, hero.offsetHeight - window.innerHeight);
+      const progress = clamp(-rect.top / distance);
+      const intro = 1 - clamp((progress - 0.08) / 0.2);
+      const scene = clamp((progress - 0.14) / 0.34);
+      const detail = clamp((progress - 0.42) / 0.26);
+      const outro = clamp((progress - 0.84) / 0.16);
+      const drift = clamp((progress - 0.32) / 0.48);
+
+      hero.dataset.phase = progress < 0.34 ? "intro" : "scene";
+
+      hero.style.setProperty("--intro", intro.toFixed(4));
+      hero.style.setProperty("--scene", scene.toFixed(4));
+      hero.style.setProperty("--detail", detail.toFixed(4));
+      hero.style.setProperty("--outro", outro.toFixed(4));
+      hero.style.setProperty("--drift", drift.toFixed(4));
     };
-    function onMouseMove(e: MouseEvent) {
-      if (!gradient || reduced.matches) return;
-      gradient.style.left = e.clientX - 192 + "px";
-      gradient.style.top = e.clientY - 192 + "px";
-      gradient.style.opacity = "1";
-    }
-    function onMouseLeave() { if (gradient) gradient.style.opacity = "0"; }
-    function onClick(e: MouseEvent) {
-      if (reduced.matches) return;
-      const ripple = document.createElement("div");
-      ripple.className = "reuno-ripple";
-      ripple.style.left = e.clientX + "px";
-      ripple.style.top = e.clientY + "px";
-      root!.appendChild(ripple);
-      ripples.add(ripple);
-      later(() => { ripple.remove(); ripples.delete(ripple); }, 1000);
-    }
-    let scrolled = false;
-    function onScroll() {
-      if (scrolled || reduced.matches) return;
-      scrolled = true;
-      root!.querySelectorAll<HTMLElement>(".reuno-floating").forEach((el, index) => {
-        later(() => { el.style.animationPlayState = "running"; }, index * 200);
-      });
-    }
-    root.addEventListener("mousemove", onMouseMove);
-    root.addEventListener("mouseleave", onMouseLeave);
-    root.addEventListener("click", onClick);
-    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const requestRender = () => {
+      if (!frame) frame = window.requestAnimationFrame(renderProgress);
+    };
+
+    requestRender();
+    window.addEventListener("scroll", requestRender, { passive: true });
+    window.addEventListener("resize", requestRender);
+    reduceMotion.addEventListener("change", requestRender);
+
     return () => {
-      root.removeEventListener("mousemove", onMouseMove);
-      root.removeEventListener("mouseleave", onMouseLeave);
-      root.removeEventListener("click", onClick);
-      window.removeEventListener("scroll", onScroll);
-      timers.forEach(clearTimeout);
-      ripples.forEach(ripple => ripple.remove());
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestRender);
+      window.removeEventListener("resize", requestRender);
+      reduceMotion.removeEventListener("change", requestRender);
     };
   }, []);
 
+  function revealMission() {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById("come-funziona")?.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start",
+    });
+  }
+
   return (
-    <div
-      ref={rootRef}
-      className="reuno-hero" aria-labelledby="welcome-title"
-    >
-      <svg aria-hidden="true" className="reuno-grid" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id={gridId} width="60" height="60" patternUnits="userSpaceOnUse">
-            <path
-              d="M 60 0 L 0 0 0 60"
-              fill="none"
-              stroke="rgba(200,180,160,0.08)"
-              strokeWidth="0.5"
-            />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill={`url(#${gridId})`} />
-        <line x1="0" y1="20%" x2="100%" y2="20%" className="reuno-grid-line" style={{ animationDelay: "0.5s" }} />
-        <line x1="0" y1="80%" x2="100%" y2="80%" className="reuno-grid-line" style={{ animationDelay: "1s" }} />
-        <line x1="20%" y1="0" x2="20%" y2="100%" className="reuno-grid-line" style={{ animationDelay: "1.5s" }} />
-        <line x1="80%" y1="0" x2="80%" y2="100%" className="reuno-grid-line" style={{ animationDelay: "2s" }} />
-        <line
-          x1="50%"
-          y1="0"
-          x2="50%"
-          y2="100%"
-          className="reuno-grid-line"
-          style={{ animationDelay: "2.5s", opacity: 0.05 }}
-        />
-        <line
-          x1="0"
-          y1="50%"
-          x2="100%"
-          y2="50%"
-          className="reuno-grid-line"
-          style={{ animationDelay: "3s", opacity: 0.05 }}
-        />
-        <circle cx="20%" cy="20%" r="2" className="reuno-detail-dot" style={{ animationDelay: "3s" }} />
-        <circle cx="80%" cy="20%" r="2" className="reuno-detail-dot" style={{ animationDelay: "3.2s" }} />
-        <circle cx="20%" cy="80%" r="2" className="reuno-detail-dot" style={{ animationDelay: "3.4s" }} />
-        <circle cx="80%" cy="80%" r="2" className="reuno-detail-dot" style={{ animationDelay: "3.6s" }} />
-        <circle cx="50%" cy="50%" r="1.5" className="reuno-detail-dot" style={{ animationDelay: "4s" }} />
-      </svg>
- 
-      {/* Corner elements */}
-      <div className="reuno-corner reuno-top reuno-left" style={{ animationDelay: "4s" }}>
-        <div
-          className="reuno-square reuno-square-tl"
-          style={{ background: colors[200] }}
-        ></div>
-      </div>
-      <div className="reuno-corner reuno-top reuno-right" style={{ animationDelay: "4.2s" }}>
-        <div
-          className="reuno-square reuno-square-tr"
-          style={{ background: colors[200] }}
-        ></div>
-      </div>
-      <div className="reuno-corner reuno-bottom reuno-left" style={{ animationDelay: "4.4s" }}>
-        <div
-          className="reuno-square reuno-square-bl"
-          style={{ background: colors[200] }}
-        ></div>
-      </div>
-      <div className="reuno-corner reuno-bottom reuno-right" style={{ animationDelay: "4.6s" }}>
-        <div
-          className="reuno-square reuno-square-br"
-          style={{ background: colors[200] }}
-        ></div>
-      </div>
- 
-      {/* Floating elements */}
-      <div className="reuno-floating" style={{ top: "25%", left: "15%", animationDelay: "5s" }}></div>
-      <div className="reuno-floating" style={{ top: "60%", left: "85%", animationDelay: "5.5s" }}></div>
-      <div className="reuno-floating" style={{ top: "40%", left: "10%", animationDelay: "6s" }}></div>
-      <div className="reuno-floating" style={{ top: "75%", left: "90%", animationDelay: "6.5s" }}></div>
- 
-      <div className="reuno-content">
-        {/* Top tagline */}
-        <div className="reuno-center">
-          <h2
-            className="reuno-tagline"
-            style={{ color: colors[200] }}
-          >
-            <span className="reuno-word" style={{ animationDelay: "0ms" }}>
-              Benvenuto</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "200ms" }}>
-              in</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "400ms" }}>
-              <b>FANTA007</b>
-            </span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "600ms" }}>
-              — 
-            </span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "800ms" }}>
-              Strategia,</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "1000ms" }}>
-              dati,</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "1200ms" }}>
-              scelte</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "1400ms" }}>
-              consapevoli.</span>
-          </h2>
-          <div
-            className="reuno-divider reuno-mt"
-            style={{
-              background: `linear-gradient(to right, transparent, ${colors[200]}, transparent)`,
-            }}
-          ></div>
-        </div>
- 
-        {/* Main headline */}
-        <div className="reuno-headline-wrap">
-          <h1 id="welcome-title" tabIndex={-1}
-            className="reuno-headline"
-            style={{ color: colors[50] }}
-          >
-            <div className="reuno-headline-main">
-              <span className="reuno-word" style={{ animationDelay: "1600ms" }}>
-                Il</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "1750ms" }}>
-                mercato</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "1900ms" }}>
-                è</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "2050ms" }}>
-                tuo.</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "2200ms" }}>
-                Giocalo</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "2350ms" }}>
-                bene.</span>
-            </div>
-            <div
-              className="reuno-headline-sub"
-              style={{ color: colors[200] }}
-            >
-              <span className="reuno-word" style={{ animationDelay: "2600ms" }}>
-                Dal</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "2750ms" }}>
-                primo</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "2900ms" }}>
-                acquisto</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "3050ms" }}>
-                alla</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "3200ms" }}>
-                rosa</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "3350ms" }}>
-                completa.</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "3500ms" }}>
-                Intuito,</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "3650ms" }}>
-                quotazioni</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "3800ms" }}>
-                e</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "3950ms" }}>
-                budget,</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "4100ms" }}>
-                insieme.</span>
-            </div>
-          </h1>
-          <div
-            className="reuno-side reuno-side-left"
-            style={{
-              background: colors[200],
-              animation: "reuno-word-appear 1s ease-out forwards",
-              animationDelay: "3.5s",
-            }}
-          ></div>
-          <div
-            className="reuno-side reuno-side-right"
-            style={{
-              background: colors[200],
-              animation: "reuno-word-appear 1s ease-out forwards",
-              animationDelay: "3.7s",
-            }}
-          ></div>
-        </div>
- 
-        {/* Bottom tagline */}
-        <div className="reuno-center">
-          <div
-            className="reuno-divider reuno-mb"
-            style={{
-              background: `linear-gradient(to right, transparent, ${colors[200]}, transparent)`,
-            }}
-          ></div>
-          <h2
-            className="reuno-tagline"
-            style={{ color: colors[200] }}
-          >
-            <span className="reuno-word" style={{ animationDelay: "4400ms" }}>
-              Nessun</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "4550ms" }}>
-              account.</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "4700ms" }}>
-              La</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "4850ms" }}>
-              rosa</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "5000ms" }}>
-              resta</span>{" "}
-            <span className="reuno-word" style={{ animationDelay: "5150ms" }}>
-              qui.</span>
-          </h2>
-          <button type="button" className="reuno-action" onClick={onStart}>
-            {resume ? "Torna alla tua squadra" : "Costruisci la tua rosa"} <span aria-hidden="true">↗</span>
-          </button>
-          <div
-            className="reuno-dots"
-            style={{
-              animation: "reuno-word-appear 1s ease-out forwards",
-              animationDelay: "4.5s",
-            }}
-          >
-            <div
-              className="reuno-dot"
-              style={{ background: colors[200] }}
-            ></div>
-            <div
-              className="reuno-dot reuno-dot-bright"
-              style={{ background: colors[200] }}
-            ></div>
-            <div
-              className="reuno-dot"
-              style={{ background: colors[200] }}
-            ></div>
+    <section ref={heroRef} className="reuno-hero" data-phase="intro" aria-labelledby="welcome-title">
+      <div className="reuno-hero__sticky">
+        <div className="reuno-canvas">
+          <div className="reuno-atmosphere" aria-hidden="true">
+            <span className="reuno-atmosphere__beam" />
+            <span className="reuno-atmosphere__orbit reuno-atmosphere__orbit--one" />
+            <span className="reuno-atmosphere__orbit reuno-atmosphere__orbit--two" />
           </div>
+
+          <header className="reuno-masthead">
+            <img
+              className="reuno-logo"
+              src={logoUrl}
+              width="984"
+              height="328"
+              alt="FANTA007 — Licence to Win"
+              fetchPriority="high"
+              decoding="async"
+            />
+            <p className="reuno-live-status" aria-label="Stato del companion FANTA007">
+              <i aria-hidden="true" />
+              <span className="reuno-status-copy reuno-status-copy--intro" aria-hidden="true">Il tuo companion stagionale</span>
+              <span className="reuno-status-copy reuno-status-copy--scene" aria-hidden="true">Missione attiva</span>
+            </p>
+          </header>
+
+          <div className="reuno-intro">
+            <h1 id="welcome-title" tabIndex={-1}>
+              <span>Dall’asta all’ultima giornata.</span>
+              <strong>La missione continua.</strong>
+            </h1>
+            <p className="reuno-lede">
+              FANTA007 evolve con la tua squadra: dati, rosa e segnali utili per preparare
+              l’asta, seguire i giocatori e affrontare ogni giornata con più contesto.
+            </p>
+
+            <div className="reuno-actions">
+              <button type="button" className="reuno-action reuno-action--primary" onClick={onStart}>
+                Entra in FANTA007
+                <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+              </button>
+              <button type="button" className="reuno-action reuno-action--secondary" onClick={revealMission}>
+                <ChevronDown aria-hidden="true" size={17} strokeWidth={1.8} />
+                Scopri la missione
+              </button>
+            </div>
+
+          </div>
+
+          <div className="reuno-scene">
+            <div className="reuno-scene-copy">
+              <h2>Il mercato finisce. La lettura continua.</h2>
+              <p>
+                Rosa, dossier, budget e segnali di giornata <span className="reuno-copy-keep">restano nello stesso quadro</span>,
+                dall’asta fino all’ultima scelta.
+              </p>
+            </div>
+
+            <div className="reuno-scene-word" aria-hidden="true">COMPANION</div>
+
+            <div className="reuno-data-plane" aria-hidden="true">
+              <span className="reuno-data-plane__line reuno-data-plane__line--one" />
+              <span className="reuno-data-plane__line reuno-data-plane__line--two" />
+              <span className="reuno-data-plane__node reuno-data-plane__node--one" />
+              <span className="reuno-data-plane__node reuno-data-plane__node--two" />
+            </div>
+
+            <div className="reuno-mission-core" aria-hidden="true">
+              <span>Companion online</span>
+              <strong>Asta <i /> Rosa <i /> Giornata</strong>
+            </div>
+
+            <div className="reuno-agent-frame">
+              <img
+                className="reuno-agent"
+                src={agentUrl}
+                width="1024"
+                height="1536"
+                alt="Fantagente FANTA007 con tablet e interfaccia dati"
+                fetchPriority="auto"
+                decoding="async"
+              />
+              <div className="reuno-agent-scan" aria-hidden="true" />
+            </div>
+
+            <div className="reuno-target" aria-hidden="true">
+              <Target size={28} strokeWidth={1.1} />
+            </div>
+
+            <div className="reuno-hud" aria-hidden="true">
+              {hudSignals.map(({ icon: Icon, label, value }, index) => (
+                <article className={`reuno-hud-card reuno-hud-card--${index + 1}`} key={label}>
+                  <Icon size={18} strokeWidth={1.5} />
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <aside className="reuno-dashboard-teaser" aria-label="Copertura del companion FANTA007">
+            <div className="reuno-dashboard-teaser__heading">
+              <span>Mission control</span>
+              <b>Una visione, tutta la stagione</b>
+            </div>
+            <div className="reuno-dashboard-teaser__signals">
+              <div><span>Mercato</span><b>Budget · slot · valore</b></div>
+              <div><span>Giocatori</span><b>Dossier · trend · affidabilità</b></div>
+              <div><span>Giornata</span><b>Segnali · scelte · contesto</b></div>
+            </div>
+          </aside>
+
+          <button type="button" className="reuno-scroll-cue" onClick={revealMission} aria-label="Scopri la missione">
+            <ChevronDown aria-hidden="true" size={20} strokeWidth={1.5} />
+          </button>
         </div>
       </div>
- 
-      <div
-        aria-hidden="true"
-        ref={gradientRef}
-        className="reuno-mouse-gradient"
-        style={{
-          background: `radial-gradient(circle, ${colors[500]}0D 0%, transparent 100%)`,
-        }}
-      ></div>
-    </div>
+    </section>
   );
 }

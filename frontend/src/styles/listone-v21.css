@@ -1,0 +1,165 @@
+/* The Listone keeps its operational density while using the approved Home identity. */
+.listone-v21-shell { min-height:100dvh; background:#101a19; color:#eff5ed; }
+body:has(.listone-v21-shell) { background:#101a19; }
+.listone-v21-shell .ops-content { position:relative; z-index:1; min-width:0; max-width:1420px; }
+.listone-v21-shell .ops-market { min-width:0; }
+.listone-v21-shell .ops-page-heading { align-items:end; margin-bottom:22px; }
+.listone-v21-shell .ops-page-heading h1 { color:#f2f7f0; font-size:clamp(2rem,3vw,2.7rem); }
+.listone-v21-shell .ops-page-heading p,.listone-v21-shell .ops-market-context { color:#bfd0c3; font-size:.88rem; }
+.listone-v21-shell .ops-market-context b { color:#e8f4e9; }
+.listone-v21-shell .ops-market-tools { gap:2px 22px; padding:12px 18px 4px; border:1px solid #4b6856; background:#1b2d25; box-shadow:0 16px 40px #07120d40; }
+.listone-v21-shell .ops-search-line { min-height:56px; border-color:#526b59; }
+.listone-v21-shell .ops-search svg { color:#a8e3b8; }
+.listone-v21-shell .ops-search input { color:#f1f7ef; font-size:1rem; }
+.listone-v21-shell .ops-search input::placeholder { color:#b5c7b9; opacity:1; }
+.listone-v21-shell .ops-search:focus-within { outline:2px solid #a6e3b7; outline-offset:4px; border-radius:4px; }
+.listone-v21-shell .ops-search kbd { border-color:#698174; color:#c4d9ca; }
+.listone-v21-shell .ops-clear-search { color:#d2e4d5; }
+.listone-v21-shell .ops-role-selector { gap:6px; padding:9px 0 7px; }
+.listone-v21-shell .ops-role-selector button { min-height:44px; padding:8px 11px; border:1px solid transparent; border-radius:8px; color:#c3d4c7; font-size:.82rem; font-weight:600; transition:background-color .18s ease,border-color .18s ease,color .18s ease; }
+.listone-v21-shell .ops-role-selector button:hover { background:#2a4936; color:#f5fbf2; }
+.listone-v21-shell .ops-role-selector button[aria-pressed=true] { border-color:#a2dcb0; background:#365f45; color:#f4fff2; }
+.listone-v21-shell .ops-role-selector button[aria-pressed=true]::after { content:none; }
+.listone-v21-shell .ops-extra-filters { padding:9px 0 12px; }
+.listone-v21-shell .ops-extra-filters > :is(div,label) { color:#c8d8cb; font-size:.8rem; }
+.listone-v21-shell .ops-extra-filters select,.listone-v21-shell .ops-extra-filters .club-team-trigger { min-height:44px; border:1px solid #617e69; background:#243c2d; color:#eff8ed; font-size:.81rem; }
+.listone-v21-shell .ops-extra-filters select option { background:#243c2d; color:#eff8ed; }
+.listone-v21-shell .ops-extra-filters .text-action { color:#b7edc3; }
+body:has(.listone-v21-shell) .club-team-menu { border-color:#698574; background:#21382b; color:#f0f8ec; }
+body:has(.listone-v21-shell) .club-team-option[data-highlighted] { background:#345c42; }
+.listone-v21-shell .ops-results-bar { color:#e7f2e6; }
+.listone-v21-shell .ops-results-bar > span,.listone-v21-shell .ops-caption { color:#b6cbbd; }
+.listone-v21-shell .ops-market-list { overflow:hidden; border:1px solid #4e6858; background:#1a2b23; box-shadow:0 18px 40px #07120d38; }
+.listone-v21-shell .ops-list-columns { border-bottom:1px solid #607a67; background:#294235; color:#d2e6d6; font-size:.73rem; }
+.listone-v21-shell .ops-player-row { border-bottom-color:#3f594b; }
+.listone-v21-shell .ops-player-row:hover,.listone-v21-shell .ops-player-row:focus-within { background:#294737; }
+.listone-v21-shell .ops-player-row.owned { background:#213b2b; }
+.listone-v21-shell .ops-player-select { color:#ebf4ea; }
+.listone-v21-shell .ops-player-identity strong { color:#f5fbf2; }
+.listone-v21-shell .ops-player-identity small,.listone-v21-shell .ops-player-number > small,.listone-v21-shell .ops-player-rating small { color:#bacfc0; }
+.listone-v21-shell .ops-player-identity small .ops-owned-mobile { color:#a5e7b8; }
+.listone-v21-shell .ops-player-rating svg { color:#c7e3aa; }
+.listone-v21-shell .ops-league-value b,.listone-v21-shell .ops-player-number .positive { color:#a5e6b6; }
+.listone-v21-shell .ops-player-number .negative { color:#ffc1b7; }
+.listone-v21-shell .ops-player-status { color:#b9ddc2; font-size:.73rem; }
+.listone-v21-shell .ops-player-row.owned .ops-player-status { color:#b2eaba; font-weight:700; }
+.listone-v21-shell .ops-row-favorite { color:#c2d9ca; }
+.listone-v21-shell .ops-row-favorite:hover { background:#3a6049; }
+.listone-v21-shell .ops-row-favorite[aria-pressed=true] { color:#f4d997; }
+.listone-v21-shell .ops-row-favorite[aria-pressed=true] svg { fill:#d8b972; }
+.listone-v21-shell .ops-row-favorite svg { transition:transform .2s ease,fill .2s ease; }
+.listone-v21-shell .ops-row-favorite:hover svg { transform:scale(1.13); }
+.listone-v21-shell .ops-row-favorite[aria-pressed=true] svg { transform:scale(1.08); }
+.listone-v21-shell .ops-pagination { color:#eaf4e9; }
+.listone-v21-shell .ops-pagination > span { color:#bfcec1; }
+.listone-v21-shell .ops-pagination .secondary-action,.listone-v21-shell .ops-empty .secondary-action { border-color:#64816c; background:#23402e; color:#e9f6e8; }
+.listone-v21-shell .ops-pagination .secondary-action:hover,.listone-v21-shell .ops-empty .secondary-action:hover { background:#355d42; }
+.listone-v21-shell .ops-pagination .secondary-action:disabled { opacity:.5; }
+.listone-v21-shell .ops-empty { min-height:290px; background:#1a2b23; color:#f2f8ed; }
+.listone-v21-shell .ops-empty h2 { color:#eef7eb; }
+.listone-v21-shell .ops-empty > p { color:#c5d5c5; }
+.listone-v21-shell .ops-list-loading > div { border-color:#476252; }
+.listone-v21-shell .ops-list-loading :is(i,span,b) { background:#355143; }
+.listone-v21-shell .message-state.error-state { border-color:#925e55; background:#372a25; color:#ffe1d7; }
+.listone-v21-shell .message-state.error-state .secondary-action { border-color:#b98174; background:#4c302b; color:#fff0ea; }
+.listone-v21-shell :is(button,input,select):focus-visible { outline:2px solid #b8efc5; outline-offset:3px; }
+.listone-v21-shell .ops-market-list .team-crest { background:#263f30; }
+
+.listone-rails { pointer-events:none; }
+.listone-agent-rail,.listone-context-rail { display:none; }
+.listone-context-inner { min-width:0; }
+.listone-rail-kicker { margin:0; color:#a5ddae; font-size:.73rem; font-weight:800; letter-spacing:.12em; }
+.listone-context-inner h2 { margin:8px 0 21px; color:#f0f7ed; font-size:1.12rem; line-height:1.2; }
+.listone-context-metrics { display:grid; gap:12px; }
+.listone-context-metrics > div { display:grid; gap:3px; padding:12px; border:1px solid #567760; border-radius:9px; background:#264031; }
+.listone-context-metrics span { color:#bfdbc4; font-size:.76rem; }
+.listone-context-metrics strong { color:#f2f8ed; font-size:1.8rem; line-height:1.1; font-variant-numeric:tabular-nums; }
+.listone-context-metrics strong small { color:#b9d3bd; font-size:.79rem; font-weight:500; }
+.listone-role-coverage { margin-top:23px; padding-top:18px; border-top:1px solid #668571; }
+.listone-role-coverage h3 { margin:0 0 9px; color:#edf4ea; font-size:.85rem; }
+.listone-role-coverage > div { display:flex; align-items:baseline; justify-content:space-between; gap:6px; padding:8px 0; border-bottom:1px solid #456650; color:#d2e3d2; font-size:.8rem; }
+.listone-role-coverage b { color:#edfaec; font-variant-numeric:tabular-nums; }
+.listone-role-coverage small { color:#b4cbb7; font-weight:500; }
+.listone-role-coverage p,.listone-context-note { color:#bad0bd; font-size:.76rem; line-height:1.5; }
+.listone-context-note { margin-top:20px; }
+
+/* The existing purchase sheet stays operational, with the same brand surfaces. */
+body:has(.listone-v21-shell) .ops-player-preview { --ink:#eef7ec; --gold:#a7e5b8; --surface:#182a21; border-left:1px solid #64806b; background:#182a21; color:#eef6eb; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-panel-top,body:has(.listone-v21-shell) .ops-player-preview .ops-preview-identity { background:#1d3527; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-panel-top span,body:has(.listone-v21-shell) .ops-player-preview .ops-preview-identity p { color:#c1d3c3; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-preview-identity h2,body:has(.listone-v21-shell) .ops-player-preview h3 { color:#f2f8ed; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-preview-value { background:#294333; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-preview-value > div > small,body:has(.listone-v21-shell) .ops-player-preview .ops-preview-value dt { color:#c2d8c5; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-dossier-link { border-color:#5d8065; background:#244032; color:#d4f1db; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-dossier-link:hover { background:#31563e; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-dossier-link small,body:has(.listone-v21-shell) .ops-player-preview .ops-caption,body:has(.listone-v21-shell) .ops-player-preview .ops-bid-summary dt { color:#bfd4c1; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-section-heading > span,body:has(.listone-v21-shell) .ops-player-preview .reference-slider-bound { color:#c3ddc7; }
+body:has(.listone-v21-shell) .ops-player-preview .club-agent-reaction { border-top-color:#516d57; }
+body:has(.listone-v21-shell) .ops-player-preview .club-reaction-art.agent-illustration--companion { width:72px; height:108px; flex:0 0 72px; overflow:hidden; }
+body:has(.listone-v21-shell) .ops-player-preview .club-reaction-art.agent-illustration--companion img { object-fit:contain; object-position:center; filter:drop-shadow(0 8px 14px #07120d66); }
+body:has(.listone-v21-shell) .ops-player-preview .club-agent-reaction strong { color:#eef8eb; }
+body:has(.listone-v21-shell) .ops-player-preview .club-agent-reaction :is(span,small) { color:#c1d5c2; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-price-field > span { border-color:#78aa83; background:#f0f5ec; color:#1e3726; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-price-field b { color:#425c47; }
+body:has(.listone-v21-shell) .ops-player-preview .ops-bid-summary { border-block:1px solid #516d57; }
+body:has(.listone-v21-shell) .ops-player-preview .primary-action { border:1px solid #abdfb5; background:#a7e5b8; color:#123322; }
+body:has(.listone-v21-shell) .ops-player-preview .primary-action:hover { background:#c6efcd; }
+body:has(.listone-v21-shell) .ops-player-preview :is(button,input):focus-visible { outline:2px solid #b8efc5; outline-offset:3px; }
+
+@media (min-width:1480px) {
+  .listone-v21-shell .ops-content { --listone-rail-width:clamp(190px,calc((100vw - 1100px)/2),300px); max-width:none; padding-inline:calc(var(--listone-rail-width) + 18px); }
+  .listone-agent-rail,.listone-context-rail { position:fixed; z-index:0; top:80px; bottom:0; display:block; width:var(--listone-rail-width,clamp(190px,calc((100vw - 1100px)/2),300px)); overflow:hidden; }
+  .listone-agent-rail { left:0; background:#101a19; }
+  .listone-agent-rail .listone-rail-media { width:100%; height:100%; border:0; border-radius:0; }
+  .listone-agent-rail .listone-rail-media :is(img,video) { object-position:47% center; }
+  .listone-agent-rail::after { content:""; position:absolute; z-index:2; inset:0; background:linear-gradient(90deg,#101a19aa,transparent 42%,#101a19aa),linear-gradient(0deg,#101a19 1%,transparent 32%,transparent 73%,#101a19a9); }
+  .listone-rail-caption { position:absolute; z-index:3; left:13px; bottom:30px; display:grid; gap:4px; color:#eef9ea; font-size:.77rem; font-weight:800; letter-spacing:.09em; text-shadow:0 2px 8px #07120e; }
+  .listone-rail-caption small { color:#b8e5c4; font-size:.64rem; }
+  .listone-context-rail { right:0; overflow-y:auto; scrollbar-width:thin; scrollbar-color:#608269 #1d3126; border-left:1px solid #45634e; background:linear-gradient(270deg,#1e382a,#15271e 88%); pointer-events:auto; }
+  .listone-context-inner { padding:23px 16px 110px; }
+}
+@media (min-width:1480px) and (max-width:1699px) {
+  .listone-context-inner { padding-inline:12px; }
+  .listone-context-metrics { gap:8px; }
+  .listone-context-metrics > div { padding:10px; }
+}
+@media (max-width:1479px) {
+  .listone-v21-shell .ops-content { max-width:1190px; }
+  .listone-context-rail { display:block; position:relative; z-index:1; width:min(1110px,calc(100% - 48px)); margin:20px auto 0; border:1px solid #4d7058; border-radius:12px; background:#1d3527; pointer-events:auto; }
+  .listone-context-inner { display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px; padding:15px 18px; }
+  .listone-context-inner h2 { margin:0; font-size:1rem; }
+  .listone-context-metrics { display:flex; flex:1; justify-content:flex-end; gap:10px; }
+  .listone-context-metrics > div { min-width:128px; padding:8px 12px; }
+  .listone-context-metrics strong { font-size:1.34rem; }
+  .listone-role-coverage,.listone-context-note { display:none; }
+}
+@media (max-width:800px) {
+  .listone-context-rail { width:calc(100% - 32px); margin-top:12px; }
+  .listone-context-inner { display:grid; gap:9px; padding:12px; }
+  .listone-context-metrics { justify-content:stretch; }
+  .listone-context-metrics > div { flex:1; min-width:0; }
+  .listone-v21-shell .ops-content { padding:24px 16px 120px; }
+  .listone-v21-shell .ops-market-tools { padding:4px 12px 0; }
+  .listone-v21-shell .ops-filter-toggle { display:flex; border-color:#607d68; color:#d2ebd8; }
+  .listone-v21-shell .ops-filter-toggle:hover,.listone-v21-shell .ops-filter-toggle[aria-expanded=true] { border-color:#9fd9ac; background:#335340; color:#f1faed; }
+  .listone-v21-shell .ops-role-selector { gap:5px; }
+  .listone-v21-shell .ops-role-selector button { flex:1; min-width:0; padding-inline:5px; }
+  .listone-v21-shell .ops-extra-filters { display:none; }
+  .listone-v21-shell .ops-extra-filters.open { display:grid; }
+  .listone-v21-shell .ops-market-list { overflow:hidden; }
+}
+@media (max-width:470px) {
+  .listone-context-metrics { gap:5px; }
+  .listone-context-metrics > div { padding:7px; }
+  .listone-context-metrics span { font-size:.67rem; line-height:1.25; }
+  .listone-context-metrics strong { font-size:1.15rem; }
+  .listone-v21-shell .ops-player-row { padding:10px 9px 13px; }
+  .listone-v21-shell .ops-player-select { gap:12px 5px; }
+  .listone-v21-shell .ops-player-identity strong { font-size:.85rem; }
+  .listone-v21-shell .ops-player-number { font-size:.84rem; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .listone-v21-shell .ops-row-favorite svg,.listone-v21-shell .ops-role-selector button { transition:none; }
+  .listone-v21-shell .ops-row-favorite:hover svg,.listone-v21-shell .ops-row-favorite[aria-pressed=true] svg { transform:none; }
+  .listone-v21-shell .ops-market-list:not([aria-busy=true]) .ops-player-row { animation:none; }
+}

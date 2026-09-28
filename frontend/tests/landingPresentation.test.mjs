@@ -35,19 +35,34 @@ function imageSources(markup) {
 
 test("landing exposes FANTA007 copy and the existing brand", () => {
   const html = renderLanding();
-  assert.match(headingText(html, "h1"), /Il mercato è tuo\. Giocalo bene\./);
+  assert.match(headingText(html, "h1"), /Dall’asta all’ultima giornata\.\s*La missione continua\./);
   assert.match(html, /aria-labelledby="welcome-title"/);
   assert.match(html, /FANTA007/);
   assert.match(html, /Licence to Win/);
-  assert.match(html, /src="\/src\/assets\/agent\/agent-brand-360\.webp"/);
+  assert.match(html, /fanta007-logo-v2\.webp/);
+  assert.match(html, /fantagente-hero-v2\.webp/);
+  assert.match(html, /Companion online/);
+  assert.match(html, /data-phase="intro"/);
+  assert.match(html, /class="reuno-hero__sticky"/);
+  assert.doesNotMatch(html, /reuno-logo-intro/);
+  assert.match(html, /COMPANION/);
+  assert.match(html, /Il tuo companion stagionale/i);
+  assert.match(html, /Missione attiva/);
+  assert.match(html, /Copertura del companion FANTA007/);
+  assert.match(html, /class="bento-visual bento-visual--market"/);
+  assert.match(html, /class="landing-agent-visual"/);
+  assert.doesNotMatch(html, /agent-positive-480\.webp/);
+  assert.doesNotMatch(html, /class="reuno-privacy-note"/);
 });
 
 test("landing offers working setup and resume actions", () => {
   const html = renderLanding();
-  assert.match(html, /<button[^>]*class="reuno-action"[^>]*>Costruisci la tua rosa/);
+  assert.match(html, /<button[^>]*class="reuno-action reuno-action--primary"[^>]*>Entra in FANTA007/);
+  assert.match(html, /<button[^>]*class="reuno-action reuno-action--secondary"[^>]*>[\s\S]*?Scopri la missione/);
   assert.match(html, /<footer[^>]*class="landing-footer"[\s\S]*?<button[^>]*>Configura la tua squadra/);
   const resumed = renderLanding({ onResume() {} });
-  assert.match(resumed, /<button[^>]*class="reuno-action"[^>]*>Torna alla tua squadra/);
+  assert.match(resumed, /La tua missione è pronta per continuare\./);
+  assert.doesNotMatch(html, /La rosa viene salvata su questo browser, senza account\./);
 });
 
 test("landing anchors point to real in-page targets", () => {
@@ -81,4 +96,10 @@ test("landing CSS remains scoped and preserves reduced-motion fallback", async (
   assert.match(css, /@media \(max-width: 700px\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /animation: none !important/);
+
+  const heroCss = await readFile(new URL("../src/components/ui/reuno-hero.css", import.meta.url), "utf8");
+  assert.match(heroCss, /\.fanta-welcome \.reuno-hero/);
+  assert.match(heroCss, /position: sticky/);
+  assert.match(heroCss, /@media \(max-width: 560px\)/);
+  assert.match(heroCss, /@media \(prefers-reduced-motion: reduce\)/);
 });

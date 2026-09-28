@@ -60,7 +60,7 @@ export function PlayerPreview({ player, config, squad, onClose, onAdd, onDossier
         {purchaseError && <p className="ops-purchase-guard" role="alert">{purchaseError}</p>}
         <button className="primary-action full" type="submit" disabled={submitting || Boolean(blockReason)}>{submitting ? "Salvataggio dell’acquisto…" : "Aggiungi alla rosa →"}</button>
       </form>}
-      <AgentReaction appeal={appeal} />
+      <AgentReaction appeal={appeal} variant="companion" />
     </div>
   </ContextPanel>;
 }
