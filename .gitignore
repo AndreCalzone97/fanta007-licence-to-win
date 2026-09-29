@@ -40,3 +40,7 @@ fanta007_step1/
 bozza ui idea progetto.png
 data/archive/
 data/source/*.xlsx
+
+.serena/cache/
+.serena/memories/
+.serena/project.local.yml
