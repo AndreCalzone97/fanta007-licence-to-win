@@ -2,224 +2,54 @@
 
 **Il tuo agente personale per il fantacalcio.**
 
-FANTA007 ti aiuta a seguire l'asta con crediti, ruoli e valore dei giocatori sempre a portata di mano. Configura la lega, registra gli acquisti e consulta i dati che spiegano i suggerimenti. Non serve un account: la missione e la rosa restano salvate nel browser che usi.
+Prepara l’asta, costruisci la rosa e capisci dove intervenire: FANTA007 mette crediti, giocatori e dati utili nello stesso posto. Le indicazioni aiutano a decidere, non promettono risultati.
 
-**Stato del progetto:** baseline UI/UX locale **v0.5.0**. La [demo pubblica attuale](https://fanta007-licence-to-win.vercel.app/) è una versione precedente: la v0.5.0 non è ancora stata distribuita.
+[Prova la demo](https://fanta007-licence-to-win.vercel.app/) · [Guarda il codice](https://github.com/AndreCalzone97/fanta007-licence-to-win)
 
-I dati e i consigli sono un supporto alle decisioni, non previsioni o garanzie di risultato.
+## 🏠 La tua missione
 
-## Cosa puoi fare
+La Home mostra subito budget, completamento della rosa e prossima decisione. Il Fantagente dà contesto alla scelta; la rail Serie A Intelligence raccoglie classifica e turni. Senza un provider live configurato, questi ultimi dati sono segnalati come illustrativi.
 
-- configurare nome, modalità, partecipanti, budget e obiettivo della lega;
-- cercare e filtrare i giocatori nel Listone;
-- aprire un dossier con quotazioni, statistiche e spiegazioni;
-- registrare i tuoi acquisti e il prezzo realmente pagato;
-- controllare crediti, posti liberi e distribuzione della spesa nella Home e nella Rosa;
-- consultare la rail Serie A Intelligence: classifica, ultimo e prossimo turno; senza credenziali del provider, i dati sono dichiarati illustrativi;
-- aprire Valutazione per leggere avanzamento, reparti e giudizio motivato;
-- aggiornare la configurazione e gestire i dati locali da Impostazioni;
-- ricevere un consiglio leggibile, accompagnato dai dati che lo motivano.
+<p align="center"><img src="docs/images/v0.5.0/home.png" alt="Home FANTA007 v0.5.0: budget, prossima decisione e rail laterali" width="960"></p>
 
-## Come si usa, in 4 passi
+## 🔎 Cerca e valuta i giocatori
 
-1. **Configura la lega.** Segui le cinque domande iniziali.
-2. **Apri il Listone.** Cerca un giocatore per nome, squadra o ruolo.
-3. **Registra l'acquisto.** Inserisci il prezzo pagato durante l'asta.
-4. **Controlla la rosa.** Guarda budget, reparti e prossima decisione suggerita.
+Nel Listone puoi cercare, filtrare e confrontare i profili. Aprendo un Dossier trovi quotazioni, statistiche e una spiegazione del consiglio: niente numeri inventati quando un dato non è disponibile.
 
-La rosa resta salvata nel browser che stai usando. Se cancelli i dati del browser o cambi dispositivo, non viene trasferita automaticamente.
+<p align="center"><img src="docs/images/v0.5.0/listone.png" alt="Listone FANTA007 v0.5.0 con ricerca, filtri e giocatori" width="960"></p>
 
-## Schermate della baseline
+Il Dossier raccoglie scheda, statistiche, analisi e consiglio in quattro viste. Qui è aperta l’analisi di Lautaro Martínez.
 
-La configurazione guidata ha cinque passaggi: squadra, partecipanti, regole, budget e obiettivo. La Home mostra il budget e la prossima decisione; il Listone serve a cercare i profili; La mia rosa raccoglie gli acquisti. Il Dossier mantiene quattro viste — Scheda, Statistiche, Analisi e Consiglio — mentre Valutazione riassume lo stato della rosa.
+<p align="center"><img src="docs/images/v0.5.0/dossier.png" alt="Dossier di Lautaro Martínez: analisi, valore e affidabilità dei dati" width="676"></p>
 
-Gli screenshot conservati in `docs/images/v2/` documentano la V2 pubblicata in precedenza e **non rappresentano la baseline v0.5.0**. Prima di mostrarli come immagini correnti, acquisire nuove schermate di: landing, configurazione, Home con entrambe le rail, Listone, Rosa, quattro tab del Dossier, Valutazione e Impostazioni. Servono una vista desktop e una mobile delle sezioni principali.
+## 🧩 Costruisci la tua rosa
 
-## Due parole che trovi spesso
+Registra ogni acquisto con il prezzo realmente pagato. La Rosa tiene insieme crediti rimasti, posti liberi e copertura di portieri, difensori, centrocampisti e attaccanti.
 
-- **QI**: quotazione iniziale del giocatore.
-- **QA**: quotazione attuale.
-- **FVM**: FantaValore di Mercato, usato come riferimento per l'asta.
-- **FVM lega**: FVM adattato al budget della tua lega.
-- **PV**: presenze a voto.
-- **MV**: media voto.
-- **FM**: fantamedia.
-- **Appetibilità FANTA007**: indice che riassume quanto il profilo è interessante nei dati disponibili. Non è un prezzo e non è una promessa di rendimento.
+<p align="center"><img src="docs/images/v0.5.0/rosa.png" alt="Rosa FANTA007 v0.5.0 con budget e copertura dei reparti" width="960"></p>
 
----
+## 🧠 Capisci come sta andando
 
-# Dietro le quinte
+Valutazione riassume equilibrio dei reparti, segnali da seguire e prossima mossa suggerita. Se la rosa è ancora incompleta, il giudizio viene presentato come provvisorio.
 
-Da qui in poi trovi le informazioni tecniche utili a sviluppatori, reviewer e a chi vuole capire come è costruito il progetto.
+<p align="center"><img src="docs/images/v0.5.0/valutazione.png" alt="Valutazione FANTA007 v0.5.0 con segnali e prossima mossa" width="960"></p>
 
-## Cosa comprende la v0.5.0
+## ⚙️ Come funziona
 
-La baseline attuale rende più chiaro il percorso completo:
+**Configura la lega → cerca i giocatori → registra gli acquisti → costruisci la rosa → analizzala.**
 
-- onboarding guidato in cinque passaggi;
-- landing e presentazione del prodotto aggiornate;
-- navigazione flottante coerente tra le aree principali;
-- Home orientata alla prossima decisione, con rail Fantagente e Serie A Intelligence;
-- Listone più leggibile e confrontabile;
-- rosa organizzata per reparti;
-- Player Dossier con quattro tab;
-- analisi con regola applicata e spiegazione del consiglio;
-- visual system dark/graphite/emerald, incluso il trattamento glass;
-- layout responsive per desktop e mobile;
-- stati di focus e aree cliccabili più accessibili.
+Non serve un account: configurazione e rosa restano nel browser in uso. Se cancelli i dati del browser o cambi dispositivo, non vengono trasferite automaticamente.
 
-Le interazioni selezionate da 21st.dev sono state adattate al linguaggio visivo di FANTA007:
+## 🛠️ Tech
 
-- [Hero Section — reuno-ui](https://21st.dev/@reuno-ui/components/hero-section)
-- [Bento Features — larsen66](https://21st.dev/@larsen66/components/bento-features)
-- [Floating Dock — manuarora700](https://21st.dev/@manuarora700/components/floating-dock)
-- [Expandable Tabs — victorwelander](https://21st.dev/@victorwelander/components/expandable-tabs)
-- [Stats Card — ravikatiyar162](https://21st.dev/@ravikatiyar162/components/stats-card-1)
-- [Bar Chart — bklitai](https://21st.dev/@bklitai/components/bar-chart)
+React, TypeScript e Vite nel frontend; Python e FastAPI nel backend. Motion, Radix UI e Lucide supportano l’interfaccia. Test frontend e backend girano in [GitHub Actions](https://github.com/AndreCalzone97/fanta007-licence-to-win/actions); la demo è pubblicata su Vercel.
 
-## Architettura
+## 🚀 Stato progetto
 
-```text
-Dataset normalizzato
-        ↓
-FastAPI REST API
-        ↓
-React + TypeScript + Vite
-        ↓
-Scoring e benchmark deterministici
-        ↓
-Listone, Dossier, Rosa e Analisi
-```
+**v0.5.0:** baseline UI/UX consolidata e pubblicata. Dati Serie A live, account sincronizzati, Fantagente conversazionale e funzioni da companion stagionale sono passi futuri, non feature già disponibili.
 
-### Frontend
+## 📚 Approfondimenti
 
-- React 19 e TypeScript;
-- Vite per sviluppo e build;
-- Motion per le animazioni;
-- componenti Radix, Lucide e Tabler per controlli e icone;
-- stato della missione salvato nel browser; non esistono ancora account o sincronizzazione tra dispositivi.
+[Prodotto](PRODUCT.md) · [Design](DESIGN.md) · [Architettura](docs/ARCHITECTURE.md) · [Roadmap](docs/ROADMAP.md)
 
-### Backend
-
-- Python 3.11+;
-- FastAPI e Pydantic;
-- API REST per giocatori, statistiche, squadre e risoluzione dei dati salvati;
-- import, normalizzazione e controlli di integrità sul dataset.
-
-### Perché il salvataggio viene “risolto” di nuovo
-
-Nel browser vengono conservati gli identificativi dei giocatori e i dati inseriti dall'utente, come il prezzo d'acquisto. Quando l'app si riapre, il backend recupera le informazioni canoniche aggiornate. In questo modo la rosa non dipende da una vecchia copia completa del giocatore salvata nel browser.
-
-## Dati e trasparenza
-
-Il dataset attivo della stagione 2026/27 contiene:
-
-- **533 giocatori**;
-- **921 record stagionali** complessivi;
-- 533 record Serie A 2026/27;
-- 365 record Serie A 2025/26;
-- 23 record EuroLeghe 2025/26 usati come fallback verificato.
-
-Se un dato verificabile non è disponibile, l'interfaccia mostra **N/D** invece di inventare un valore. I controlli finali sono documentati in [`docs/stats_integrity_final.md`](docs/stats_integrity_final.md).
-
-## Avvio locale semplice (Windows)
-
-### Prima configurazione
-
-Servono [Python 3.11+](https://www.python.org/downloads/) e [Node.js](https://nodejs.org/). Dalla cartella del progetto:
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e ".\backend[dev]"
-npm install --prefix .\frontend
-```
-
-### Avvio quotidiano
-
-Fai doppio clic su:
-
-```text
-START_FANTA007_FRESH.cmd
-```
-
-Lo script avvia e controlla backend e frontend, poi apre la preview. In alternativa:
-
-```powershell
-.\scripts\windows\Start-Preview.ps1 -OpenBrowser
-```
-
-- App locale: `http://127.0.0.1:5173`
-- Presentazione: `http://127.0.0.1:5173/presentazione`
-- Stato API: `http://127.0.0.1:8000/api/v1/health`
-
-<details>
-<summary>Avvio manuale di backend e frontend</summary>
-
-Backend:
-
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir .\backend --reload --port 8000
-```
-
-Frontend, in un secondo terminale:
-
-```powershell
-npm run dev --prefix .\frontend
-```
-
-</details>
-
-## Test e build
-
-```powershell
-$env:PYTHONPATH = "$PWD;$PWD\backend"
-.\.venv\Scripts\python.exe -m pytest .\backend\tests -q -rs
-npm test --prefix .\frontend
-npm run build --prefix .\frontend
-```
-
-Ultima verifica della baseline locale v0.5.0:
-
-- frontend: **74 test superati**;
-- backend: **143 test superati**, 4 test opzionali saltati perché richiedono gli export ufficiali locali;
-- build di produzione: completata;
-- verifica desktop e mobile: completata.
-
-`npm run build` esegue anche il typecheck TypeScript (`tsc -b`). Non è configurato un lint separato. La build mostra un avviso non bloccante sul peso del chunk JavaScript principale.
-
-I test backend usano dati sintetici o file temporanei e non modificano i dati di produzione.
-
-<details>
-<summary>Media Review: accesso amministrativo locale</summary>
-
-Le modifiche tramite `PATCH /api/v1/admin/media-review/{player_id}` sono disabilitate per impostazione predefinita e rispondono con `403 Forbidden`.
-
-Per abilitarle in un ambiente locale fidato:
-
-```powershell
-$env:FANTA007_ENABLE_MEDIA_REVIEW_ADMIN = "true"
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir .\backend --host 127.0.0.1 --port 8000
-```
-
-Il flag **non autentica gli utenti**: quando è attivo, chiunque raggiunga l'API può modificare le revisioni. Deve quindi rimanere disabilitato nei deploy pubblici.
-
-</details>
-
-## Prossimi passi
-
-Verificare la CI su GitHub, poi distribuire la baseline. Dati live, Fantagente conversazionale, account e database, e funzioni da companion stagionale sono tappe future: non fanno parte della v0.5.0.
-
-## Repository e demo
-
-- [Demo pubblica precedente](https://fanta007-licence-to-win.vercel.app/)
-- [Repository GitHub](https://github.com/AndreCalzone97/fanta007-licence-to-win)
-- Percorso consigliato: **configurazione → Home → Listone → Dossier → La mia rosa → Valutazione**
-
-## Nota sul progetto
-
-FANTA007 è un progetto indipendente realizzato a scopo didattico e portfolio. Nomi, marchi e dati di terze parti appartengono ai rispettivi titolari. Gli indicatori hanno finalità informative e non garantiscono risultati sportivi o di gioco.
-
----
-
-**FANTA007**<br>
-_Meno rumore, più contesto per decidere._
+FANTA007 è un progetto indipendente a scopo didattico e portfolio. Marchi e dati di terze parti appartengono ai rispettivi titolari.

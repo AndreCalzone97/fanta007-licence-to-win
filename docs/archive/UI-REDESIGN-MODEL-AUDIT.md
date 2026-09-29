@@ -31,7 +31,7 @@ Cartella effettiva all'epoca: copia locale recuperata del repository FANTA007.
 | Preview locale | Landing “Il mercato è tuo. Giocalo bene.”, arco petrolio, FAQ e footer | Lavoro successivo presente localmente, non da assumere pubblicato |
 | `studio-review.html` | Documento statico di circa 2,13 MB, selettore e iframe sandbox, contenuti dimostrativi | Non usa API o persistenza; i pulsanti del prodotto non sono operativi |
 
-Fonti: metadati e stato Git dell'export locale del 9 settembre, [commit remoto rilevato](https://github.com/AndreCalzone97/fanta007-licence-to-win/commit/ffa53155f8d14f0682b0a8108730945d9b18f3a7), [sito pubblico](https://fanta007-licence-to-win.vercel.app/), [preview statica esistente](previews/studio-review.html).
+Fonti: metadati e stato Git dell'export locale del 9 settembre, [commit remoto rilevato](https://github.com/AndreCalzone97/fanta007-licence-to-win/commit/ffa53155f8d14f0682b0a8108730945d9b18f3a7), [sito pubblico](https://fanta007-licence-to-win.vercel.app/), [preview statica esistente](../previews/studio-review.html).
 
 Prima di qualsiasi futura pubblicazione occorrerà ricostruire un checkout separato e confrontarlo con questa copia. Non propongo `git init`, reset o sovrascritture automatiche.
 
@@ -46,37 +46,37 @@ Confronto SHA-256 con il manifest dei 205 file dell'export, **prima della creazi
 
 I 15 file modificati sono:
 
-- [frontend/package.json](<../frontend/package.json>)
-- [frontend/package-lock.json](<../frontend/package-lock.json>)
-- [frontend/src/App.tsx](<../frontend/src/App.tsx>)
-- [frontend/src/components/BottomNavigation.tsx](<../frontend/src/components/BottomNavigation.tsx>)
-- [frontend/src/components/CommandCenter.tsx](<../frontend/src/components/CommandCenter.tsx>)
-- [frontend/src/components/Onboarding.tsx](<../frontend/src/components/Onboarding.tsx>)
-- [frontend/src/components/PlayerModal.tsx](<../frontend/src/components/PlayerModal.tsx>)
-- [frontend/src/components/PlayerPreview.tsx](<../frontend/src/components/PlayerPreview.tsx>)
-- [frontend/src/components/PlayerSearch.tsx](<../frontend/src/components/PlayerSearch.tsx>)
-- [frontend/src/components/StudioWelcome.tsx](<../frontend/src/components/StudioWelcome.tsx>)
-- [frontend/src/components/TeamSelector.tsx](<../frontend/src/components/TeamSelector.tsx>)
-- [frontend/src/hooks/useFocusTrap.ts](<../frontend/src/hooks/useFocusTrap.ts>)
-- [frontend/src/main.tsx](<../frontend/src/main.tsx>)
-- [frontend/src/pages/PlayersPage.tsx](<../frontend/src/pages/PlayersPage.tsx>)
-- [frontend/src/styles/studio.css](<../frontend/src/styles/studio.css>)
+- [frontend/package.json](<../../frontend/package.json>)
+- [frontend/package-lock.json](<../../frontend/package-lock.json>)
+- [frontend/src/App.tsx](<../../frontend/src/App.tsx>)
+- [frontend/src/components/BottomNavigation.tsx](<../../frontend/src/components/BottomNavigation.tsx>)
+- [frontend/src/components/CommandCenter.tsx](<../../frontend/src/components/CommandCenter.tsx>)
+- [frontend/src/components/Onboarding.tsx](<../../frontend/src/components/Onboarding.tsx>)
+- [frontend/src/components/PlayerModal.tsx](<../../frontend/src/components/PlayerModal.tsx>)
+- [frontend/src/components/PlayerPreview.tsx](<../../frontend/src/components/PlayerPreview.tsx>)
+- [frontend/src/components/PlayerSearch.tsx](<../../frontend/src/components/PlayerSearch.tsx>)
+- [frontend/src/components/StudioWelcome.tsx](<../../frontend/src/components/StudioWelcome.tsx>)
+- [frontend/src/components/TeamSelector.tsx](<../../frontend/src/components/TeamSelector.tsx>)
+- [frontend/src/hooks/useFocusTrap.ts](<../../frontend/src/hooks/useFocusTrap.ts>)
+- [frontend/src/main.tsx](<../../frontend/src/main.tsx>)
+- [frontend/src/pages/PlayersPage.tsx](<../../frontend/src/pages/PlayersPage.tsx>)
+- [frontend/src/styles/studio.css](<../../frontend/src/styles/studio.css>)
 
 I 13 file aggiuntivi sono:
 
-- [docs/CLUB-PREVIEW.md](<../docs/CLUB-PREVIEW.md>)
-- [docs/COMPONENT-INTEGRATION.md](<../docs/COMPONENT-INTEGRATION.md>)
-- [docs/MAJOR-REDESIGN-PREVIEW.md](<../docs/MAJOR-REDESIGN-PREVIEW.md>)
-- [frontend/src/styles/club.css](<../frontend/src/styles/club.css>)
-- [frontend/tests/componentIntegration.test.mjs](<../frontend/tests/componentIntegration.test.mjs>)
-- [frontend/src/components/AgentReaction.tsx](<../frontend/src/components/AgentReaction.tsx>)
-- [frontend/src/components/DevelopmentFeedback.tsx](<../frontend/src/components/DevelopmentFeedback.tsx>)
-- [frontend/src/components/SectionArrival.tsx](<../frontend/src/components/SectionArrival.tsx>)
-- [frontend/src/components/ui/RadialAction.tsx](<../frontend/src/components/ui/RadialAction.tsx>)
-- [frontend/src/components/ui/FantaHero.tsx](<../frontend/src/components/ui/FantaHero.tsx>)
-- [frontend/src/components/ui/FantaFaq.tsx](<../frontend/src/components/ui/FantaFaq.tsx>)
-- [frontend/src/components/ui/DossierTabs.tsx](<../frontend/src/components/ui/DossierTabs.tsx>)
-- [frontend/src/components/ui/AppearText.tsx](<../frontend/src/components/ui/AppearText.tsx>)
+- [docs/CLUB-PREVIEW.md](<CLUB-PREVIEW.md>)
+- [docs/COMPONENT-INTEGRATION.md](<COMPONENT-INTEGRATION.md>)
+- [docs/MAJOR-REDESIGN-PREVIEW.md](<MAJOR-REDESIGN-PREVIEW.md>)
+- [frontend/src/styles/club.css](<../../frontend/src/styles/club.css>)
+- [frontend/tests/componentIntegration.test.mjs](<../../frontend/tests/componentIntegration.test.mjs>)
+- [frontend/src/components/AgentReaction.tsx](<../../frontend/src/components/AgentReaction.tsx>)
+- [frontend/src/components/DevelopmentFeedback.tsx](<../../frontend/src/components/DevelopmentFeedback.tsx>)
+- [frontend/src/components/SectionArrival.tsx](<../../frontend/src/components/SectionArrival.tsx>)
+- [frontend/src/components/ui/RadialAction.tsx](<../../frontend/src/components/ui/RadialAction.tsx>)
+- [frontend/src/components/ui/FantaHero.tsx](<../../frontend/src/components/ui/FantaHero.tsx>)
+- [frontend/src/components/ui/FantaFaq.tsx](<../../frontend/src/components/ui/FantaFaq.tsx>)
+- [frontend/src/components/ui/DossierTabs.tsx](<../../frontend/src/components/ui/DossierTabs.tsx>)
+- [frontend/src/components/ui/AppearText.tsx](<../../frontend/src/components/ui/AppearText.tsx>)
 
 Questi non sono “file untracked” verificati con Git: sono file assenti dal manifest. Tutto il lavoro presente va preservato, anche quando il suo risultato visivo verrà superato.
 
@@ -86,14 +86,14 @@ Stack rilevato: React **19.2.8**, TypeScript **7.0.2**, Vite **8.2.2**; Motion *
 
 | Funzione | Componenti principali |
 |---|---|
-| Stato applicativo, passaggi e percorsi | [App](<../frontend/src/App.tsx>), [PlayersPage](<../frontend/src/pages/PlayersPage.tsx>), [useSquadPersistence](<../frontend/src/hooks/useSquadPersistence.ts>) |
-| Presentazione e FAQ | [StudioWelcome](<../frontend/src/components/StudioWelcome.tsx>), [FantaHero](<../frontend/src/components/ui/FantaHero.tsx>), [FantaFaq](<../frontend/src/components/ui/FantaFaq.tsx>), [BrandLogo](<../frontend/src/components/BrandLogo.tsx>) |
-| Configurazione e navigazione | [Onboarding](<../frontend/src/components/Onboarding.tsx>), [BottomNavigation](<../frontend/src/components/BottomNavigation.tsx>), [StudioHeader](<../frontend/src/components/StudioHeader.tsx>) |
-| Home e budget | [CommandCenter](<../frontend/src/components/CommandCenter.tsx>), [BudgetAllocation](<../frontend/src/components/BudgetAllocation.tsx>), [AgentInsight](<../frontend/src/components/AgentInsight.tsx>) |
-| Listone e confronto | [PlayerSearch](<../frontend/src/components/PlayerSearch.tsx>), [PlayerCompactCard](<../frontend/src/components/PlayerCompactCard.tsx>), [TeamSelector](<../frontend/src/components/TeamSelector.tsx>), [PlayerComparisonView](<../frontend/src/components/PlayerComparisonView.tsx>), [PlayerCompareTray](<../frontend/src/components/PlayerCompareTray.tsx>) |
-| Acquisto e dossier | [PlayerPreview](<../frontend/src/components/PlayerPreview.tsx>), [PlayerModal](<../frontend/src/components/PlayerModal.tsx>), [DossierTabs](<../frontend/src/components/ui/DossierTabs.tsx>), [AppealBadge](<../frontend/src/components/AppealBadge.tsx>), [StarRating](<../frontend/src/components/StarRating.tsx>), [AgentReaction](<../frontend/src/components/AgentReaction.tsx>) |
-| Rosa e valutazione | [SquadOverview](<../frontend/src/components/SquadOverview.tsx>), [SquadEvaluation](<../frontend/src/components/SquadEvaluation.tsx>) |
-| Impostazioni e accessibilità | [SettingsDialog](<../frontend/src/components/SettingsDialog.tsx>), [useFocusTrap](<../frontend/src/hooks/useFocusTrap.ts>) |
+| Stato applicativo, passaggi e percorsi | [App](<../../frontend/src/App.tsx>), [PlayersPage](<../../frontend/src/pages/PlayersPage.tsx>), [useSquadPersistence](<../../frontend/src/hooks/useSquadPersistence.ts>) |
+| Presentazione e FAQ | [StudioWelcome](<../../frontend/src/components/StudioWelcome.tsx>), [FantaHero](<../../frontend/src/components/ui/FantaHero.tsx>), [FantaFaq](<../../frontend/src/components/ui/FantaFaq.tsx>), [BrandLogo](<../../frontend/src/components/BrandLogo.tsx>) |
+| Configurazione e navigazione | [Onboarding](<../../frontend/src/components/Onboarding.tsx>), [BottomNavigation](<../../frontend/src/components/BottomNavigation.tsx>), [StudioHeader](<../../frontend/src/components/StudioHeader.tsx>) |
+| Home e budget | [CommandCenter](<../../frontend/src/components/CommandCenter.tsx>), [BudgetAllocation](<../../frontend/src/components/BudgetAllocation.tsx>), [AgentInsight](<../../frontend/src/components/AgentInsight.tsx>) |
+| Listone e confronto | [PlayerSearch](<../../frontend/src/components/PlayerSearch.tsx>), [PlayerCompactCard](<../../frontend/src/components/PlayerCompactCard.tsx>), [TeamSelector](<../../frontend/src/components/TeamSelector.tsx>), [PlayerComparisonView](<../../frontend/src/components/PlayerComparisonView.tsx>), [PlayerCompareTray](<../../frontend/src/components/PlayerCompareTray.tsx>) |
+| Acquisto e dossier | [PlayerPreview](<../../frontend/src/components/PlayerPreview.tsx>), [PlayerModal](<../../frontend/src/components/PlayerModal.tsx>), [DossierTabs](<../../frontend/src/components/ui/DossierTabs.tsx>), [AppealBadge](<../../frontend/src/components/AppealBadge.tsx>), [StarRating](<../../frontend/src/components/StarRating.tsx>), [AgentReaction](<../../frontend/src/components/AgentReaction.tsx>) |
+| Rosa e valutazione | [SquadOverview](<../../frontend/src/components/SquadOverview.tsx>), [SquadEvaluation](<../../frontend/src/components/SquadEvaluation.tsx>) |
+| Impostazioni e accessibilità | [SettingsDialog](<../../frontend/src/components/SettingsDialog.tsx>), [useFocusTrap](<../../frontend/src/hooks/useFocusTrap.ts>) |
 
 I percorsi esistenti, incluso `/players` e il percorso amministrativo media, vanno conservati. Home, Rosa e Valutazione condividono parte della navigazione gestita nello stato React: non introdurre un nuovo router come effetto collaterale del restyling.
 
@@ -235,17 +235,17 @@ Ogni blocco termina con verifica e confronto visivo prima di procedere. File ind
 
 | Blocco | File e obiettivo/modifiche | Dipendenze | Test e criteri di accettazione | Rollback / risultato visivo |
 |---|---|---|---|---|
-| 1. Baseline e compatibilità | [package.json](<../frontend/package.json>), [types](<../frontend/src/types.ts>), [persistenza](<../frontend/src/lib/squadPersistence.ts>); registrare stato, flussi e contratti senza rifattorizzarli indiscriminatamente | Nessuna | Hash protetti invariati; baseline test/build; zero perdita della copia recuperata | R; app invariata |
-| 2. Modelli e fondamentali | [FantaHero](<../frontend/src/components/ui/FantaHero.tsx>), [FantaFaq](<../frontend/src/components/ui/FantaFaq.tsx>), [DossierTabs](<../frontend/src/components/ui/DossierTabs.tsx>), [token](<../frontend/src/styles/tokens.css>); fissare specifiche modello, stati e confini CSS | Esistenti; licenze come prerequisito al codice di terzi | Confronto struttura/interazioni con riferimenti; nessun cambio di font/palette non approvato | R; componenti coerenti, non collage |
-| 3. Presentazione, FAQ, footer | [StudioWelcome](<../frontend/src/components/StudioWelcome.tsx>), [Hero](<../frontend/src/components/ui/FantaHero.tsx>), [FAQ](<../frontend/src/components/ui/FantaFaq.tsx>), [BrandLogo](<../frontend/src/components/BrandLogo.tsx>), [HTML](<../frontend/index.html>), [stili](<../frontend/src/styles/club.css>); M1/M2 e link reali | Nessuna installazione prevista; Dither soltanto se licenza verificata | CTA funzionante, FAQ tastiera/apertura/chiusura, fallback shader, screenshot 375/768/1440, nessun overflow | R; hero davvero a tutta altezza e FAQ centrali |
-| 4. Configurazione e navigazione | [Onboarding](<../frontend/src/components/Onboarding.tsx>), [Navigation](<../frontend/src/components/BottomNavigation.tsx>), [App](<../frontend/src/App.tsx>); cinque step, riepilogo, nav approvata | Motion esistente | Creazione da zero, Invio/indietro/errori, rientro/modifica, stato attivo, percorsi e tastiera | R; ingresso e navigazione parte dello stesso prodotto |
-| 5. Home | [CommandCenter](<../frontend/src/components/CommandCenter.tsx>), [BudgetAllocation](<../frontend/src/components/BudgetAllocation.tsx>), [AgentInsight](<../frontend/src/components/AgentInsight.tsx>); gerarchia approvata e meno duplicazioni | Nessuna | Rosa vuota/parziale/completa, somme coerenti, link reparto/ultimi acquisti, qualità reparti presente | R; budget e prossima azione immediati |
-| 6. Listone | [Search](<../frontend/src/components/PlayerSearch.tsx>), [riga](<../frontend/src/components/PlayerCompactCard.tsx>), [TeamSelector](<../frontend/src/components/TeamSelector.tsx>), [confronto](<../frontend/src/components/PlayerCompareTray.tsx>); M3 adattato, controlli e gestione richieste | Motion; GSAP solo se successivamente approvato e motivato | Filtri combinati, risposte ritardate, preferiti/confronto, 0 risultati/errore, 533 elementi senza duplicati, touch/focus | R; righe compatte con voto leggibile, non barre sproporzionate |
-| 7. Dossier e acquisto | [Preview](<../frontend/src/components/PlayerPreview.tsx>), [Modal](<../frontend/src/components/PlayerModal.tsx>), [Tabs](<../frontend/src/components/ui/DossierTabs.tsx>), [Appeal](<../frontend/src/components/AppealBadge.tsx>); M5 approvato, quattro sezioni, prezzo conservato | Esistenti o Dialog/Vaul con consenso separato | Apri/chiudi/Escape/focus, passaggio acquisto↔dossier, zero/N/D, validazione budget/duplicati, tab da tastiera | R; dossier centrale desktop, mobile leggibile, dati invariati |
-| 8. Rosa e valutazione | [Rosa](<../frontend/src/components/SquadOverview.tsx>), [Valutazione](<../frontend/src/components/SquadEvaluation.tsx>), [Budget](<../frontend/src/components/BudgetAllocation.tsx>); viste distinte, dettaglio, score e reparti | Nessuna | Cambio vista/selezione, rimozione/annulla, budget e score uguali alla baseline per stessa fixture | R; rosa più leggibile, valutazione meno dispersiva |
-| 9. Responsive | [studio.css](<../frontend/src/styles/studio.css>), [club.css](<../frontend/src/styles/club.css>), componenti dei blocchi 3–8 | Nessuna | 375/768/1440 e viewport corta; zoom 200%; orientamento; controllo overflow e CTA non coperte | R; adattamento reale, non semplice riduzione desktop |
-| 10. Motion | [SectionArrival](<../frontend/src/components/SectionArrival.tsx>), [AppearText](<../frontend/src/components/ui/AppearText.tsx>), [RadialAction](<../frontend/src/components/ui/RadialAction.tsx>), [motion.css](<../frontend/src/styles/motion.css>); tempi coerenti, loader verificato, stop offscreen | Motion; M6 solo dopo controllo | Reduced motion, interruzione animazioni, ritorni rapidi, nessun ritardo artificiale o salto di layout | R; movimento intenzionale e leggero |
-| 11. Accessibilità e QA finale | [FocusTrap](<../frontend/src/hooks/useFocusTrap.ts>), [Settings](<../frontend/src/components/SettingsDialog.tsx>), [test](<../frontend/tests/componentIntegration.test.mjs>), componenti interessati | Nessuna automatica | Flusso completo, reset su fixture isolata, contrasto, focus, stati, console, TypeScript/build, test frontend/backend | R; consegna interattiva verificata con elenco residui |
+| 1. Baseline e compatibilità | [package.json](<../../frontend/package.json>), [types](<../../frontend/src/types.ts>), [persistenza](<../../frontend/src/lib/squadPersistence.ts>); registrare stato, flussi e contratti senza rifattorizzarli indiscriminatamente | Nessuna | Hash protetti invariati; baseline test/build; zero perdita della copia recuperata | R; app invariata |
+| 2. Modelli e fondamentali | [FantaHero](<../../frontend/src/components/ui/FantaHero.tsx>), [FantaFaq](<../../frontend/src/components/ui/FantaFaq.tsx>), [DossierTabs](<../../frontend/src/components/ui/DossierTabs.tsx>), [token](<../../frontend/src/styles/tokens.css>); fissare specifiche modello, stati e confini CSS | Esistenti; licenze come prerequisito al codice di terzi | Confronto struttura/interazioni con riferimenti; nessun cambio di font/palette non approvato | R; componenti coerenti, non collage |
+| 3. Presentazione, FAQ, footer | [StudioWelcome](<../../frontend/src/components/StudioWelcome.tsx>), [Hero](<../../frontend/src/components/ui/FantaHero.tsx>), [FAQ](<../../frontend/src/components/ui/FantaFaq.tsx>), [BrandLogo](<../../frontend/src/components/BrandLogo.tsx>), [HTML](<../../frontend/index.html>), [stili](<../../frontend/src/styles/club.css>); M1/M2 e link reali | Nessuna installazione prevista; Dither soltanto se licenza verificata | CTA funzionante, FAQ tastiera/apertura/chiusura, fallback shader, screenshot 375/768/1440, nessun overflow | R; hero davvero a tutta altezza e FAQ centrali |
+| 4. Configurazione e navigazione | [Onboarding](<../../frontend/src/components/Onboarding.tsx>), [Navigation](<../../frontend/src/components/BottomNavigation.tsx>), [App](<../../frontend/src/App.tsx>); cinque step, riepilogo, nav approvata | Motion esistente | Creazione da zero, Invio/indietro/errori, rientro/modifica, stato attivo, percorsi e tastiera | R; ingresso e navigazione parte dello stesso prodotto |
+| 5. Home | [CommandCenter](<../../frontend/src/components/CommandCenter.tsx>), [BudgetAllocation](<../../frontend/src/components/BudgetAllocation.tsx>), [AgentInsight](<../../frontend/src/components/AgentInsight.tsx>); gerarchia approvata e meno duplicazioni | Nessuna | Rosa vuota/parziale/completa, somme coerenti, link reparto/ultimi acquisti, qualità reparti presente | R; budget e prossima azione immediati |
+| 6. Listone | [Search](<../../frontend/src/components/PlayerSearch.tsx>), [riga](<../../frontend/src/components/PlayerCompactCard.tsx>), [TeamSelector](<../../frontend/src/components/TeamSelector.tsx>), [confronto](<../../frontend/src/components/PlayerCompareTray.tsx>); M3 adattato, controlli e gestione richieste | Motion; GSAP solo se successivamente approvato e motivato | Filtri combinati, risposte ritardate, preferiti/confronto, 0 risultati/errore, 533 elementi senza duplicati, touch/focus | R; righe compatte con voto leggibile, non barre sproporzionate |
+| 7. Dossier e acquisto | [Preview](<../../frontend/src/components/PlayerPreview.tsx>), [Modal](<../../frontend/src/components/PlayerModal.tsx>), [Tabs](<../../frontend/src/components/ui/DossierTabs.tsx>), [Appeal](<../../frontend/src/components/AppealBadge.tsx>); M5 approvato, quattro sezioni, prezzo conservato | Esistenti o Dialog/Vaul con consenso separato | Apri/chiudi/Escape/focus, passaggio acquisto↔dossier, zero/N/D, validazione budget/duplicati, tab da tastiera | R; dossier centrale desktop, mobile leggibile, dati invariati |
+| 8. Rosa e valutazione | [Rosa](<../../frontend/src/components/SquadOverview.tsx>), [Valutazione](<../../frontend/src/components/SquadEvaluation.tsx>), [Budget](<../../frontend/src/components/BudgetAllocation.tsx>); viste distinte, dettaglio, score e reparti | Nessuna | Cambio vista/selezione, rimozione/annulla, budget e score uguali alla baseline per stessa fixture | R; rosa più leggibile, valutazione meno dispersiva |
+| 9. Responsive | [studio.css](<../../frontend/src/styles/studio.css>), [club.css](<../../frontend/src/styles/club.css>), componenti dei blocchi 3–8 | Nessuna | 375/768/1440 e viewport corta; zoom 200%; orientamento; controllo overflow e CTA non coperte | R; adattamento reale, non semplice riduzione desktop |
+| 10. Motion | [SectionArrival](<../../frontend/src/components/SectionArrival.tsx>), [AppearText](<../../frontend/src/components/ui/AppearText.tsx>), [RadialAction](<../../frontend/src/components/ui/RadialAction.tsx>), [motion.css](<../../frontend/src/styles/motion.css>); tempi coerenti, loader verificato, stop offscreen | Motion; M6 solo dopo controllo | Reduced motion, interruzione animazioni, ritorni rapidi, nessun ritardo artificiale o salto di layout | R; movimento intenzionale e leggero |
+| 11. Accessibilità e QA finale | [FocusTrap](<../../frontend/src/hooks/useFocusTrap.ts>), [Settings](<../../frontend/src/components/SettingsDialog.tsx>), [test](<../../frontend/tests/componentIntegration.test.mjs>), componenti interessati | Nessuna automatica | Flusso completo, reset su fixture isolata, contrasto, focus, stati, console, TypeScript/build, test frontend/backend | R; consegna interattiva verificata con elenco residui |
 
 ### Azioni e comandi successivi, dopo approvazione
 

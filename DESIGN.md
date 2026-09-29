@@ -1,38 +1,28 @@
-# Fanta007 — interfaccia operativa
+# Design FANTA007 — baseline v0.5.0
 
-Stato: redesign implementato. Catture desktop/tablet/mobile del 13 settembre 2026; ultime correzioni del 14 settembre coperte da test e build, con riconferma browser bloccata dal sistema di approvazione. Questo documento descrive il codice, non un'approvazione estetica dell'utente.
+La UI/UX v0.5.0 è la baseline approvata. La Landing può essere più cinematica; le schermate operative privilegiano leggibilità, densità utile e decisioni rapide.
 
-## Direzione
+## Identità
 
-Interfaccia Operate per preparare e registrare un'asta. La Home risponde nell'ordine a situazione, attenzione e prossima scelta. Steep orienta gerarchia e spaziatura, Maestro le priorità, Hawy il contesto calcistico. Fintech è un riferimento per la relazione prezzo/valore, senza grafici di trading decorativi.
+- Nuovo logo FANTA007 e nuovo Fantagente sono gli asset canonici.
+- Sora Variable guida titoli, numeri, controlli e testi.
+- Grafite e verde profondo formano le superfici; smeraldo indica azioni e stati attivi, off-white i contenuti principali, grigio metallico bordi e informazioni secondarie.
+- Il glassmorphism usa trasparenza, blur e riflessi controllati. Tabelle, numeri e testo lungo restano su superfici più opache per conservare contrasto.
+- Bordi sottili, spaziatura ordinata e raggi coerenti uniscono le sezioni senza aggiungere decorazioni che competono con i dati.
 
-## Identità e superfici
+## Schermate operative
 
-Fanta007, payoff Licence to Win. Font e asset originali conservati. Sfondo minerale #f2f5f3; superfici bianche; testata #122f2e; testo #193330; secondario #4b625d. Oro #dfbd6d sulle azioni, verde #246a4e sui valori favorevoli, rosso #b13d38 su errori/scostamenti sfavorevoli. Gli stati mantengono anche etichette testuali.
+- **Home:** budget, stato della rosa e prossima decisione dominano la gerarchia. Fantagente e Serie A Intelligence occupano le rail laterali desktop; il centro resta prioritario.
+- **Listone:** ricerca, filtri, quotazioni e confronto dei giocatori sono facili da scansionare. Il prezzo d'asta si registra in un pannello contestuale.
+- **Rosa:** acquisti, crediti, posti liberi e copertura dei reparti restano leggibili nelle viste Reparti ed Elenco.
+- **Dossier:** identità del giocatore, KPI e quattro viste — Scheda, Statistiche, Analisi, Consiglio — separano i dati dal giudizio.
+- **Valutazione:** score e spiegazione precedono il dettaglio di reparti, budget e prossima mossa.
+- **Impostazioni:** configurazione e gestione dei dati locali usano un layout funzionale e senza rumore visivo.
 
-La nuova presentazione è circoscritta alle classi ops-* in frontend/src/styles/operations.css. I fogli precedenti sono ancora presenti per landing, onboarding, valutazione e Media Review: il loro consolidamento è debito tecnico dichiarato, non già risolto.
+## Interazione e accessibilità
 
-## Composizione
+La navigazione flottante mantiene destinazioni, icone e stato attivo coerenti tra le sezioni. Hover e focus sono riconoscibili; i controlli devono restare raggiungibili da tastiera e comodi al tocco. Motion e HUD comunicano stato o relazione tra dati, con supporto a `prefers-reduced-motion`.
 
-- Testata compatta con dock orizzontale desktop; dock inferiore a cinque destinazioni sotto 700 px.
-- Home: riepilogo budget/posti e priorità affiancati; mappa dei reparti; distribuzione del budget e ultimi acquisti.
-- Listone: ricerca, ruoli, squadra, ordinamento, 40 risultati per pagina; azioni separate per dettaglio, preferito e confronto.
-- Riga desktop con numeri allineati; riga mobile su due livelli, con QA, FVM /1000 e FVM lega. Stato In rosa mantenuto anche quando la colonna desktop è nascosta.
-- Rosa: registro raggruppato per ruolo, prezzo pagato e riferimento FVM; inspector laterale desktop e dettaglio contestuale inline sotto 1000 px.
-- Dettagli: ContextPanel controllato, laterale desktop e superficie dal basso su mobile; quattro tab nel dossier: Scheda, Statistiche, Analisi, Consiglio.
+Desktop e mobile adattano densità, rail e pannelli senza comprimere i contenuti essenziali. I dati mancanti sono indicati come **N/D**: nessuna cifra viene inventata per riempire la UI. Le indicazioni del Fantagente devono poter essere ricondotte ai dati mostrati e non sono previsioni.
 
-## Interazione
-
-Entrate di sezione 200 ms e 6 px; pannello 260 ms; aggiornamento lista 160 ms. Niente animazioni continue. prefers-reduced-motion disabilita transizioni decorative. I pannelli sono portali, con focus confinato, Escape e isolamento dello sfondo. Il prezzo resta in bozza passando da anteprima a dossier. Salvataggio, fallimento e vincoli d'acquisto hanno feedback nel pannello.
-
-## Verità del prodotto
-
-FVM normalizzato al budget della lega; colonne Classic/Mantra distinte. Nessun dato mancante trasformato in zero. ID, prezzi e date d'acquisto restano nel formato normalizzato esistente; FastAPI valida il salvataggio. Le indicazioni dell'agente sono spiegabili e non promettono risultati futuri.
-
-## Riferimenti e provenienza
-
-Dock Nav Sora Labs (21st demo 19177): feedback di prossimità e selezione tradotti con Motion esistente, etichette sempre visibili. Modal Efferd (demo 4514): pattern responsive adattato, senza incorporare Radix Dialog/Vaul o copiare codice dalla licenza non accertata. Interactive List Preview allegato b672a229: highlight e dettaglio contestuale, senza GSAP.
-
-Mobbin non ha fornito schermate: il connettore ha richiesto un piano a pagamento. Nessun pattern viene attribuito a una ricerca Mobbin riuscita.
-
-Nessuna nuova immagine: logo, agenti e stemmi provengono dagli asset preesistenti del progetto. Le derivazioni WebP erano già presenti. Nessun nuovo diritto d'uso viene affermato.
+Le regole implementate sono distribuite soprattutto in `frontend/src/styles/identity-v21.css`, `glass-system.css`, `home-exploration.css`, `dossier-v21.css` ed `evaluation-v21.css`. La cronologia dei redesign precedenti è conservata in `docs/archive/`.

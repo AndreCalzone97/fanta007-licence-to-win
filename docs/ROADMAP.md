@@ -1,52 +1,14 @@
-# Roadmap
+# Roadmap FANTA007
 
-## Step 2A — Foundation
+Questa è la direzione del prodotto, non un calendario di rilascio. Ogni fase parte dalla baseline v0.5.0 approvata; le funzioni future non sono già disponibili nella demo.
 
-- [x] struttura repository;
-- [x] parser e normalizzazione;
-- [x] modello Player;
-- [x] ricerca e API;
-- [x] frontend tecnico;
-- [x] test automatici.
+1. **Baseline v0.5.0 — completata.** Landing e schermate operative consolidate, test frontend/backend, build e primo deploy.
+2. **Repository e qualità — in corso.** README, documentazione attuale, archivio storico, CI e controlli di rilascio.
+3. **DevKit e workflow AI — da definire.** Strumenti di sviluppo e procedure verificabili, senza cambiare il comportamento del prodotto.
+4. **Dati live — futuro.** Provider autorizzati, cache, gestione degli errori e provenienza chiara per calendario, risultati e Serie A Intelligence.
+5. **Fantagente conversazionale — futuro.** Risposte brevi e motivate da rosa, lega, budget e dati verificati; il modello interpreta i dati, non li inventa.
+6. **Account e database — futuro.** Autenticazione, più squadre e leghe, sincronizzazione e storico personale.
+7. **Companion stagionale — futuro.** Calendario, news, probabili formazioni e supporto a scambi, aste di riparazione e formazione, secondo disponibilità dei dati.
+8. **Mobile avanzato e integrazioni — da valutare.** PWA, notifiche e canali come Telegram o WhatsApp solo dopo aver validato l'uso reale del prodotto.
 
-## Step 2B — Mission Briefing + Dashboard
-
-- [x] landing mobile-first;
-- [x] onboarding guidato;
-- [x] configurazione lega persistente;
-- [x] dashboard base;
-- [x] mini scheda giocatore;
-- [x] primo set di immagini Commons attribuite;
-- [ ] provider statistiche storiche autorizzato;
-
-## Step 2C — Squad Builder + Scoring
-
-- [x] gestione rosa locale;
-- [x] budget e FVM normalizzato;
-- [x] scoring deterministico base;
-- [x] intelligence report base;
-
-## M0 — Release guardrails
-
-- [x] baseline Git;
-- [x] artefatti build esclusi;
-- [x] dipendenze frontend riproducibili;
-- [x] build e suite backend verificate.
-
-## V4.1 — Data audit
-
-- [x] catalogo verificato delle 20 squadre 2026/27;
-- [x] modello Team e TeamAsset con fallback legale;
-- [x] composizione del dataset candidato senza perdita degli arricchimenti;
-- [x] audit di schema, checksum, ID, ruoli, squadre e differenziali;
-- [x] diff categorizzato e report leggibile;
-- [x] approvazione e attivazione esplicita del candidato da 533 giocatori.
-
-## Futuro
-
-- Fanta007 Agent;
-- estensione copertura immagini con verifica licenze;
-- statistiche e news tramite provider autorizzati;
-- Dossier finale e analisi rosa avanzata;
-- UI/UX V4 su specifica visuale approvata;
-- account e sincronizzazione.
+Priorità trasversali: fonti lecite e affidabili, separazione tra provider dati, UI, account e AI, accessibilità, responsive e costi iniziali contenuti.

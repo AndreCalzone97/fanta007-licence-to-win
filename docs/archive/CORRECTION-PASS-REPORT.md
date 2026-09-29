@@ -46,11 +46,6 @@ Aggiornato il 14 settembre 2026. Implementazione disponibile su http://127.0.0.1
 
 ## Evidenza visiva
 
-[Confronto interattivo Home/Listone](../../../correction-pass-20260913/confronto-ui.html). Usa esclusivamente catture reali del 13 settembre, stesso scenario di test: 11 giocatori, 395 crediti investiti, 105 disponibili.
-
-- [Home prima](../../../correction-pass-20260913/before-home.png) / [Home dopo](../../../correction-pass-20260913/after-home-1440.png)
-- [Listone prima](../../../correction-pass-20260913/before-listone.png) / [Listone dopo](../../../correction-pass-20260913/after-listone-1440.png)
-- [Rosa dopo](../../../correction-pass-20260913/after-rosa-1440.png)
-- [Listone mobile](../../../correction-pass-20260913/after-listone-390.png) / [Anteprima mobile](../../../correction-pass-20260913/after-preview-390.png)
+Il confronto interattivo Home/Listone e le catture del 13 settembre erano conservati fuori da questo repository e non sono inclusi nell'archivio Git. Lo scenario di test riportava 11 giocatori, 395 crediti investiti e 105 disponibili. Le catture comprendevano Home e Listone prima/dopo, Rosa, Listone mobile e anteprima mobile.
 
 Per provare una squadra nuova senza toccare quella nel browser abituale: aprire l'anteprima in una finestra privata, configurare nome/budget/obiettivo e registrare acquisti. I dati della finestra privata sono temporanei e si perdono chiudendola. Il link è locale al PC, non pubblico e non utilizzabile da un telefono diverso.
